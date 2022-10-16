@@ -19,13 +19,13 @@ public class EventTracker : MonoBehaviour
         }
     }
 
-    public static Toggle story;
+    public static Toggle Story;
 
-    public static Toggle unlock;
+    public static Toggle Unlock;
 
-    public static Toggle combat;
+    public static Toggle Combat;
 
-    public static Toggle loot;
+    public static Toggle Loot;
 
     public static TextMeshProUGUI logOutput;
 
@@ -38,23 +38,16 @@ public class EventTracker : MonoBehaviour
         if (Initialised == false)
         {
             Initialised = true;
-            logOutput =
-                GameObject.Find("Text_Log").GetComponent<TextMeshProUGUI>();
+            logOutput = GameObject.Find("Text_Log").GetComponent<TextMeshProUGUI>();
             Debug.Log(logOutput + " found");
-            story =
-                GameObject.Find("Toggle_Story").GetComponent<Toggle>();
-            Debug.Log(story + " found");
-            unlock =
-                GameObject.Find("Toggle_Unlock").GetComponent<Toggle>();
-            Debug.Log(unlock + " found");
-            combat =
-                GameObject.Find("Toggle_Combat").GetComponent<Toggle>();
-            Debug.Log(combat + " found");
-            loot =
-                GameObject.Find("Toggle_Loot").GetComponent<Toggle>();
-            Debug.Log(loot + " found");
-
-
+            Story = GameObject.Find("Toggle_Story").GetComponent<Toggle>();
+            Debug.Log(Story + " found");
+            Unlock = GameObject.Find("Toggle_Unlock").GetComponent<Toggle>();
+            Debug.Log(Unlock + " found");
+            Combat = GameObject.Find("Toggle_Combat").GetComponent<Toggle>();
+            Debug.Log(Combat + " found");
+            Loot = GameObject.Find("Toggle_Loot").GetComponent<Toggle>();
+            Debug.Log(Loot + " found");
         }
     }
 
@@ -73,52 +66,68 @@ public class EventTracker : MonoBehaviour
 
     public static void updateEvents()
     {
-//        if (unlock != null){
-//        Debug.Log("Unlock Status = " + unlock.isOn);
-//        }
-//        else{Debug.Log(unlock);}
+        //if (Unlock != null){
+        //Debug.Log("Unlock Status = " + Unlock.isOn);
+        //}
+        //else{Debug.Log(Unlock);}
         string output = "";
         string entryOutput = "";
         foreach (Log entry in logs)
         {
-//            Debug.Log("Entry content = " + entry.Content);
-//            Debug.Log("Entry Type = " + entry.Type);
-
+            //Debug.Log("Entry content = " + entry.Content);
+            //Debug.Log("Entry Type = " + entry.Type);
             switch (entry.Type)
             {
                 case 0:
-                    if (story.isOn == true)
+                    if (Story.isOn == true)
                     {
-                        entryOutput = "Story = " + entry.Content + "\n -+-*-+- \n";
-//                        Debug.Log("Story = " + entryOutput);
+                        entryOutput =
+                            "Story = " + entry.Content + "\n -+-*-+- \n";
+                        //Debug.Log("Story = " + entryOutput);
                     }
-                    else{ entryOutput="";}
+                    else
+                    {
+                        entryOutput = "";
+                    }
                     break;
                 case 1:
-                    if (unlock.isOn == true)
+                    if (Unlock.isOn == true)
                     {
-                        entryOutput = "Unlocked = " + entry.Content+ "\n -+-*-+- \n";
-//                        Debug.Log("Unlocked = " + entryOutput);
+                        entryOutput =
+                            "Unlocked = " + entry.Content + "\n -+-*-+- \n";
+                        //Debug.Log("Unlocked = " + entryOutput);
                     }
-                    else{ entryOutput="";}
+                    else
+                    {
+                        entryOutput = "";
+                    }
                     break;
                 case 2:
-                    if (combat.isOn == true)
+                    if (Combat.isOn == true)
                     {
-                        entryOutput = "Combat = " + entry.Content+ "\n -+-*-+- \n";
-//                        Debug.Log("Combat = " + entryOutput);
+                        entryOutput =
+                            "Combat = " + entry.Content + "\n -+-*-+- \n";
+                        //Debug.Log("Combat = " + entryOutput);
                     }
-                    else{ entryOutput="";}
+                    else
+                    {
+                        entryOutput = "";
+                    }
                     break;
                 case 3:
-                    if (loot.isOn == true)
+                    if (Loot.isOn == true)
                     {
-                        entryOutput = "Loot = " + entry.Content+ "\n -+-*-+- \n";
-//                        Debug.Log("Loot = " + entryOutput);
+                        entryOutput =
+                            "Loot = " + entry.Content + "\n -+-*-+- \n";
+                        //Debug.Log("Loot = " + entryOutput);
                     }
-                    else{ entryOutput="";}
+                    else
+                    {
+                        entryOutput = "";
+                    }
                     break;
-                default: entryOutput ="";
+                default:
+                    entryOutput = "";
                     break;
             }
             output += entryOutput;
