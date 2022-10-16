@@ -82,7 +82,7 @@ public class EventTracker : MonoBehaviour
         foreach (Log entry in logs)
         {
 //            Debug.Log("Entry content = " + entry.Content);
-            Debug.Log("Entry Type = " + entry.Type);
+//            Debug.Log("Entry Type = " + entry.Type);
 
             switch (entry.Type)
             {
@@ -92,6 +92,7 @@ public class EventTracker : MonoBehaviour
                         entryOutput = "Story = " + entry.Content + "\n -+-*-+- \n";
 //                        Debug.Log("Story = " + entryOutput);
                     }
+                    else{ entryOutput="";}
                     break;
                 case 1:
                     if (unlock.isOn == true)
@@ -99,6 +100,7 @@ public class EventTracker : MonoBehaviour
                         entryOutput = "Unlocked = " + entry.Content+ "\n -+-*-+- \n";
 //                        Debug.Log("Unlocked = " + entryOutput);
                     }
+                    else{ entryOutput="";}
                     break;
                 case 2:
                     if (combat.isOn == true)
@@ -106,6 +108,7 @@ public class EventTracker : MonoBehaviour
                         entryOutput = "Combat = " + entry.Content+ "\n -+-*-+- \n";
 //                        Debug.Log("Combat = " + entryOutput);
                     }
+                    else{ entryOutput="";}
                     break;
                 case 3:
                     if (loot.isOn == true)
@@ -113,8 +116,9 @@ public class EventTracker : MonoBehaviour
                         entryOutput = "Loot = " + entry.Content+ "\n -+-*-+- \n";
 //                        Debug.Log("Loot = " + entryOutput);
                     }
+                    else{ entryOutput="";}
                     break;
-                default:
+                default: entryOutput ="";
                     break;
             }
             output += entryOutput;

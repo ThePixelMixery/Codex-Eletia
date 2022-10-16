@@ -19,8 +19,10 @@ public class TestScript : MonoBehaviour
 
     public void testMethod()
     {
+    EventTracker.NewEvent(0,"test Story2");
     EventTracker.NewEvent(1,"test Unlock");
-    EventTracker.NewEvent(0,"test Story");
+    EventTracker.NewEvent(2,"test Combat");
+    EventTracker.NewEvent(3,"test Loot");
 //    Debug.Log();
     }
 }
