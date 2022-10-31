@@ -164,9 +164,20 @@ public class MapScript : MonoBehaviour
         State state =
             new State(stateName,spec,cap,towns);
             Debug.Log(state.StateName+", "+state.Specialisation+", "+state.Capital+", "+state.Towns);
-            foreach (Town location in state.TownList)
-            {
-            Debug.Log(state.TownList);
-            }
+    }
+    
+    public class GridUnit
+    {
+    string contents;
+    }
+    public static GridUnit[,] Map;
+    public static void makeMapSmall(){
+        Map = new GridUnit[40,50];
+        int index=0;
+        foreach(GridUnit thing in Map)
+        {
+        Debug.Log(index);
+        index++;
+        }
     }
 }

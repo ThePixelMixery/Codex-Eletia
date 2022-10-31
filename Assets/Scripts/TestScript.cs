@@ -18,7 +18,18 @@ public class TestScript : MonoBehaviour
     EventTracker.NewEvent(3,"test Loot");
     Debug.Log();
 */
+
+        int[,] Map = new int[4,5];
+        int index=0;
+        foreach(int thing in Map)
+        {
+        int rand = Random.Range(0,4);
+        if (rand==1)
+        {
+            Debug.Log("Village");
+        }
+        Debug.Log(index);
+        index++;
+        }
     }
-
-
 }
