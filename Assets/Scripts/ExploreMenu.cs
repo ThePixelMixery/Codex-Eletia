@@ -23,7 +23,7 @@ public class ExploreMenu : MonoBehaviour
         {
             button.sprite = ContractSprite;
             MiniMap.GetComponent<RectTransform>().sizeDelta =
-                new Vector2(530, 480);
+                new Vector2(546, 487);
             Expanded = true;
             MinimapInfo.SetActive(false);
             Actions.SetActive(false);
@@ -32,11 +32,10 @@ public class ExploreMenu : MonoBehaviour
         {
             button.sprite = ExpandSprite;
             MiniMap.GetComponent<RectTransform>().sizeDelta =
-                new Vector2(265, 241);
+                new Vector2(276, 276);
             Expanded = false;
             MinimapInfo.SetActive(true);
             Actions.SetActive(true);
         }
-
     }
 }

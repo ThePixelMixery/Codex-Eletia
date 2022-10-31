@@ -19,6 +19,7 @@ public class TestScript : MonoBehaviour
     Debug.Log();
 */
 
+/*
         int[,] Map = new int[4,5];
         int index=0;
         foreach(int thing in Map)
@@ -31,5 +32,8 @@ public class TestScript : MonoBehaviour
         Debug.Log(index);
         index++;
         }
+*/
+    ActionScript.UpdateStrings();
+
     }
 }
