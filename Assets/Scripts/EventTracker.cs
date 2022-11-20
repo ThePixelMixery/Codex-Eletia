@@ -33,6 +33,8 @@ public class EventTracker : MonoBehaviour
 
     private static bool Initialised = false;
 
+
+    //checks for elements
     public static void initialise()
     {
         if (Initialised == false)
@@ -56,6 +58,7 @@ public class EventTracker : MonoBehaviour
         initialise();
     }
 
+    // for external use of creating events
     public static void NewEvent(int type, string content)
     {
         Log log = new Log(type, content);
@@ -63,7 +66,8 @@ public class EventTracker : MonoBehaviour
         logs.Insert(0, log);
         updateEvents();
     }
-
+    
+    // updates event list
     public static void updateEvents()
     {
         //if (Unlock != null){

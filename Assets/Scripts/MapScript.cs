@@ -129,7 +129,12 @@ public class MapScript : MonoBehaviour
 
         public List<Town> TownList;
 
-        public State(string stateName, string spec, string cap, int towns)
+        public State(
+        string stateName, 
+        string spec, 
+        string cap, 
+        int towns
+        )
         {
             this.StateName = stateName;
             this.Specialisation = spec;

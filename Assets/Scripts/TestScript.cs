@@ -33,7 +33,7 @@ public class TestScript : MonoBehaviour
         index++;
         }
 */
-    ActionScript.UpdateStrings();
+//    ActionScript.UpdateStrings();
 
     }
 }
