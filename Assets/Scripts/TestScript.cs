@@ -5,12 +5,16 @@ using UnityEngine.UI;
 
 public class TestScript : MonoBehaviour
 {
-    public Button testButton;
-
+    public GameObject testerObject;
 
     public void testMethod()
 
     {
+//    testerObject.GetComponentsInChildren<StateScript>().CreateState("Gupta","Fire");
+//    testerObject.GetComponentsInChildren<StateScript>().UpdateInf(1);
+//    testerObject.GetComponentsInChildren<StateScript>().UpdateExp(1);
+
+
 /*
     EventTracker.NewEvent(0,"test Story2");
     EventTracker.NewEvent(1,"test Unlock");

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapScript : MonoBehaviour
+public class TownScript : TileScript
 {
     public class Town
     {
@@ -115,74 +115,5 @@ public class MapScript : MonoBehaviour
         //                    town.Market+", "+
         //                    town.Other
         return town;
-    }
-
-    public class State
-    {
-        public string StateName;
-
-        public string Specialisation;
-
-        public string Capital;
-
-        public int Towns;
-
-        public List<Town> TownList;
-
-        public State(
-        string stateName, 
-        string spec, 
-        string cap, 
-        int towns
-        )
-        {
-            this.StateName = stateName;
-            this.Specialisation = spec;
-            this.Capital = cap;
-            this.Towns = towns;
-            this.TownList = new List<Town>();
-            for (int i = 0; 1 < towns; towns++)
-            {
-                TownList
-                    .Add(NewTown("Juiceville",
-                    "Texas",
-                    200,
-                    true,
-                    true,
-                    4,
-                    14,
-                    true,
-                    true,
-                    true,
-                    false));
-            }
-        }
-    }
-
-    public static void NewState(
-        string stateName,
-        string spec,
-        string cap,
-        int towns
-    ) 
-    {
-        State state =
-            new State(stateName,spec,cap,towns);
-            Debug.Log(state.StateName+", "+state.Specialisation+", "+state.Capital+", "+state.Towns);
-    }
-    
-    public class GridUnit
-    {
-    string contents;
-    }
-    public static GridUnit[,] Map;
-    public static void makeMapSmall(){
-        Map = new GridUnit[40,50];
-        int index=0;
-        foreach(GridUnit thing in Map)
-        {
-        Debug.Log(index);
-        index++;
-        }
     }
 }
