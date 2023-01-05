@@ -6,11 +6,17 @@ using UnityEngine;
 public class DragonScript : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float age;
-    public string dragonName;
-    
+    public float age = 0;
+    public float bond;
 
+    public string dragonName;
+    public string act;
+    
+    public TextMeshProUGUI nameFancy;
     public TextMeshProUGUI ageFancy;
+    public TextMeshProUGUI bondFancy;
+    public TextMeshProUGUI actFancy;
+
 
     private enum ageStage{
     Hatchling,
@@ -23,6 +29,10 @@ public class DragonScript : MonoBehaviour
     Greatwyrm,
     Death
     };
+
+    void Start(){
+    ageFancy.text=dragonName;
+    }
 
     // Life Stage updater
     void Update(){

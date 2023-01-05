@@ -28,7 +28,8 @@ public class MenuManager : MonoBehaviour
 
 
 
-    //expands and contract minimap
+    //expands and contract minimap (REMOVED)
+/*
     public void ExpandMinimap()
     {
         if (Expanded == false)
@@ -50,6 +51,7 @@ public class MenuManager : MonoBehaviour
             Actions.SetActive(true);
         }
     }
+*/
 
     public void CloseMenus()
     {
