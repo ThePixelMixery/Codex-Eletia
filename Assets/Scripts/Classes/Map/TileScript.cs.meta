@@ -3,7 +3,14 @@ guid: 89de9c8f3578fc0039597995f46d23f3
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - emptyTile: {fileID: 21300000, guid: 46c2d91362ceb2dffbb3ef2af006d68c, type: 3}
+  - campTile: {fileID: 21300000, guid: 26f46e260838c2b8f803d5a5a3de6880, type: 3}
+  - farmTile: {fileID: 21300000, guid: c6a3bd03802d48f61931aa6002d2af2a, type: 3}
+  - forestTile: {fileID: 21300000, guid: 473bf61db2b2b2f00ab6cb9172ffa1c6, type: 3}
+  - necroTile: {fileID: 21300000, guid: 03a11c7d672c74b70aeba7d191254d51, type: 3}
+  - townTile: {fileID: 21300000, guid: ddf65e43377dbc944b4bf23f9ae48d75, type: 3}
+  - waterTile: {fileID: 21300000, guid: 0989ba1bc0dca8c38ae8c61488775b93, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

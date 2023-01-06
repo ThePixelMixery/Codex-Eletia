@@ -20,16 +20,18 @@ public class MenuManager : MonoBehaviour
     public GameObject MiniMap;
     public Image button;
 
-    private bool Expanded = false;
-
-    public Sprite ExpandSprite;
-    public Sprite ContractSprite;
 
 
 
 
     //expands and contract minimap (REMOVED)
 /*
+    private bool Expanded = false;
+
+    public Sprite ExpandSprite;
+    public Sprite ContractSprite;
+
+
     public void ExpandMinimap()
     {
         if (Expanded == false)
