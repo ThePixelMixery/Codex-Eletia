@@ -6,72 +6,55 @@ using UnityEngine.UI;
 
 public class StateScript : MonoBehaviour
 {
-    public TextMeshProUGUI stateTitle;
+    StateClass state;
 
-    public Image expand;
+    public TextMeshProUGUI stateTitle;
 
     public GameObject details;
 
     public TextMeshProUGUI stateDetails;
 
-    public Sprite open;
 
-    public Sprite closed;
-
-    public string stateName;
-
-    public string specialisation;
-
-    public string capital;
-
-    //        public List<Town> TownList;
-    [SerializeField]
-    public int explored;
-
-    public int exploredOutput;
-
-    [SerializeField]
-    public int influence;
 
     public void Start()
     {
-        stateTitle.text = stateName;
+        stateTitle.text = state.stateName;
         UpdateDetails();
     }
 
     public void UpdateDetails()
     {
         stateDetails.text =
-            specialisation +
+            state.specialisation +
             "\n" +
-            influence +
+            state.influence +
             "\n" +
-            capital +
+            state.capital +
             "\n" +
-            exploredOutput +
+            state.exploredOutput +
             "%";
     }
 
     public void CreateState(string name, string spec)
     {
-        this.stateName = name;
-        this.specialisation = spec;
-        this.influence = 0;
-        this.explored = 0;
+        state.stateName = name;
+        state.specialisation = spec;
+        state.influence = 0;
+        state.explored = 0;
         Debug.Log("State created");
     }
 
     public void UpdateInf(int inf)
     {
-        this.influence += inf;
+        state.influence += inf;
         UpdateDetails();
         Debug.Log("Influence Updated");
     }
 
     public void UpdateExp(int explore)
     {
-        this.explored += explore;
-        this.exploredOutput = explored/9200;
+        state.explored += explore;
+        state.exploredOutput = state.explored / 9200;
         UpdateDetails();
         Debug.Log("Explore Updated");
     }
@@ -80,12 +63,12 @@ public class StateScript : MonoBehaviour
     {
         if (details.activeSelf == false)
         {
-            expand.sprite = open;
+            state.expand.sprite = state.open;
             details.SetActive(true);
         }
         else
         {
-            expand.sprite = closed;
+            state.expand.sprite = state.closed;
             details.SetActive(false);
         }
     }

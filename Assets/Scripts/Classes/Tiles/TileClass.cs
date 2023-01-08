@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TileScript : MonoBehaviour
+[System.Serializable]
+public class TileClass : MonoBehaviour
 {
     public Sprite tileImage;
+
+    public int X;
+
+    public int Y;
 
     public enum access
     {
@@ -16,11 +21,9 @@ public class TileScript : MonoBehaviour
 
     public List<ActionScript> tileActions;
 
-    [SerializeField]
     public float explored;
 
-    [SerializeField]
-    public List<ObjectScript> tileObjects;
+    public List<ObjectClass> tileObjects;
 
     public enum tileType
     {
@@ -31,19 +34,4 @@ public class TileScript : MonoBehaviour
         necro,
         water
     }
-
-    void Start()
-    {
-        Debug.Log (explored);
-    }
-
-    public float ExploredAmount()
-    {
-        return explored;
-    }
-    public void ExploredMore(int exploredMore)
-    {
-        explored += exploredMore;
-    }
-
 }

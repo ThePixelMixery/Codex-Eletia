@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConsumableScript : ObjectScript
+public class ConsumableClass : ObjectClass
 {
     public int stamina;
+
+    public bool consumable = true;
 }

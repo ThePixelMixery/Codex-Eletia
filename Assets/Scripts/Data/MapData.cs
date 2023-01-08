@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapKeeper : MonoBehaviour
+[System.Serializable]
+public class MapData
 {
-    public GameObject[] Maptiles;
+    public GameObject[] mapTiles;
 }
