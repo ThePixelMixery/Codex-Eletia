@@ -32,13 +32,15 @@ public class CreateMap : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
     public void SmallMapCreator()
     {
-        for (int i = 0; i < 20; i++)
-        {
-        states.Add(new StateClass("newName", "spec", "cap"));
-        }
-    SaveObject.GetComponentInChildren<SaveManager>()._MapData.statesList = states;
+        //for (int i = 0; i < 20; i++)
+        //{
+        StateClass state = new StateClass("newName", "spec", "cap");
+        states.Add (state);
+        Debug.Log(state.tiles[0].X);
+        //}
+        SaveObject.GetComponentInChildren<SaveManager>()._MapData.statesList =
+            states;
     }
 }

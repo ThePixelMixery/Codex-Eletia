@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TownTile : TileClass
+public class CivilTile : TileClass
 {
     public string TownName;
 

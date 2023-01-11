@@ -12,7 +12,7 @@ public class StateClass
 
     public string capital;
 
-    public List<TownTile> TownList;
+    public List<CivilTile> TownList;
 
     public int explored;
 
@@ -20,7 +20,7 @@ public class StateClass
 
     public int influence;
 
-    public GameObject[] tiles;
+    public TileClass[] tiles;
 
     public StateClass(string name, string spec, string cap)
     {
@@ -29,7 +29,7 @@ public class StateClass
         this.capital = cap;
         this.influence = 0;
         this.explored = 0;
-        this.tiles = new GameObject[104];
+        this.tiles = new TileClass[104];
         Debug.Log("State created");
     }
 }

@@ -12,6 +12,37 @@ public class TileClass
 
     public int Y;
 
+    public float explored;
+
+    public enum tileType
+    {
+        //civilisation
+        camp,
+        farm,
+        town,
+        forest,
+        //elemental - common
+        fire,
+        water,
+        earth,        
+        air,
+        //utility - rare
+        mystic,
+        time,
+        ghost,
+        hallow,
+        summoner,
+        changer,
+        overseer,
+        channel,
+        //immoral / perversion
+        disease, //hallow 
+        illusion, //changer
+        blood, //water
+        hex, //mystic
+        necromantic //summoner
+    }
+
     public enum access
     {
         foot,
@@ -19,19 +50,10 @@ public class TileClass
         caravan
     }
 
-    public List<ActionScript> tileActions;
+    public List<ActionClass> tileActions;
 
-    public float explored;
-
+    
     public List<ObjectClass> tileObjects;
 
-    public enum tileType
-    {
-        camp,
-        farm,
-        town,
-        forest,
-        necro,
-        water
-    }
+
 }
