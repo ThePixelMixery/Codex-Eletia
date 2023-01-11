@@ -14,6 +14,11 @@ public class StateScript : MonoBehaviour
 
     public TextMeshProUGUI stateDetails;
 
+    public Sprite open;
+
+    public Sprite closed;
+
+    public Image expand;
 
 
     public void Start()
@@ -35,15 +40,6 @@ public class StateScript : MonoBehaviour
             "%";
     }
 
-    public void CreateState(string name, string spec)
-    {
-        state.stateName = name;
-        state.specialisation = spec;
-        state.influence = 0;
-        state.explored = 0;
-        Debug.Log("State created");
-    }
-
     public void UpdateInf(int inf)
     {
         state.influence += inf;
@@ -63,12 +59,12 @@ public class StateScript : MonoBehaviour
     {
         if (details.activeSelf == false)
         {
-            state.expand.sprite = state.open;
+            expand.sprite = open;
             details.SetActive(true);
         }
         else
         {
-            state.expand.sprite = state.closed;
+            expand.sprite = closed;
             details.SetActive(false);
         }
     }

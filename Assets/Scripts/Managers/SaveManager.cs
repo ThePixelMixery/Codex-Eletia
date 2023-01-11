@@ -1,105 +1,86 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using UnityEditor;
 using UnityEngine;
 
 public class SaveManager : MonoBehaviour
 {
     [SerializeField]
-    private MapData _MapData = new MapData();
-
-    void Start()
-    {
-        LoadMapFile();
-        LoadKeeperFile();
-    }
-
-    public void SaveMapFile()
-    {
-        string destination =
-            Path.Combine(Application.persistentDataPath, "/MapData.json");
-        FileStream file;
-
-        if (File.Exists(destination))
-            file = File.OpenWrite(destination);
-        else
-        {
-            file = File.Create(destination);
-        }
-        string map = JsonUtility.ToJson(_MapData);
-        System
-            .IO
-            .File
-            .WriteAllText(Application.persistentDataPath + "/MapData.json",
-            map);
-        Debug.Log("Map Saved!");
-    }
-
-    public void LoadMapFile()
-    {
-        string destination =
-            Path.Combine(Application.persistentDataPath, "/MapData.json");
-        FileStream file;
-
-        if (File.Exists(destination))
-        {
-            Debug.Log("Loaded Map");
-            file = File.OpenRead(destination);
-        }
-        else
-        {
-            Debug.Log("File not found");
-            _MapData.mapTiles = GameObject.FindGameObjectsWithTag("Maptile");
-            return;
-        }
-
-        string json = File.ReadAllText(destination);
-        _MapData = JsonUtility.FromJson<MapData>(json);
-        file.Close();
-    }
+    public MapData _MapData = new MapData();
 
     [SerializeField]
     private KeeperData _KeeperData = new KeeperData();
 
-    public void SaveKeeperFile()
+    private string keeperSaveLocation;
+
+    private string mapSaveLocation;
+
+    void Start()
     {
-        string destination =
-            Path.Combine(Application.persistentDataPath, "/KeeperData.json");
-        FileStream file;
-
-        if (File.Exists(destination))
-            file = File.OpenWrite(destination);
-        else
-            file = File.Create(destination);
-
-        string map = JsonUtility.ToJson(_KeeperData);
-        System
-            .IO
-            .File
-            .WriteAllText(Application.persistentDataPath + "/KeeperData.json",
-            map);
-        Debug.Log("Keeper Saved!");
+        if (!Directory.Exists(Application.persistentDataPath + "/Saves"))
+        {
+            Debug.LogError("Save Directory not found");
+            Directory
+                .CreateDirectory(Application.persistentDataPath + "/Saves");
+        }
+        keeperSaveLocation =
+            Application.persistentDataPath + "/Saves/KeeperData.json";
+        mapSaveLocation = Application.persistentDataPath + "/Saves/MapData.json";
+        LoadFiles();
     }
 
-    public void LoadKeeperFile()
+    public void SaveFiles()
     {
-        string destination =
-            Path.Combine(Application.persistentDataPath, "/KeeperData.json");
-        FileStream file;
+        string keeper = JsonUtility.ToJson(_KeeperData);
+        System.IO.File.WriteAllText (keeperSaveLocation, keeper);
+        string map = JsonUtility.ToJson(_MapData);
+        System.IO.File.WriteAllText (mapSaveLocation, map);
+        Debug.Log("Keeper and map saved");
+    }
 
-        if (File.Exists(destination))
+    public void LoadFiles()
+    {
+        if (System.IO.File.Exists(keeperSaveLocation))
         {
-            file = File.OpenRead(destination);
-            Debug.Log("Loaded Keeper");
+            string json = File.ReadAllText(keeperSaveLocation);
+            _KeeperData = JsonUtility.FromJson<KeeperData>(json);
+            Debug.Log("Keeper Loaded");
         }
         else
         {
-            Debug.LogError("File not found");
-            return;
+            Debug.LogError("Keeper not found at " + keeperSaveLocation);
         }
+        if (System.IO.File.Exists(mapSaveLocation))
+        {
+            string json = File.ReadAllText(mapSaveLocation);
+        }
+        else
+        {
+            Debug.LogError("Map not found at " + mapSaveLocation);
+        }
+    }
 
-        string json = File.ReadAllText(destination);
-        _KeeperData = JsonUtility.FromJson<KeeperData>(json);
-        file.Close();
+    public void DeleteFiles()
+    {
+        if (System.IO.File.Exists(keeperSaveLocation))
+        {
+            File.Delete (keeperSaveLocation);
+            Debug.Log("Keeper Deleted");
+        }
+        else
+        {
+            Debug.LogError("Keeper not found at " + keeperSaveLocation);
+        }
+        if (System.IO.File.Exists(mapSaveLocation))
+        {
+            File.Delete (mapSaveLocation);
+            Debug.Log("Map Deleted");
+        }
+        else
+        {
+            Debug.LogError("Map not found at " + mapSaveLocation);
+        }
+        AssetDatabase.Refresh();
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [System.Serializable]
-public class TileClass : MonoBehaviour
+public class TileClass
 {
     public Sprite tileImage;
 

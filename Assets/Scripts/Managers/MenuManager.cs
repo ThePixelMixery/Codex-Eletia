@@ -7,17 +7,12 @@ public class MenuManager : MonoBehaviour
 {
 
 
-    public GameObject Panel_Dragons;
-    public GameObject Panel_Explore;
-    public GameObject Panel_Map;
-    public GameObject Panel_Combat;
-    public GameObject Panel_Journal;
+    public GameObject[] panels;
 
+    public GameObject actions;
 
-    public GameObject Actions;
-
-    public GameObject MinimapInfo;
-    public GameObject MiniMap;
+    public GameObject minimapInfo;
+    public GameObject miniMap;
     public Image button;
 
 
@@ -57,11 +52,11 @@ public class MenuManager : MonoBehaviour
 
     public void CloseMenus()
     {
-        Panel_Dragons.SetActive(false);
-        Panel_Explore.SetActive(false);
-        Panel_Map.SetActive(false);
-        Panel_Combat.SetActive(false);
-        Panel_Journal.SetActive(false);
+        panels = GameObject.FindGameObjectsWithTag("MainPanel");
+        foreach(GameObject panel in panels)
+        {
+            panel.SetActive(false);
+        }
     }
 
 }

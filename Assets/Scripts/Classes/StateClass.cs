@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [System.Serializable]
-public class StateClass : MonoBehaviour
+public class StateClass
 {
     public string stateName;
 
@@ -20,9 +20,16 @@ public class StateClass : MonoBehaviour
 
     public int influence;
 
-    public Sprite open;
+    public GameObject[] tiles;
 
-    public Sprite closed;
-
-    public Image expand;
+    public StateClass(string name, string spec, string cap)
+    {
+        this.stateName = name;
+        this.specialisation = spec;
+        this.capital = cap;
+        this.influence = 0;
+        this.explored = 0;
+        this.tiles = new GameObject[104];
+        Debug.Log("State created");
+    }
 }
