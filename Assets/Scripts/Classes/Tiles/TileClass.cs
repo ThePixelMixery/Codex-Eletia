@@ -8,12 +8,17 @@ public class TileClass
 {
     public Sprite tileImage;
 
-    public int X;
+    public string locationName;
 
-    public int Y;
+    public int access;
+
+    public int x;
+
+    public int y;
 
     public float explored;
 
+    /* Type enum
     public enum tileType
     {
         //civilisation
@@ -24,7 +29,7 @@ public class TileClass
         //elemental - common
         fire,
         water,
-        earth,        
+        earth,
         air,
         //utility - rare
         mystic,
@@ -36,24 +41,21 @@ public class TileClass
         overseer,
         channel,
         //immoral / perversion
-        disease, //hallow 
+        disease, //hallow
         illusion, //changer
         blood, //water
         hex, //mystic
         necromantic //summoner
     }
-
-    public enum access
-    {
-        foot,
-        horse,
-        caravan
-    }
-
+*/
     public List<ActionClass> tileActions;
 
-    
     public List<ObjectClass> tileObjects;
 
-
+    public TileClass()
+    {
+        //this.x = X;
+        //this.y = Y;
+        this.explored = 0.0f;
+    }
 }

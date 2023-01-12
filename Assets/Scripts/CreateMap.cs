@@ -38,7 +38,7 @@ public class CreateMap : MonoBehaviour
         //{
         StateClass state = new StateClass("newName", "spec", "cap");
         states.Add (state);
-        Debug.Log(state.tiles[0].X);
+        Debug.Log(state.tiles[0]);
         //}
         SaveObject.GetComponentInChildren<SaveManager>()._MapData.statesList =
             states;
