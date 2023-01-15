@@ -6,15 +6,12 @@ using UnityEngine;
 
 public class SaveManager : MonoBehaviour
 {
-    [SerializeField]
-    public MapData _MapData = new MapData();
 
     [SerializeField]
     private KeeperData _KeeperData = new KeeperData();
 
     private string keeperSaveLocation;
 
-    private string mapSaveLocation;
 
     void Start()
     {
@@ -26,7 +23,6 @@ public class SaveManager : MonoBehaviour
         }
         keeperSaveLocation =
             Application.persistentDataPath + "/Saves/KeeperData.json";
-        mapSaveLocation = Application.persistentDataPath + "/Saves/MapData.json";
         LoadFiles();
     }
 
@@ -34,9 +30,7 @@ public class SaveManager : MonoBehaviour
     {
         string keeper = JsonUtility.ToJson(_KeeperData);
         System.IO.File.WriteAllText (keeperSaveLocation, keeper);
-        string map = JsonUtility.ToJson(_MapData);
-        System.IO.File.WriteAllText (mapSaveLocation, map);
-        Debug.Log("Keeper and map saved");
+        Debug.Log("Keeper saved");
     }
 
     public void LoadFiles()
@@ -51,14 +45,6 @@ public class SaveManager : MonoBehaviour
         {
             Debug.LogError("Keeper not found at " + keeperSaveLocation);
         }
-        if (System.IO.File.Exists(mapSaveLocation))
-        {
-            string json = File.ReadAllText(mapSaveLocation);
-        }
-        else
-        {
-            Debug.LogError("Map not found at " + mapSaveLocation);
-        }
     }
 
     public void DeleteFiles()
@@ -72,15 +58,11 @@ public class SaveManager : MonoBehaviour
         {
             Debug.LogError("Keeper not found at " + keeperSaveLocation);
         }
-        if (System.IO.File.Exists(mapSaveLocation))
-        {
-            File.Delete (mapSaveLocation);
-            Debug.Log("Map Deleted");
-        }
-        else
-        {
-            Debug.LogError("Map not found at " + mapSaveLocation);
-        }
+        AssetDatabase.Refresh();
+    }
+
+    public void Refesh()
+    {
         AssetDatabase.Refresh();
     }
 }

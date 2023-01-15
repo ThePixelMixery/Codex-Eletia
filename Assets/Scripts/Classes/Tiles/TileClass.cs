@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [System.Serializable]
-public class TileClass
+public class TileClass : MonoBehaviour
 {
     public Sprite tileImage;
 
@@ -16,9 +16,9 @@ public class TileClass
 
     public int y;
 
-    public float explored;
+    public string type;
 
-    /* Type enum
+    public float explored; /* Type enum
     public enum tileType
     {
         //civilisation
@@ -48,6 +48,7 @@ public class TileClass
         necromantic //summoner
     }
 */
+
     public List<ActionClass> tileActions;
 
     public List<ObjectClass> tileObjects;

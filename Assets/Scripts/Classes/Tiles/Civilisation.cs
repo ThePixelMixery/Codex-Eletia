@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CivilTile : TileClass
+[System.Serializable]
+public class Civilisation : MonoBehaviour
 {
+
+
     public bool castle;
 
     public bool townHall;
@@ -23,8 +26,12 @@ public class CivilTile : TileClass
     public List<GameObject> market;
 
     public List<GameObject> other;
-
-    public CivilTile(
+/*
+    public CivilTile(bool Church)
+    {
+        this.church = Church;
+    }
+    
         string location,
         int X,
         int Y,
@@ -35,7 +42,9 @@ public class CivilTile : TileClass
         bool Church,
         bool Inn,
         bool Guild
+
     ) //:base(X, Y)
+
     {
         this.locationName = location;
         this.x = X;
@@ -51,4 +60,5 @@ public class CivilTile : TileClass
         this.inn = Inn;
         this.guild = Guild;
     }
+*/
 }

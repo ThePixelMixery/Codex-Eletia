@@ -5,22 +5,10 @@ using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
-
-
     public GameObject[] panels;
 
-    public GameObject actions;
-
-    public GameObject minimapInfo;
-    public GameObject miniMap;
-    public Image button;
-
-
-
-
-
     //expands and contract minimap (REMOVED)
-/*
+    /*
     private bool Expanded = false;
 
     public Sprite ExpandSprite;
@@ -49,14 +37,12 @@ public class MenuManager : MonoBehaviour
         }
     }
 */
-
     public void CloseMenus()
     {
         panels = GameObject.FindGameObjectsWithTag("MainPanel");
-        foreach(GameObject panel in panels)
+        foreach (GameObject panel in panels)
         {
             panel.SetActive(false);
         }
     }
-
 }

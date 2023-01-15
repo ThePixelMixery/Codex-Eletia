@@ -20,6 +20,8 @@ public class StateScript : MonoBehaviour
 
     public Image expand;
 
+/*
+
 
     public void Start()
     {
@@ -68,4 +70,5 @@ public class StateScript : MonoBehaviour
             details.SetActive(false);
         }
     }
+*/
 }

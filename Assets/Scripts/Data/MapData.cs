@@ -5,5 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class MapData
 {
-    public List<StateClass> statesList;
+    public int mapSize;
+    public string test;
+    public List<StateClass> states;
 }
