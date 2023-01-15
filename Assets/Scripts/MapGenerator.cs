@@ -1,15 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using UnityEngine;
+using System.Linq;
 using UnityEditor;
-
+using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
     [SerializeField]
-    private MapData _MapData = new MapData();
-
     public string mapSaveLocation;
 
     public string mapFolderLocation;
@@ -17,6 +15,8 @@ public class MapGenerator : MonoBehaviour
     public GameObject MapObjectParent;
 
     public GameObject LocalMapPanel;
+
+    public List<string> stateNames = new List<string>();
 
     public TileClass tile;
 
@@ -31,23 +31,20 @@ public class MapGenerator : MonoBehaviour
         }
         mapSaveLocation =
             Application.persistentDataPath + "/Saves/MapData.json";
-
+        mapFolderLocation = Application.persistentDataPath + "/Saves/Map/";
         MapLoader();
     }
 
     public void SaveMapFile()
     {
-        string map = JsonUtility.ToJson(_MapData);
-        System.IO.File.WriteAllText (mapSaveLocation, map);
-        Debug.Log("Map saved");
     }
 
     public void DeleteFiles()
     {
         if (System.IO.File.Exists(mapSaveLocation))
         {
-            File.Delete(mapSaveLocation);
-            Directory.Delete (mapFolderLocation,true);
+            File.Delete (mapSaveLocation);
+            Directory.Delete(mapFolderLocation, true);
             Debug.Log("Map Deleted");
         }
         else
@@ -62,12 +59,14 @@ public class MapGenerator : MonoBehaviour
         if (System.IO.File.Exists(mapSaveLocation))
         {
             string json = File.ReadAllText(mapSaveLocation);
-            _MapData = JsonUtility.FromJson<MapData>(json);
+            stateNames = json.Split(',').ToList();
             Debug.Log("Map Loaded");
         }
         else
         {
             Debug.LogError("Map not found at " + mapSaveLocation);
+            Directory
+                .CreateDirectory(Application.persistentDataPath + "/Saves/Map");
         }
     }
 
@@ -89,7 +88,27 @@ public class MapGenerator : MonoBehaviour
 
     public void SmallMapCreator()
     {
-    StateClass newState = new StateClass("Bajoo",4);
-    newState.StateSaver();
+        StateClass newState = new StateClass("Wawoo'in", 7);
+        string state = JsonUtility.ToJson(newState);
+        System
+            .IO
+            .File
+            .WriteAllText(mapFolderLocation + newState.stateName + ".json",
+            state);
+        Directory
+            .CreateDirectory(Application.persistentDataPath +
+            "/Saves/Map/" +
+            newState.stateName);
+        if (stateNames.Contains(newState.stateName))
+        {
+            Debug.LogError("State already exists: " + newState.stateName);
+        }
+        else
+        {
+            stateNames.Add(newState.stateName);
+            string stateList = string.Join(",", stateNames);
+            System.IO.File.WriteAllText (mapSaveLocation, stateList);
+            Debug.Log("State Created: " + newState.stateName);
+        }
     }
 }

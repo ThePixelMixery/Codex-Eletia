@@ -6,6 +6,5 @@ using UnityEngine;
 public class MapData
 {
     public int mapSize;
-    public string test;
-    public List<StateClass> states;
+    public int stateCount;
 }

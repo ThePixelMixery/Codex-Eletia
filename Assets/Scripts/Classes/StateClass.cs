@@ -4,33 +4,23 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
 public class StateClass
 {
     public string stateInfoLocation;
 
-    [System.Serializable]
-    public class StateSerial
+    public string stateName;
+
+    public int specialisation;
+
+    public List<Civilisation> townList;
+
+    public List<TileClass> tiles;
+
+    public StateClass(string name, int spec)
     {
-        public string stateName;
-
-        public int specialisation;
-
-        public List<Civilisation> townList;
-
-        public List<TileClass> tiles;
-
-        public StateSerial(string name, int spec)
-        {   
-            this.stateName = name;
-            this.specialisation = spec;
-        }
-    }
-    [SerializeField]
-    StateSerial state;
-    public StateClass(string nameofState, int typeofState){
-    
-    this.state = new StateSerial(nameofState, typeofState);
-    Debug.Log("StateSerial Made");
+        this.stateName = name;
+        this.specialisation = spec;
     }
 
     //from struct
@@ -49,27 +39,12 @@ public class StateClass
             Directory
                 .CreateDirectory(Application.persistentDataPath + "/Saves/Map");
         }
-        
-        stateInfoLocation =
-            Application.persistentDataPath +
-            "/Saves/Map"; //+
-//            state.stateName +
-//            ".json";
+
+        stateInfoLocation = Application.persistentDataPath + "/Saves/Map"; //+
+        //            state.stateName +
+        //            ".json";
         //LoadState();
     }
-
-    public void StateSaver()
-    {
-        string stateData = JsonUtility.ToJson(state);
-
-        System
-            .IO
-            .File
-            .WriteAllText(stateInfoLocation+state.stateName+".json",
-            stateData);
-        Debug.Log("State saved: " + state.stateName +" at " + stateInfoLocation);
-    }
-
 }
 //    public TileClass[] tiles;
 
@@ -100,5 +75,4 @@ public class StateClass
         Debug.Log("State created");
     }
 
-}
 */
