@@ -12,13 +12,17 @@ public class MapGenerator : MonoBehaviour
 
     public string mapFolderLocation;
 
-    public GameObject MapObjectParent;
+    public GameObject worldMapPanel;
 
-    public GameObject LocalMapPanel;
+    public GameObject localMapPanel;
+
+    public GameObject stateInstance;
 
     public List<string> stateNames = new List<string>();
 
     public TileClass tile;
+
+    public StateClass tempState;
 
     public void Start()
     {
@@ -32,30 +36,6 @@ public class MapGenerator : MonoBehaviour
         mapSaveLocation =
             Application.persistentDataPath + "/Saves/MapData.json";
         mapFolderLocation = Application.persistentDataPath + "/Saves/Map/";
-        MapLoader();
-    }
-
-    public void SaveMapFile()
-    {
-    }
-
-    public void DeleteFiles()
-    {
-        if (System.IO.File.Exists(mapSaveLocation))
-        {
-            File.Delete (mapSaveLocation);
-            Directory.Delete(mapFolderLocation, true);
-            Debug.Log("Map Deleted");
-        }
-        else
-        {
-            Debug.LogError("Map not found at " + mapSaveLocation);
-        }
-        AssetDatabase.Refresh();
-    }
-
-    public void MapLoader()
-    {
         if (System.IO.File.Exists(mapSaveLocation))
         {
             string json = File.ReadAllText(mapSaveLocation);
@@ -68,47 +48,77 @@ public class MapGenerator : MonoBehaviour
             Directory
                 .CreateDirectory(Application.persistentDataPath + "/Saves/Map");
         }
-    }
-
-    public void mapSizer(int size)
-    {
-        switch (size)
+        foreach (string name in stateNames)
         {
-            case 0:
-                SmallMapCreator();
-                break;
-            case 1:
-                break;
-            case 2:
-                break;
-            default:
-                break;
+            string json = File.ReadAllText(mapFolderLocation + name + ".json");
+            tempState = JsonUtility.FromJson<StateClass>(json);
+
+            ObjectGenerator (tempState);
         }
     }
 
-    public void SmallMapCreator()
+    public void SaveMapFile()
     {
-        StateClass newState = new StateClass("Wawoo'in", 7);
-        string state = JsonUtility.ToJson(newState);
-        System
-            .IO
-            .File
-            .WriteAllText(mapFolderLocation + newState.stateName + ".json",
-            state);
-        Directory
-            .CreateDirectory(Application.persistentDataPath +
-            "/Saves/Map/" +
-            newState.stateName);
-        if (stateNames.Contains(newState.stateName))
+    }
+
+    public void DeleteFiles()
+    {
+        if (System.IO.File.Exists(mapSaveLocation))
         {
-            Debug.LogError("State already exists: " + newState.stateName);
+            File.Delete (mapSaveLocation);
+            Directory.Delete(mapFolderLocation, true);
+            stateNames.Clear();
+            Debug.Log("Map Deleted");
         }
         else
         {
+            Debug.LogError("Map not found at " + mapSaveLocation);
+        }
+        AssetDatabase.Refresh();
+    }
+
+    public void MapLoader()
+    {
+    }
+
+    public void MapCreator()
+    {
+        HashSet<int> stateTypeNumbers = new HashSet<int>();
+        while (stateTypeNumbers.Count < 14)
+        {
+            stateTypeNumbers.Add(Random.Range(0, 14));
+        }
+        foreach (int type in stateTypeNumbers)
+        {
+            StateClass newState = new StateClass(type);
+
             stateNames.Add(newState.stateName);
             string stateList = string.Join(",", stateNames);
+
             System.IO.File.WriteAllText (mapSaveLocation, stateList);
             Debug.Log("State Created: " + newState.stateName);
+            string state = JsonUtility.ToJson(newState);
+            System
+                .IO
+                .File
+                .WriteAllText(mapFolderLocation + newState.stateName + ".json",
+                state);
+            Directory
+                .CreateDirectory(Application.persistentDataPath +
+                "/Saves/Map/" +
+                newState.stateName);
         }
+    }
+
+    public void ObjectGenerator(StateClass tempState)
+    {
+        GameObject statePrefab;
+        statePrefab = Instantiate(stateInstance, worldMapPanel.transform);
+        StateScript prefabScript =
+            statePrefab.GetComponentInChildren<StateScript>();
+        prefabScript.state = tempState;
+        prefabScript.stateTitle.text = prefabScript.state.stateName;
+        prefabScript.stateSpec =
+            prefabScript.SpecFancy(prefabScript.state.specialisation);
     }
 }

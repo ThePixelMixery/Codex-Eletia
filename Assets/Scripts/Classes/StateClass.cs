@@ -17,22 +17,10 @@ public class StateClass
 
     public List<TileClass> tiles;
 
-    public StateClass(string name, int spec)
+    public StateClass(int spec)
     {
-        this.stateName = name;
         this.specialisation = spec;
-    }
-
-    //from struct
-    //from serialise
-    public int explored;
-
-    public int exploredOutput;
-
-    public int influence;
-
-    void Start()
-    {
+        this.stateName = randomStateNameGen(spec);
         if (!Directory.Exists(Application.persistentDataPath + "/Saves/Map"))
         {
             Debug.LogError("Save Directory not found");
@@ -40,7 +28,180 @@ public class StateClass
                 .CreateDirectory(Application.persistentDataPath + "/Saves/Map");
         }
 
-        stateInfoLocation = Application.persistentDataPath + "/Saves/Map"; //+
+        stateInfoLocation = Application.persistentDataPath + "/Saves/Map";
+    }
+
+    private string randomStateNameGen(int spec)
+    {
+        string generatedName;
+        int rand = Random.Range(0, 4);
+        switch (spec)
+        {
+            case 0:
+                string[] fireNames =
+                {
+                    "Titus",
+                    "Avlyrra",
+                    "Saza",
+                    "Zefadolon",
+                    "Issavyre"
+                };
+                generatedName = fireNames[rand];
+                break;
+            case 1:
+                string[] waterNames =
+                {
+                    "Glappilan",
+                    "Halaema",
+                    "Ararin",
+                    "Mirlenas",
+                    "Aronorin"
+                };
+                generatedName = waterNames[rand];
+                break;
+            case 2:
+                string[] earthNames =
+                {
+                    "Kyhun",
+                    "Karenth",
+                    "Votara",
+                    "Krigor",
+                    "Volgograd"
+                };
+                generatedName = earthNames[rand];
+                break;
+            case 3:
+                string[] airNames =
+                {
+                    "Orivae",
+                    "Opheros",
+                    "Hoyatha",
+                    "Gomiris",
+                    "Thalvith"
+                };
+                generatedName = airNames[rand];
+                break;
+            case 4:
+                string[] arcaneNames =
+                {
+                    "Diatoran",
+                    "Ehodran",
+                    "Bredane",
+                    "Hvalba",
+                    "Gravago"
+                };
+                generatedName = arcaneNames[rand];
+                break;
+            case 5:
+                string[] mysticNames =
+                {
+                    "Islavaria",
+                    "Yusia",
+                    "Lecit",
+                    "Maritria",
+                    "Hoterra"
+                };
+                generatedName = mysticNames[rand];
+                break;
+            case 6:
+                string[] timeNames =
+                {
+                    "Praston",
+                    "Warminster",
+                    "Monfort",
+                    "Falkenberg",
+                    "Algard"
+                };
+                generatedName = timeNames[rand];
+                break;
+            case 7:
+                string[] ghostNames =
+                {
+                    "Sheonnorat",
+                    "Tarrgain",
+                    "Thomnum",
+                    "Akureyri",
+                    "Wyntumal"
+                };
+                generatedName = ghostNames[rand];
+                break;
+            case 8:
+                string[] hallowNames =
+                {
+                    "Soliana",
+                    "Kathaela",
+                    "Noria",
+                    "Elinlya",
+                    "Sophutria"
+                };
+                generatedName = hallowNames[rand];
+                break;
+            case 9:
+                string[] summonerNames =
+                {
+                    "Khodour",
+                    "Kolvereid",
+                    "Okukeg",
+                    "Obapan",
+                    "Nuxinon"
+                };
+                generatedName = summonerNames[rand];
+                break;
+            case 10:
+                string[] changerNames =
+                {
+                    "Noci",
+                    "Eszee",
+                    "Kezig",
+                    "Jahnin",
+                    "Crocan"
+                };
+                generatedName = changerNames[rand];
+                break;
+            case 11:
+                string[] overseerNames =
+                {
+                    "Azagrut",
+                    "Azagana",
+                    "Zegosh",
+                    "Tyrkak",
+                    "Zibbema"
+                };
+                generatedName = overseerNames[rand];
+                break;
+            case 12:
+                string[] channelNames =
+                {
+                    "Yesmaris",
+                    "Toshecion",
+                    "Brunnholl",
+                    "Gerin",
+                    "Bramukork"
+                };
+                generatedName = channelNames[rand];
+                break;
+            case 13:
+                string[] immoralNames =
+                {
+                    "Rorvik",
+                    "Thorgruzz",
+                    "Grozny",
+                    "Amberg",
+                    "Husavik"
+                };
+                generatedName = immoralNames[rand];
+                break;
+            default:
+                generatedName = "Unnamed";
+                break;
+        }
+
+        return generatedName;
+    }
+
+    void Awake()
+    {
+        //+
         //            state.stateName +
         //            ".json";
         //LoadState();
