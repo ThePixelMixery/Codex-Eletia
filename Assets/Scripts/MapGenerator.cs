@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MapGenerator : MonoBehaviour
 {
@@ -12,17 +13,24 @@ public class MapGenerator : MonoBehaviour
 
     public string mapFolderLocation;
 
+    public GameObject worldMapList;
+
     public GameObject worldMapPanel;
 
     public GameObject localMapPanel;
 
     public GameObject stateInstance;
 
+    public GameObject stateTile;
+
     public List<string> stateNames = new List<string>();
 
     public TileClass tile;
 
     public StateClass tempState;
+
+
+    public Sprite[] sprites;
 
     public void Start()
     {
@@ -68,6 +76,10 @@ public class MapGenerator : MonoBehaviour
             File.Delete (mapSaveLocation);
             Directory.Delete(mapFolderLocation, true);
             stateNames.Clear();
+            foreach (Transform child in worldMapList.transform)
+            {
+                Destroy(child.gameObject);
+            }
             Debug.Log("Map Deleted");
         }
         else
@@ -84,41 +96,70 @@ public class MapGenerator : MonoBehaviour
     public void MapCreator()
     {
         HashSet<int> stateTypeNumbers = new HashSet<int>();
-        while (stateTypeNumbers.Count < 14)
+        while (stateTypeNumbers.Count < 16)
         {
-            stateTypeNumbers.Add(Random.Range(0, 14));
+            stateTypeNumbers.Add(Random.Range(0, 16));
         }
-        foreach (int type in stateTypeNumbers)
+        int[] stateTypeArray = new int[stateTypeNumbers.Count()];
+        stateTypeNumbers.CopyTo (stateTypeArray);
+        int j = 0;
+        int index = 0;
+        while (j < 4)
         {
-            StateClass newState = new StateClass(type);
+            for (int k = 0; k < 4; k++)
+            {
+                StateClass newState =
+                    new StateClass(stateTypeArray[index], k, j);
+                stateNames.Add(newState.stateName);
+                string stateList = string.Join(",", stateNames);
 
-            stateNames.Add(newState.stateName);
-            string stateList = string.Join(",", stateNames);
+                System.IO.File.WriteAllText (mapSaveLocation, stateList);
+                Debug
+                    .Log("State Created: " +
+                    newState.stateName +
+                    " at " +
+                    k +
+                    ", " +
+                    j);
+                string state = JsonUtility.ToJson(newState);
+                System
+                    .IO
+                    .File
+                    .WriteAllText(mapFolderLocation +
+                    newState.stateName +
+                    ".json",
+                    state);
+                Directory
+                    .CreateDirectory(Application.persistentDataPath +
+                    "/Saves/Map/" +
+                    newState.stateName);
 
-            System.IO.File.WriteAllText (mapSaveLocation, stateList);
-            Debug.Log("State Created: " + newState.stateName);
-            string state = JsonUtility.ToJson(newState);
-            System
-                .IO
-                .File
-                .WriteAllText(mapFolderLocation + newState.stateName + ".json",
-                state);
-            Directory
-                .CreateDirectory(Application.persistentDataPath +
-                "/Saves/Map/" +
-                newState.stateName);
+                ObjectGenerator (newState);
+
+                index++;
+            }
+            j++;
+            //Debug.Log("Tile created: " + k + ", " + j);
         }
     }
 
     public void ObjectGenerator(StateClass tempState)
     {
         GameObject statePrefab;
-        statePrefab = Instantiate(stateInstance, worldMapPanel.transform);
+        statePrefab = Instantiate(stateInstance, worldMapList.transform);
         StateScript prefabScript =
             statePrefab.GetComponentInChildren<StateScript>();
         prefabScript.state = tempState;
         prefabScript.stateTitle.text = prefabScript.state.stateName;
-        prefabScript.stateSpec =
+        string specNumber =
             prefabScript.SpecFancy(prefabScript.state.specialisation);
+
+        prefabScript.stateSpec = specNumber;
+
+        statePrefab.SetActive(prefabScript.state.discovered);
+        GameObject stateTileObject;
+        stateTileObject = Instantiate(stateTile, worldMapPanel.transform);
+        Sprite tempSprite = sprites[tempState.specialisation];
+        stateTileObject.GetComponent<Image>().sprite = tempSprite;
     }
 }

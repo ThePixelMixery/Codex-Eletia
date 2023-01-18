@@ -39,46 +39,49 @@ public class StateScript : MonoBehaviour
                 type = "Fire";
                 break;
             case 1:
-                type = "Earth";
-                break;
-            case 2:
                 type = "Water";
                 break;
-            case 3:
+            case 2:
                 type = "Earth";
                 break;
-            case 4:
+            case 3:
                 type = "Air";
                 break;
-            case 5:
+            case 4:
                 type = "Arcane";
                 break;
-            case 6:
+            case 5:
                 type = "Mystic";
                 break;
-            case 7:
+            case 6:
                 type = "Time";
                 break;
-            case 8:
+            case 7:
                 type = "Ghost";
                 break;
-            case 9:
+            case 8:
                 type = "Hallow";
                 break;
-            case 10:
+            case 9:
                 type = "Summoner";
                 break;
-            case 11:
-                type = "Changer";
+            case 10:
+                type = "Alchemy";
                 break;
-            case 12:
+            case 11:
                 type = "Overseer";
                 break;
-            case 13:
+            case 12:
                 type = "Channel";
                 break;
-            case 14:
+            case 13:
                 type = "Immoral";
+                break;
+            case 14:
+                type = "Ocean";
+                break;
+            case 15:
+                type = "Divide";
                 break;
             default:
                 type = "Invalid State Spec/Unassigned";
