@@ -21,14 +21,11 @@ public class MapGenerator : MonoBehaviour
 
     public GameObject stateInstance;
 
-    public GameObject stateTile;
-
     public List<string> stateNames = new List<string>();
 
     public TileClass tile;
 
     public StateClass tempState;
-
 
     public Sprite[] sprites;
 
@@ -111,9 +108,8 @@ public class MapGenerator : MonoBehaviour
                 StateClass newState =
                     new StateClass(stateTypeArray[index], k, j);
                 stateNames.Add(newState.stateName);
-                string stateList = string.Join(",", stateNames);
 
-                System.IO.File.WriteAllText (mapSaveLocation, stateList);
+                /*
                 Debug
                     .Log("State Created: " +
                     newState.stateName +
@@ -121,6 +117,8 @@ public class MapGenerator : MonoBehaviour
                     k +
                     ", " +
                     j);
+                */
+                
                 string state = JsonUtility.ToJson(newState);
                 System
                     .IO
@@ -141,6 +139,9 @@ public class MapGenerator : MonoBehaviour
             j++;
             //Debug.Log("Tile created: " + k + ", " + j);
         }
+        Debug.Log("Line 152 makes states discovered");
+        string stateList = string.Join(",", stateNames);
+        System.IO.File.WriteAllText (mapSaveLocation, stateList);
     }
 
     public void ObjectGenerator(StateClass tempState)
@@ -149,17 +150,10 @@ public class MapGenerator : MonoBehaviour
         statePrefab = Instantiate(stateInstance, worldMapList.transform);
         StateScript prefabScript =
             statePrefab.GetComponentInChildren<StateScript>();
-        prefabScript.state = tempState;
-        prefabScript.stateTitle.text = prefabScript.state.stateName;
-        string specNumber =
-            prefabScript.SpecFancy(prefabScript.state.specialisation);
-
-        prefabScript.stateSpec = specNumber;
-
-        statePrefab.SetActive(prefabScript.state.discovered);
-        GameObject stateTileObject;
-        stateTileObject = Instantiate(stateTile, worldMapPanel.transform);
+        StateClass createState = tempState;
+        createState.discovered=true;
         Sprite tempSprite = sprites[tempState.specialisation];
-        stateTileObject.GetComponent<Image>().sprite = tempSprite;
+        prefabScript.StateCreate (createState, worldMapPanel, tempSprite);
+        statePrefab.SetActive(prefabScript.state.discovered);
     }
 }

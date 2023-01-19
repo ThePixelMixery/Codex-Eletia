@@ -19,13 +19,13 @@ public class EventTracker : MonoBehaviour
         }
     }
 
-    public static Toggle Story;
+    public static Toggle story;
 
-    public static Toggle Unlock;
+    public static Toggle unlock;
 
-    public static Toggle Combat;
+    public static Toggle combat;
 
-    public static Toggle Loot;
+    public static Toggle loot;
 
     public static TextMeshProUGUI logOutput;
 
@@ -41,15 +41,11 @@ public class EventTracker : MonoBehaviour
         {
             Initialised = true;
             logOutput = GameObject.Find("Text_Log").GetComponent<TextMeshProUGUI>();
-            Debug.Log(logOutput + " found");
-            Story = GameObject.Find("Toggle_Story").GetComponent<Toggle>();
-            Debug.Log(Story + " found");
-            Unlock = GameObject.Find("Toggle_Unlock").GetComponent<Toggle>();
-            Debug.Log(Unlock + " found");
-            Combat = GameObject.Find("Toggle_Combat").GetComponent<Toggle>();
-            Debug.Log(Combat + " found");
-            Loot = GameObject.Find("Toggle_Loot").GetComponent<Toggle>();
-            Debug.Log(Loot + " found");
+            story = GameObject.Find("Toggle_Story").GetComponent<Toggle>();
+            unlock = GameObject.Find("Toggle_Unlock").GetComponent<Toggle>();
+            combat = GameObject.Find("Toggle_Combat").GetComponent<Toggle>();
+            loot = GameObject.Find("Toggle_Loot").GetComponent<Toggle>();
+            Debug.Log(story+ " ,"+unlock+ " ,"+combat+ " ,"+loot);
         }
     }
 
@@ -83,7 +79,7 @@ public class EventTracker : MonoBehaviour
             switch (entry.Type)
             {
                 case 0:
-                    if (Story.isOn == true)
+                    if (story.isOn == true)
                     {
                         entryOutput =
                             "Story = " + entry.Content + "\n -+-*-+- \n";
@@ -95,7 +91,7 @@ public class EventTracker : MonoBehaviour
                     }
                     break;
                 case 1:
-                    if (Unlock.isOn == true)
+                    if (unlock.isOn == true)
                     {
                         entryOutput =
                             "Unlocked = " + entry.Content + "\n -+-*-+- \n";
@@ -107,7 +103,7 @@ public class EventTracker : MonoBehaviour
                     }
                     break;
                 case 2:
-                    if (Combat.isOn == true)
+                    if (combat.isOn == true)
                     {
                         entryOutput =
                             "Combat = " + entry.Content + "\n -+-*-+- \n";
@@ -119,7 +115,7 @@ public class EventTracker : MonoBehaviour
                     }
                     break;
                 case 3:
-                    if (Loot.isOn == true)
+                    if (loot.isOn == true)
                     {
                         entryOutput =
                             "Loot = " + entry.Content + "\n -+-*-+- \n";

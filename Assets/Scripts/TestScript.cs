@@ -6,9 +6,6 @@ using UnityEngine.UI;
 public class TestScript : MonoBehaviour
 {
     public GameObject testerObject;
-
-    MapData map;
-
     public void testMethod()
     {
     }

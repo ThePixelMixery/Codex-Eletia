@@ -744,6 +744,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59b2d9aaca0959202a6554c77576b90e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explored: 0
+  exploredOutput: 0
+  influence: 0
   state:
     stateInfoLocation: 
     stateName: 
@@ -753,17 +756,14 @@ MonoBehaviour:
     y: 0
     townList: []
     tiles: []
-  stateSaveLocation: 
+  stateSpec: 
   stateTitle: {fileID: 5686242797973400527}
   details: {fileID: 5686242798805937137}
   stateDetails: {fileID: 5686242799098487815}
-  stateSpec: 
-  explored: 0
-  exploredOutput: 0
-  influence: 0
   open: {fileID: 21300000, guid: a4a483b6022270479b8accab1ff36534, type: 3}
   closed: {fileID: 21300000, guid: ca799abe5fb2155f980f427e2fc51f00, type: 3}
   expand: {fileID: 5686242798059906656}
+  stateTile: {fileID: 5840468080801857343, guid: c9201c0331bffe5618b7d47c24d2e5a2, type: 3}
 --- !u!1 &5686242799555551237
 GameObject:
   m_ObjectHideFlags: 0

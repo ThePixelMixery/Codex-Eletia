@@ -6,29 +6,42 @@ using UnityEngine.UI;
 
 public class StateScript : MonoBehaviour
 {
+    public int explored;
+    public int exploredOutput;
+    public int influence;
     public StateClass state;
-
-    public string stateSaveLocation;
-
-    public TextMeshProUGUI stateTitle;
-
-    public GameObject details;
-
-    public TextMeshProUGUI stateDetails;
-
     public string stateSpec;
 
-    public int explored;
+    //Save
+    string stateSaveLocation;
 
-    public int exploredOutput;
-
-    public int influence;
-
+    //ListObject
+    public TextMeshProUGUI stateTitle;
+    public GameObject details;
+    public TextMeshProUGUI stateDetails;
     public Sprite open;
-
     public Sprite closed;
-
     public Image expand;
+
+    //MapObject
+    GameObject worldMapPanel;
+    GameObject stateTileObject;
+    public GameObject stateTile;
+
+    public void StateCreate(
+        StateClass tempState,
+        GameObject stateImagePanel,
+        Sprite tempSprite
+    )
+    {
+        state = tempState;
+        stateTitle.text = state.stateName;
+        SpecFancy(state.specialisation);
+        worldMapPanel = stateImagePanel;
+        stateTileObject = Instantiate(stateTile, worldMapPanel.transform);
+        stateTileObject.GetComponent<Image>().sprite = tempSprite;
+        stateTileObject.SetActive(state.discovered);
+    }
 
     public string SpecFancy(int spec)
     {
