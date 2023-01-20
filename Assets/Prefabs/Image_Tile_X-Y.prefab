@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8909730966605675573}
   m_Layer: 0
   m_Name: Image_Tile_X-Y
-  m_TagString: Maptile
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

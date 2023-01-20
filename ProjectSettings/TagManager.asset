@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Maptile
   - MainPanel
+  - Navigates
+  - State
+  - Tile
   layers:
   - Default
   - TransparentFX

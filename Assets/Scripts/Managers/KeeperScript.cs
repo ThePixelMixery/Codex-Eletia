@@ -4,14 +4,12 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-public class SaveManager : MonoBehaviour
+public class KeeperScript : MonoBehaviour
 {
-
     [SerializeField]
-    private KeeperData _KeeperData = new KeeperData();
+    private KeeperClass _KeeperData = new KeeperClass();
 
     private string keeperSaveLocation;
-
 
     void Start()
     {
@@ -38,12 +36,13 @@ public class SaveManager : MonoBehaviour
         if (System.IO.File.Exists(keeperSaveLocation))
         {
             string json = File.ReadAllText(keeperSaveLocation);
-            _KeeperData = JsonUtility.FromJson<KeeperData>(json);
+            _KeeperData = JsonUtility.FromJson<KeeperClass>(json);
             Debug.Log("Keeper Loaded");
         }
         else
         {
             Debug.LogError("Keeper not found at " + keeperSaveLocation);
+            SaveFiles();
         }
     }
 

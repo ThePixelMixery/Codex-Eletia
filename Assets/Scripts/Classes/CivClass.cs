@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Civilisation : MonoBehaviour
+public class CivClass : MonoBehaviour
 {
-
-
     public bool castle;
 
     public bool townHall;

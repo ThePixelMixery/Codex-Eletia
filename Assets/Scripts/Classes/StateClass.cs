@@ -7,8 +7,6 @@ using UnityEngine.UI;
 [System.Serializable]
 public class StateClass
 {
-    public string stateInfoLocation;
-
     public string stateName;
 
     public int specialisation;
@@ -19,7 +17,9 @@ public class StateClass
 
     public int y;
 
-    public List<Civilisation> townList;
+    public List<MapNavClass> occupants = new List<MapNavClass>();
+
+    public List<CivClass> townList;
 
     public List<TileClass> tiles;
 
@@ -29,15 +29,6 @@ public class StateClass
         this.y = Y;
         this.specialisation = spec;
         this.stateName = randomStateNameGen(spec);
-
-        if (!Directory.Exists(Application.persistentDataPath + "/Saves/Map"))
-        {
-            Debug.LogError("Save Directory not found");
-            Directory
-                .CreateDirectory(Application.persistentDataPath + "/Saves/Map");
-        }
-
-        stateInfoLocation = Application.persistentDataPath + "/Saves/Map";
     }
 
     private string randomStateNameGen(int spec)
@@ -45,7 +36,7 @@ public class StateClass
         string generatedName;
         int rand = Random.Range(0, 4);
         int rando = Random.Range(0, 4);
-                
+
         switch (spec)
         {
             case 0:
@@ -121,14 +112,18 @@ public class StateClass
             case 14:
                 string[] seaNames =
                 { "Waters", "Tides", "Waves", "Abyss", "Sea" };
-                string[] seaPrefix= {"Arching", "Rough", "Mighty", "Wasted", "Forbidden"};
-                generatedName = "The " + seaPrefix[rando] + " " + seaNames[rand];
+                string[] seaPrefix =
+                { "Arching", "Rough", "Mighty", "Wasted", "Forbidden" };
+                generatedName =
+                    "The " + seaPrefix[rando] + " " + seaNames[rand];
                 break;
             case 15:
                 string[] mountNames =
                 { "Mountain", "Rise", "Tops", "Peaks", "Heights" };
-                string[] mountPrefix= {"Darkest", "Mammoth", "Forsaken", "Unscaled", "Haunted"};
-                generatedName = "The " + mountPrefix[rando] + " " + mountNames[rando];
+                string[] mountPrefix =
+                { "Darkest", "Mammoth", "Forsaken", "Unscaled", "Haunted" };
+                generatedName =
+                    "The " + mountPrefix[rando] + " " + mountNames[rando];
                 break;
             default:
                 generatedName = "Unnamed";
