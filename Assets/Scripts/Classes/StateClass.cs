@@ -21,14 +21,15 @@ public class StateClass
 
     public List<CivClass> townList;
 
-    public List<TileClass> tiles;
+    public TileClass[] tiles;
 
-    public StateClass(int spec, int X, int Y)
+    public StateClass(int spec, int X, int Y, TileClass[] Tiles)
     {
         this.x = X;
         this.y = Y;
         this.specialisation = spec;
         this.stateName = randomStateNameGen(spec);
+        this.tiles = Tiles;
     }
 
     private string randomStateNameGen(int spec)
@@ -133,33 +134,3 @@ public class StateClass
         return generatedName;
     }
 }
-//    public TileClass[] tiles;
-
-/*    public void GenerateTiles(){
-        this.tiles = new TileClass[104];
-
-        //creates tiles
-        for (int i = 0; i < tiles.Length; i++)
-        {
-            tiles[i] = new TileClass();
-        }
-
-        //Assigns tile x and y
-        int index = 0;
-        int j = 0;
-        while (j < 8)
-        {
-            for (int k = 0; k < 13; k++)
-            {
-                tiles[index].x = k;
-                tiles[index].y = j;
-
-                //Debug.Log("Tile created: " + k + ", " + j);
-                index++;
-            }
-            j++;
-        }
-        Debug.Log("State created");
-    }
-
-*/

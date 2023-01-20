@@ -16,7 +16,9 @@ public class SaveHandler : MonoBehaviour
 
     string saveJson;
 
-    public Sprite[] sprites;
+    public Sprite[] stateSprites;
+
+    public Sprite[] tileSprites;
 
     public void Start()
     {
@@ -32,7 +34,6 @@ public class SaveHandler : MonoBehaviour
                 .CreateDirectory(Application.persistentDataPath + "/Saves");
         }
         _GameData.stateCoords = new StateClass[16];
-        
     }
 
     public void SaveFile()
@@ -67,21 +68,35 @@ public class SaveHandler : MonoBehaviour
     {
         saveJson = File.ReadAllText(saveLocation);
         _GameData = JsonUtility.FromJson<GameData>(saveJson);
+        WorldMapUI();
     }
 
-    void MapUI()
+    void WorldMapUI()
     {
         foreach (StateClass state in _GameData.stateCoords)
         {
             GameObject statePrefab =
-                Instantiate(_UIControl.stateInstance, _UIControl.worldMapList.transform);
+                Instantiate(_UIControl.stateInstance,
+                _UIControl.worldMapList.transform);
             StateScript prefabScript =
                 statePrefab.GetComponentInChildren<StateScript>();
             StateClass createState = state;
             createState.discovered = true;
-            Sprite tempSprite = sprites[state.specialisation];
-            prefabScript.StateCreate (createState, _UIControl.worldMapPanel, tempSprite);
+            Sprite tempSprite = stateSprites[state.specialisation];
+            prefabScript
+                .StateCreate(createState, _UIControl.worldMapPanel, tempSprite);
             statePrefab.SetActive(prefabScript.state.discovered);
+        }
+    }
+
+    void LocalMapUI(StateClass state)
+    {
+        foreach (TileClass tile in state.tiles)
+        {
+            Sprite tempSprite = tileSprites[tile.type];
+            GameObject tilePrefab =
+                Instantiate(_UIControl.tileInstance,
+                _UIControl.localMapPanel.transform);
         }
     }
 
@@ -101,7 +116,11 @@ public class SaveHandler : MonoBehaviour
             for (int k = 0; k < 4; k++)
             {
                 StateClass newState =
-                    new StateClass(stateTypeArray[index], k, j);
+                    new StateClass(stateTypeArray[index],
+                        k,
+                        j,
+                        GenerateTiles());
+
                 _GameData.stateCoords[index] = newState;
                 index++;
             }
@@ -109,8 +128,37 @@ public class SaveHandler : MonoBehaviour
             //Debug.Log("Tile created: " + k + ", " + j);
         }
         Debug
-            .Log("Line 131 of MapGen makes states discovered, marked as breakpoint");
+            .Log("Line 81 of MapGen makes states discovered, marked as breakpoint");
         SaveFile();
-        MapUI();
+        WorldMapUI();
+    }
+
+    public TileClass[] GenerateTiles()
+    {
+        TileClass[] tiles = new TileClass[104];
+
+        //creates tiles
+        for (int i = 0; i < tiles.Length; i++)
+        {
+            tiles[i] = new TileClass();
+        }
+
+        //Assigns tile x and y
+        int index = 0;
+        int j = 0;
+        while (j < 8)
+        {
+            for (int k = 0; k < 13; k++)
+            {
+                tiles[index].x = k;
+                tiles[index].y = j;
+
+                //Debug.Log("Tile created: " + k + ", " + j);
+                index++;
+            }
+            j++;
+        }
+        Debug.Log("Tiles created");
+        return tiles;
     }
 }

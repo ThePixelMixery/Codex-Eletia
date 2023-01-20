@@ -12,4 +12,6 @@ public class UIController
     public GameObject localMapPanel;
 
     public GameObject stateInstance;
+
+    public GameObject tileInstance;
 }

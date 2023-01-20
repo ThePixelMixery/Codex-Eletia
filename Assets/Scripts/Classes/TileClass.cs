@@ -4,10 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [System.Serializable]
-public class TileClass : MonoBehaviour
+public class TileClass
 {
-    public Sprite tileImage;
-
     public string locationName;
 
     public int access;
@@ -16,7 +14,9 @@ public class TileClass : MonoBehaviour
 
     public int y;
 
-    public string type;
+    public int type;
+
+    public bool discovered;
 
     public float explored; /* Type enum
     public enum tileType
