@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class TileScript : MonoBehaviour
 {
-    TileClass tile;
+    public TileClass tile;
 
     GameObject localMapPanel;
 
@@ -37,6 +37,13 @@ public class TileScript : MonoBehaviour
         tile = tempTile;
         if (tile.type > 0)
             tileTile.GetComponent<Image>().sprite = tempSprite;
+        tileTile.SetActive(tile.discovered);
+    }
+
+    public void UpdateTile(bool current)
+    {
+        if (current) tileTile.GetComponent<Image>().color = new Color(0.3f,0.55f,1.0f,1.0f);
+        else tileTile.GetComponent<Image>().color = Color.white;
         tileTile.SetActive(tile.discovered);
     }
 }

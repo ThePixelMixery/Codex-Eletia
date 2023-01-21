@@ -14,4 +14,8 @@ public class UIController
     public GameObject stateInstance;
 
     public GameObject tileInstance;
+
+    public GameObject TilePosition;
+
+    public GameObject StatePosition;
 }

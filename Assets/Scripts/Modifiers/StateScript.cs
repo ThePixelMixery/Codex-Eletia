@@ -107,6 +107,13 @@ public class StateScript : MonoBehaviour
         //        UpdateDetails(type);
     }
 
+    public void UpdateState(bool current)
+    {
+        if (current) stateTileObject.GetComponent<Image>().color = new Color(0.3f,0.55f,1.0f,1.0f);
+        else stateTileObject.GetComponent<Image>().color = Color.white;
+        stateTileObject.SetActive(state.discovered);
+    }
+
     /*    
     public void UpdateDetails(string spec)
     {

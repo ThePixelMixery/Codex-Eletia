@@ -16,25 +16,23 @@ public class SaveHandler : MonoBehaviour
 
     string saveJson;
 
-    StateClass tempState;
-
     StateClass currentState;
 
-    TileClass currentTile;
+    int keeperStateX;
 
-    public int keeperStateX;
+    int keeperStateY;
 
-    public int keeperStateY;
+    int keeperTileX;
 
-    public int keeperTileX;
+    int keeperTileY;
 
-    public int keeperTileY;
+    public GameObject[] currentTiles = new GameObject[104];
 
     public Sprite[] stateSprites;
 
     public Sprite[] tileSprites;
 
-    public void Start()
+    void Start()
     {
         saveLocation = Application.persistentDataPath + "/Saves/GameData.json";
         _GameData.stateCoords = new StateClass[16];
@@ -70,6 +68,11 @@ public class SaveHandler : MonoBehaviour
             {
                 Destroy(child.gameObject);
             }
+            foreach (Transform child in _UIControl.localMapPanel.transform)
+            {
+                Destroy(child.gameObject);
+            }
+
             Debug.Log("Save Deleted");
         }
         else
@@ -91,7 +94,7 @@ public class SaveHandler : MonoBehaviour
         LocalMapUI(currentState.tiles);
     }
 
-    public void WorldMapUI()
+    void WorldMapUI()
     {
         foreach (StateClass state in _GameData.stateCoords)
         {
@@ -105,10 +108,12 @@ public class SaveHandler : MonoBehaviour
             {
                 current = true;
                 currentState = state;
+                _UIControl.StatePosition = statePrefab;
             }
             else
                 current = false;
             StateClass createState = state;
+
             //state set to disovered
             createState.discovered = true;
             Sprite tempSprite = stateSprites[state.specialisation];
@@ -123,6 +128,7 @@ public class SaveHandler : MonoBehaviour
 
     void LocalMapUI(TileClass[] tiles)
     {
+        int index = 0;
         foreach (TileClass tile in tiles)
         {
             Sprite tempSprite = tileSprites[tile.type];
@@ -133,17 +139,22 @@ public class SaveHandler : MonoBehaviour
                 tilePrefab.GetComponentInChildren<TileScript>();
             bool current;
             if (tile.x == keeperTileX && tile.y == keeperTileY)
+            {
                 current = true;
+                _UIControl.TilePosition = tilePrefab;
+            }
             else
                 current = false;
-            
+
             //tile set to discovered
             tile.discovered = true;
             tileScript.TileCreate (current, tile, tempSprite);
+            currentTiles[index] = tilePrefab;
+            index++;
         }
     }
 
-    public void MapCreator()
+    void MapCreator()
     {
         HashSet<int> stateTypeNumbers = new HashSet<int>();
         while (stateTypeNumbers.Count < 16)
@@ -174,9 +185,28 @@ public class SaveHandler : MonoBehaviour
             .Log("Line 81 of MapGen makes states discovered, marked as breakpoint");
         SaveFile();
         WorldMapUI();
+        LocalMapUI(currentState.tiles);
     }
 
-    public TileClass[] GenerateTiles()
+    public void updateTile()
+    {
+    }
+
+    /*
+    public void updateLocalMap(){
+    foreach (GameObject tile in currentTiles)
+       {
+            TileScript script = tile.GetComponentInChildren<TileScript>();
+            bool current;
+            if (script.tile.x == keeperTileX && script.tile.y == keeperTileY)
+                current = true;
+            else
+                current = false;
+            script.UpdateTile(current);
+        }
+    }
+*/
+    TileClass[] GenerateTiles()
     {
         TileClass[] tiles = new TileClass[104];
 
@@ -201,7 +231,8 @@ public class SaveHandler : MonoBehaviour
             }
             j++;
         }
-        Debug.Log("Tiles created");
+
+        //        Debug.Log("Tiles created");
         return tiles;
     }
 }
