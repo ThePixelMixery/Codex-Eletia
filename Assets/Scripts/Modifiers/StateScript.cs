@@ -28,7 +28,7 @@ public class StateScript : MonoBehaviour
     GameObject stateTileObject;
     public GameObject stateTile;
 
-    public void StateCreate(
+    public void StateCreate(bool current,
         StateClass tempState,
         GameObject stateImagePanel,
         Sprite tempSprite
@@ -40,6 +40,8 @@ public class StateScript : MonoBehaviour
         worldMapPanel = stateImagePanel;
         stateTileObject = Instantiate(stateTile, worldMapPanel.transform);
         stateTileObject.GetComponent<Image>().sprite = tempSprite;
+        if (current) stateTileObject.GetComponent<Image>().color = new Color(0.3f,0.55f,1.0f,1.0f);
+        else stateTileObject.GetComponent<Image>().color = Color.white;
         stateTileObject.SetActive(state.discovered);
     }
 

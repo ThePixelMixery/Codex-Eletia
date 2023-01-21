@@ -16,6 +16,20 @@ public class SaveHandler : MonoBehaviour
 
     string saveJson;
 
+    StateClass tempState;
+
+    StateClass currentState;
+
+    TileClass currentTile;
+
+    public int keeperStateX;
+
+    public int keeperStateY;
+
+    public int keeperTileX;
+
+    public int keeperTileY;
+
     public Sprite[] stateSprites;
 
     public Sprite[] tileSprites;
@@ -23,6 +37,7 @@ public class SaveHandler : MonoBehaviour
     public void Start()
     {
         saveLocation = Application.persistentDataPath + "/Saves/GameData.json";
+        _GameData.stateCoords = new StateClass[16];
         if (System.IO.File.Exists(saveLocation))
         {
             Loader();
@@ -32,8 +47,8 @@ public class SaveHandler : MonoBehaviour
             Debug.LogError("Savefile not found at " + saveLocation);
             Directory
                 .CreateDirectory(Application.persistentDataPath + "/Saves");
+            MapCreator();
         }
-        _GameData.stateCoords = new StateClass[16];
     }
 
     public void SaveFile()
@@ -68,10 +83,15 @@ public class SaveHandler : MonoBehaviour
     {
         saveJson = File.ReadAllText(saveLocation);
         _GameData = JsonUtility.FromJson<GameData>(saveJson);
+        _GameData.keeper.stateX = keeperStateX;
+        _GameData.keeper.stateY = keeperStateY;
+        _GameData.keeper.tileX = keeperTileX;
+        _GameData.keeper.tileY = keeperTileY;
         WorldMapUI();
+        LocalMapUI(currentState.tiles);
     }
 
-    void WorldMapUI()
+    public void WorldMapUI()
     {
         foreach (StateClass state in _GameData.stateCoords)
         {
@@ -80,23 +100,46 @@ public class SaveHandler : MonoBehaviour
                 _UIControl.worldMapList.transform);
             StateScript prefabScript =
                 statePrefab.GetComponentInChildren<StateScript>();
+            bool current;
+            if (state.x == keeperStateX && state.y == keeperStateY)
+            {
+                current = true;
+                currentState = state;
+            }
+            else
+                current = false;
             StateClass createState = state;
+            //state set to disovered
             createState.discovered = true;
             Sprite tempSprite = stateSprites[state.specialisation];
             prefabScript
-                .StateCreate(createState, _UIControl.worldMapPanel, tempSprite);
+                .StateCreate(current,
+                createState,
+                _UIControl.worldMapPanel,
+                tempSprite);
             statePrefab.SetActive(prefabScript.state.discovered);
         }
     }
 
-    void LocalMapUI(StateClass state)
+    void LocalMapUI(TileClass[] tiles)
     {
-        foreach (TileClass tile in state.tiles)
+        foreach (TileClass tile in tiles)
         {
             Sprite tempSprite = tileSprites[tile.type];
             GameObject tilePrefab =
                 Instantiate(_UIControl.tileInstance,
                 _UIControl.localMapPanel.transform);
+            TileScript tileScript =
+                tilePrefab.GetComponentInChildren<TileScript>();
+            bool current;
+            if (tile.x == keeperTileX && tile.y == keeperTileY)
+                current = true;
+            else
+                current = false;
+            
+            //tile set to discovered
+            tile.discovered = true;
+            tileScript.TileCreate (current, tile, tempSprite);
         }
     }
 

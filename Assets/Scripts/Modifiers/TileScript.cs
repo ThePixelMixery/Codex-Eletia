@@ -11,8 +11,6 @@ public class TileScript : MonoBehaviour
 
     public GameObject tileTile;
 
-    GameObject tileTileObject;
-
     void Start()
     {
         //Debug.Log (tile.explored);
@@ -28,19 +26,17 @@ public class TileScript : MonoBehaviour
         tile.explored += exploredMore;
     }
 
-    public void TileCreate(
+    public void TileCreate( 
+        bool current,
         TileClass tempTile,
-        GameObject LocalMapPanel,
         Sprite tempSprite
     )
     {
+        if (current) tileTile.GetComponent<Image>().color = new Color(0.3f,0.55f,1.0f,1.0f);
+        else  tileTile.GetComponent<Image>().color = Color.white;
         tile = tempTile;
-
-        //tile.text = state.stateName;
-        //SpecFancy(state.specialisation);
-        localMapPanel = LocalMapPanel;
         if (tile.type > 0)
-            this.GetComponent<Image>().sprite = tempSprite;
-        tileTileObject.SetActive(tile.discovered);
+            tileTile.GetComponent<Image>().sprite = tempSprite;
+        tileTile.SetActive(tile.discovered);
     }
 }
