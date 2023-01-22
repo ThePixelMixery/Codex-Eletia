@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class GameData
 {
-    public KeeperClass keeper;
+    public KeeperClass keeper = new KeeperClass();
 
     public List<MapNavClass> mapNavigators;
 

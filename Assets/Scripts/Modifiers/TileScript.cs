@@ -26,24 +26,30 @@ public class TileScript : MonoBehaviour
         tile.explored += exploredMore;
     }
 
-    public void TileCreate( 
-        bool current,
-        TileClass tempTile,
-        Sprite tempSprite
-    )
+    public void TileCreate(bool current, TileClass tempTile, Sprite tempSprite)
     {
-        if (current) tileTile.GetComponent<Image>().color = new Color(0.3f,0.55f,1.0f,1.0f);
-        else  tileTile.GetComponent<Image>().color = Color.white;
+        if (current)
+            tileTile.GetComponent<Image>().color =
+                new Color(0.3f, 0.55f, 1.0f, 1.0f);
+        else
+            tileTile.GetComponent<Image>().color = Color.white;
         tile = tempTile;
-        if (tile.type > 0)
-            tileTile.GetComponent<Image>().sprite = tempSprite;
+        if (tile.type > 0) tileTile.GetComponent<Image>().sprite = tempSprite;
         tileTile.SetActive(tile.discovered);
+    }
+
+    public void Discovery()
+    {
+        tile.discovered = true;
     }
 
     public void UpdateTile(bool current)
     {
-        if (current) tileTile.GetComponent<Image>().color = new Color(0.3f,0.55f,1.0f,1.0f);
-        else tileTile.GetComponent<Image>().color = Color.white;
+        if (current)
+            tileTile.GetComponent<Image>().color =
+                new Color(0.3f, 0.55f, 1.0f, 1.0f);
+        else
+            tileTile.GetComponent<Image>().color = Color.white;
         tileTile.SetActive(tile.discovered);
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -18,6 +19,8 @@ public class SaveHandler : MonoBehaviour
 
     StateClass currentState;
 
+    int keeperCurrentState;
+
     int keeperStateX;
 
     int keeperStateY;
@@ -26,7 +29,9 @@ public class SaveHandler : MonoBehaviour
 
     int keeperTileY;
 
-    public GameObject[] currentTiles = new GameObject[104];
+    public GameObject[,] currentTiles = new GameObject[13, 8];
+
+    public GameObject[] miniMapTiles = new GameObject[9];
 
     public Sprite[] stateSprites;
 
@@ -57,6 +62,9 @@ public class SaveHandler : MonoBehaviour
 
     public void DeleteFiles()
     {
+        _GameData.keeper.tileX=0;
+        _GameData.keeper.tileY=0;
+        
         if (System.IO.File.Exists(saveLocation))
         {
             File.Delete (saveLocation);
@@ -82,16 +90,35 @@ public class SaveHandler : MonoBehaviour
         AssetDatabase.Refresh();
     }
 
+    public void RefreshAssets()
+    {
+        AssetDatabase.Refresh();
+    }
+
     public void Loader()
     {
+        foreach (Transform child in _UIControl.worldMapList.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        foreach (Transform child in _UIControl.worldMapPanel.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        foreach (Transform child in _UIControl.localMapPanel.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
         saveJson = File.ReadAllText(saveLocation);
         _GameData = JsonUtility.FromJson<GameData>(saveJson);
-        _GameData.keeper.stateX = keeperStateX;
-        _GameData.keeper.stateY = keeperStateY;
-        _GameData.keeper.tileX = keeperTileX;
-        _GameData.keeper.tileY = keeperTileY;
+        keeperStateX = _GameData.keeper.stateX;
+        keeperStateY = _GameData.keeper.stateY;
+        keeperTileX = _GameData.keeper.tileX;
+        keeperTileY = _GameData.keeper.tileY;
         WorldMapUI();
         LocalMapUI(currentState.tiles);
+        MiniMapUI();
     }
 
     void WorldMapUI()
@@ -128,13 +155,12 @@ public class SaveHandler : MonoBehaviour
 
     void LocalMapUI(TileClass[] tiles)
     {
-        int index = 0;
         foreach (TileClass tile in tiles)
         {
-            Sprite tempSprite = tileSprites[tile.type];
             GameObject tilePrefab =
                 Instantiate(_UIControl.tileInstance,
                 _UIControl.localMapPanel.transform);
+            Sprite tempSprite = tileSprites[tile.type];
             TileScript tileScript =
                 tilePrefab.GetComponentInChildren<TileScript>();
             bool current;
@@ -147,65 +173,199 @@ public class SaveHandler : MonoBehaviour
                 current = false;
 
             //tile set to discovered
-            tile.discovered = true;
             tileScript.TileCreate (current, tile, tempSprite);
-            currentTiles[index] = tilePrefab;
-            index++;
+            UpdateCurrentTiles(tilePrefab,
+            tileScript.tile.x,
+            tileScript.tile.y);
         }
     }
 
-    void MapCreator()
+    void UpdateCurrentTiles(GameObject tile, int x, int y)
     {
-        HashSet<int> stateTypeNumbers = new HashSet<int>();
-        while (stateTypeNumbers.Count < 16)
+        currentTiles[x, y] = tile;
+    }
+
+    public void MiniMapUI()
+    {
+        foreach (Transform child in _UIControl.miniMapPanel.transform)
+        Destroy(child.gameObject);
+        Array.Clear(miniMapTiles, 0, 9);
+        for (int j = 0; j < 8; j++)
         {
-            stateTypeNumbers.Add(Random.Range(0, 16));
-        }
-        int[] stateTypeArray = new int[stateTypeNumbers.Count()];
-        stateTypeNumbers.CopyTo (stateTypeArray);
-        int j = 0;
-        int index = 0;
-        while (j < 4)
-        {
-            for (int k = 0; k < 4; k++)
+            for (int k = 0; k < 13; k++)
             {
-                StateClass newState =
-                    new StateClass(stateTypeArray[index],
-                        k,
-                        j,
-                        GenerateTiles());
-
-                _GameData.stateCoords[index] = newState;
-                index++;
+                if (keeperTileX - 1 == k && keeperTileY - 1 == j)
+                {
+                    miniMapTiles[0] = currentTiles[k, j];
+                    currentTiles[k, j]
+                        .GetComponentInChildren<TileScript>()
+                        .Discovery();
+                }
+                else if (keeperTileX == k && keeperTileY - 1 == j)
+                {
+                    miniMapTiles[1] = currentTiles[k, j];
+                    currentTiles[k, j]
+                        .GetComponentInChildren<TileScript>()
+                        .Discovery();
+                }
+                else if (keeperTileX + 1 == k && keeperTileY - 1 == j)
+                {
+                    miniMapTiles[2] = currentTiles[k, j];
+                    currentTiles[k, j]
+                        .GetComponentInChildren<TileScript>()
+                        .Discovery();
+                }
+                else if (keeperTileX - 1 == k && keeperTileY == j)
+                {
+                    miniMapTiles[3] = currentTiles[k, j];
+                    currentTiles[k, j]
+                        .GetComponentInChildren<TileScript>()
+                        .Discovery();
+                }
+                else if (keeperTileX == k && keeperTileY == j)
+                {
+                    miniMapTiles[4] = currentTiles[k, j];
+                    currentTiles[k, j]
+                        .GetComponentInChildren<TileScript>()
+                        .Discovery();
+                }
+                else if (keeperTileX + 1 == k && keeperTileY == j)
+                {
+                    miniMapTiles[5] = currentTiles[k, j];
+                    currentTiles[k, j]
+                        .GetComponentInChildren<TileScript>()
+                        .Discovery();
+                }
+                else if (keeperTileX - 1 == k && keeperTileY + 1 == j)
+                {
+                    miniMapTiles[6] = currentTiles[k, j];
+                    currentTiles[k, j]
+                        .GetComponentInChildren<TileScript>()
+                        .Discovery();
+                }
+                else if (keeperTileX == k && keeperTileY + 1 == j)
+                {
+                    miniMapTiles[7] = currentTiles[k, j];
+                    currentTiles[k, j]
+                        .GetComponentInChildren<TileScript>()
+                        .Discovery();
+                }
+                else if (keeperTileX + 1 == k && keeperTileY + 1 == j)
+                {
+                    miniMapTiles[8] = currentTiles[k, j];
+                    currentTiles[k, j]
+                        .GetComponentInChildren<TileScript>()
+                        .Discovery();
+                }
             }
-            j++;
-            //Debug.Log("Tile created: " + k + ", " + j);
         }
-        Debug
-            .Log("Line 81 of MapGen makes states discovered, marked as breakpoint");
-        SaveFile();
-        WorldMapUI();
-        LocalMapUI(currentState.tiles);
+        for (int i = 0; i < miniMapTiles.Length; i++)
+        {
+            if (miniMapTiles[i] != null)
+            {
+                if (i == 4)
+                    miniMapTiles[i]
+                        .GetComponentInChildren<TileScript>()
+                        .UpdateTile(true);
+                else
+                    miniMapTiles[i]
+                        .GetComponentInChildren<TileScript>()
+                        .UpdateTile(false);
+
+                //Debug.Log("I exist: Minimap tile " + index);
+                Instantiate(miniMapTiles[i], _UIControl.miniMapPanel.transform);
+                _UIControl
+                    .navButtons[i]
+                    .GetComponentInChildren<Button>()
+                    .interactable = true;
+            }
+            else
+            {
+                //if (i == 7) Debug.Log(miniMapTiles[i]);
+                //Debug.LogError("I don't exist: Minimap tile " + index);
+                _UIControl
+                    .navButtons[i]
+                    .GetComponentInChildren<Button>()
+                    .interactable = false;
+                Instantiate(_UIControl.blockedTile,
+                _UIControl.miniMapPanel.transform);
+            }
+        }
     }
 
-    public void updateTile()
+    public void MapCreator()
     {
+        if (System.IO.File.Exists(saveLocation))
+        {
+            Debug.LogError("Map Already exists. Denied");
+        }
+        else
+        {
+            HashSet<int> stateTypeNumbers = new HashSet<int>();
+            while (stateTypeNumbers.Count < 16)
+            {
+                stateTypeNumbers.Add(UnityEngine.Random.Range(0, 16));
+            }
+            int[] stateTypeArray = new int[stateTypeNumbers.Count()];
+            stateTypeNumbers.CopyTo (stateTypeArray);
+            int index = 0;
+            for (int j = 0; j < 4; j++)
+            {
+                for (int k = 0; k < 4; k++)
+                {
+                    StateClass newState =
+                        new StateClass(stateTypeArray[index],
+                            k,
+                            j,
+                            GenerateTiles());
+
+                    _GameData.stateCoords[index] = newState;
+                    index++;
+                }
+                //Debug.Log("Tile created: " + k + ", " + j);
+            }
+            Debug
+                .Log("Line 81 of MapGen makes states discovered, marked as breakpoint");
+            SaveFile();
+            WorldMapUI();
+            LocalMapUI(currentState.tiles);
+            MiniMapUI();
+        }
     }
 
-    /*
-    public void updateLocalMap(){
-    foreach (GameObject tile in currentTiles)
-       {
+    public void UpdateKeeperLocationX(int x)
+    {
+        if (keeperTileX + x <= 12 && keeperTileX + x >= 0)
+        {
+            keeperTileX += x;
+            _GameData.keeper.tileX = keeperTileX;
+        }
+    }
+
+    public void UpdateKeeperLocationY(int y)
+    {
+        if (keeperTileY + y <= 7 && keeperTileY + y >= 0)
+        {
+            keeperTileY += y;
+            _GameData.keeper.tileY = keeperTileY;
+        }
+    }
+
+    public void updateLocalMap()
+    {
+        foreach (GameObject tile in currentTiles)
+        {
             TileScript script = tile.GetComponentInChildren<TileScript>();
             bool current;
             if (script.tile.x == keeperTileX && script.tile.y == keeperTileY)
                 current = true;
             else
                 current = false;
-            script.UpdateTile(current);
+            script.UpdateTile (current);
+            //Debug.Log(script.tile.x + ", " + script.tile.y);
         }
     }
-*/
+
     TileClass[] GenerateTiles()
     {
         TileClass[] tiles = new TileClass[104];
@@ -218,18 +378,16 @@ public class SaveHandler : MonoBehaviour
 
         //Assigns tile x and y
         int index = 0;
-        int j = 0;
-        while (j < 8)
+        for (int j = 0; j <= 7; j++)
         {
-            for (int k = 0; k < 13; k++)
+            for (int k = 0; k <= 12; k++)
             {
                 tiles[index].x = k;
                 tiles[index].y = j;
 
-                //Debug.Log("Tile created: " + k + ", " + j);
+                Debug.Log("Tile created: " + k + ", " + j);
                 index++;
             }
-            j++;
         }
 
         //        Debug.Log("Tiles created");

@@ -11,9 +11,16 @@ public class UIController
 
     public GameObject localMapPanel;
 
+    public GameObject miniMapPanel;
+
+    public GameObject blockedTile;
+
+    public GameObject[] navButtons = new GameObject[8];
+
     public GameObject stateInstance;
 
     public GameObject tileInstance;
+
 
     public GameObject TilePosition;
 

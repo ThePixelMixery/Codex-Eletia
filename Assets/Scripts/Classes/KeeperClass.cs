@@ -4,11 +4,13 @@ using UnityEngine;
 
 [System.Serializable]
 public class KeeperClass
-{
+{   
     public int stateX;
 
     public int stateY;
-    
+
+    public int TilePosition;
+
     public int tileX;
 
     public int tileY;
