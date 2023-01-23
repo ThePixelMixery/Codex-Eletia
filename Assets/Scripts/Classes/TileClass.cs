@@ -18,6 +18,8 @@ public class TileClass
 
     public bool discovered;
 
+    public Color tileColor;
+
     public float explored; /* Type enum
     public enum tileType
     {
@@ -48,6 +50,8 @@ public class TileClass
         necromantic //summoner
     }
 */
+
+    public CivClass civ;
 
     public List<ActionClass> tileActions;
 

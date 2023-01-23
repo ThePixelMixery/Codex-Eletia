@@ -2917,9 +2917,9 @@ RectTransform:
   m_Father: {fileID: 1553382280}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 95, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 95, y: -55.510002}
   m_SizeDelta: {x: 186, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &374414274
@@ -9806,6 +9806,8 @@ MonoBehaviour:
     localMapPanel: {fileID: 950918559}
     miniMapPanel: {fileID: 250540620}
     blockedTile: {fileID: 2962992882202361934, guid: 46be911e39a21b50db39c9a7df52bef3, type: 3}
+    tile: {fileID: 21300000, guid: 3cc504dedfe2ef28aaf3f375f3c475bc, type: 3}
+    keeper: {fileID: 21300000, guid: 2d7be142a6cf4e7539b5889f9e6cfc88, type: 3}
     navButtons:
     - {fileID: 1731929582}
     - {fileID: 2028275102}
@@ -9820,33 +9822,40 @@ MonoBehaviour:
     tileInstance: {fileID: 5402177375487433437, guid: 9437233a2e330dff1a8678d75830cfab, type: 3}
     TilePosition: {fileID: 0}
     StatePosition: {fileID: 0}
-  miniMapTiles:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  stateSprites:
-  - {fileID: 21300000, guid: df7a6babcb3d335d39e2d1e031871877, type: 3}
-  - {fileID: 21300000, guid: 413715f57287b8ce8a4d2f0e34e8c202, type: 3}
-  - {fileID: 21300000, guid: ca605dace99762c5b9ac7a5e13a3438d, type: 3}
-  - {fileID: 21300000, guid: 9b8c042622634d902b686e7f443c3b4d, type: 3}
-  - {fileID: 21300000, guid: b6cd2d0b5798f18129d4d0bd45c1ee19, type: 3}
-  - {fileID: 21300000, guid: 183a62975042421cdba69e693ee4ca8d, type: 3}
-  - {fileID: 21300000, guid: 64cfe6130b9e4249a9413d49da03b991, type: 3}
-  - {fileID: 21300000, guid: 150b7087ed222e3378dfa64d9364758a, type: 3}
-  - {fileID: 21300000, guid: a5ee79de4e5d14fce89824c41b8663e5, type: 3}
-  - {fileID: 21300000, guid: 7fca0815724cec3d6b8a0b58e130dd56, type: 3}
-  - {fileID: 21300000, guid: 0b05f5ae8318fb9b197a054a4569b22b, type: 3}
-  - {fileID: 21300000, guid: f026416c9eef0cfc9836b85b445ed18b, type: 3}
-  - {fileID: 21300000, guid: 68bb9f7bd28d9435b8e6992e0b2c4730, type: 3}
-  - {fileID: 21300000, guid: 318b18c0292aeadc09c48f59ebdc6687, type: 3}
-  - {fileID: 21300000, guid: cd4cad49e4ede3476beef59a8667e331, type: 3}
-  - {fileID: 21300000, guid: 3dc6b297b6b5eb461888e7d4c92aab8e, type: 3}
+    tileColours:
+    - {r: 1, g: 0.5, b: 0.5, a: 0}
+    - {r: 0.5, g: 1, b: 1, a: 0}
+    - {r: 0.5, g: 1, b: 0.5, a: 0}
+    - {r: 1, g: 1, b: 0.5, a: 0}
+    - {r: 0.25, g: 0.5, b: 1, a: 0}
+    - {r: 0.5, g: 0.25, b: 1, a: 0}
+    - {r: 1, g: 0.5, b: 0.25, a: 0}
+    - {r: 0.5, g: 0.5, b: 0.5, a: 0}
+    - {r: 1, g: 0.5, b: 1, a: 0}
+    - {r: 0.75, g: 0.75, b: 0.25, a: 0}
+    - {r: 0.25, g: 0.75, b: 0.75, a: 0}
+    - {r: 0.5, g: 0.25, b: 0.25, a: 0}
+    - {r: 0.75, g: 0.5, b: 1, a: 0}
+    - {r: 1, g: 1, b: 1, a: 0}
+    - {r: 0.25, g: 0.1, b: 0, a: 0}
+    - {r: 0, g: 0.1, b: 0.25, a: 0}
+    stateSprites:
+    - {fileID: 21300000, guid: df7a6babcb3d335d39e2d1e031871877, type: 3}
+    - {fileID: 21300000, guid: 413715f57287b8ce8a4d2f0e34e8c202, type: 3}
+    - {fileID: 21300000, guid: ca605dace99762c5b9ac7a5e13a3438d, type: 3}
+    - {fileID: 21300000, guid: 9b8c042622634d902b686e7f443c3b4d, type: 3}
+    - {fileID: 21300000, guid: b6cd2d0b5798f18129d4d0bd45c1ee19, type: 3}
+    - {fileID: 21300000, guid: 183a62975042421cdba69e693ee4ca8d, type: 3}
+    - {fileID: 21300000, guid: 64cfe6130b9e4249a9413d49da03b991, type: 3}
+    - {fileID: 21300000, guid: 150b7087ed222e3378dfa64d9364758a, type: 3}
+    - {fileID: 21300000, guid: a5ee79de4e5d14fce89824c41b8663e5, type: 3}
+    - {fileID: 21300000, guid: 7fca0815724cec3d6b8a0b58e130dd56, type: 3}
+    - {fileID: 21300000, guid: 0b05f5ae8318fb9b197a054a4569b22b, type: 3}
+    - {fileID: 21300000, guid: f026416c9eef0cfc9836b85b445ed18b, type: 3}
+    - {fileID: 21300000, guid: 68bb9f7bd28d9435b8e6992e0b2c4730, type: 3}
+    - {fileID: 21300000, guid: 318b18c0292aeadc09c48f59ebdc6687, type: 3}
+    - {fileID: 21300000, guid: cd4cad49e4ede3476beef59a8667e331, type: 3}
+    - {fileID: 21300000, guid: 3dc6b297b6b5eb461888e7d4c92aab8e, type: 3}
   tileSprites:
   - {fileID: 21300000, guid: 46c2d91362ceb2dffbb3ef2af006d68c, type: 3}
 --- !u!4 &1184143804

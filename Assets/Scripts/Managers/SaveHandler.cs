@@ -29,11 +29,11 @@ public class SaveHandler : MonoBehaviour
 
     int keeperTileY;
 
-    public GameObject[,] currentTiles = new GameObject[13, 8];
+    public GameObject[] testCurrentTiles = new GameObject[104];
 
-    public GameObject[] miniMapTiles = new GameObject[9];
+    GameObject[,] currentTiles = new GameObject[13, 8];
 
-    public Sprite[] stateSprites;
+    GameObject[] miniMapTiles = new GameObject[9];
 
     public Sprite[] tileSprites;
 
@@ -62,9 +62,9 @@ public class SaveHandler : MonoBehaviour
 
     public void DeleteFiles()
     {
-        _GameData.keeper.tileX=0;
-        _GameData.keeper.tileY=0;
-        
+        _GameData.keeper.tileX = 0;
+        _GameData.keeper.tileY = 0;
+
         if (System.IO.File.Exists(saveLocation))
         {
             File.Delete (saveLocation);
@@ -143,7 +143,7 @@ public class SaveHandler : MonoBehaviour
 
             //state set to disovered
             createState.discovered = true;
-            Sprite tempSprite = stateSprites[state.specialisation];
+            Sprite tempSprite = _UIControl.stateSprites[state.specialisation];
             prefabScript
                 .StateCreate(current,
                 createState,
@@ -155,33 +155,32 @@ public class SaveHandler : MonoBehaviour
 
     void LocalMapUI(TileClass[] tiles)
     {
+        int index =0;
         foreach (TileClass tile in tiles)
         {
             GameObject tilePrefab =
                 Instantiate(_UIControl.tileInstance,
                 _UIControl.localMapPanel.transform);
-            Sprite tempSprite = tileSprites[tile.type];
+            Sprite tempSprite = _UIControl.tile;
+            Debug.Log(tempSprite);
             TileScript tileScript =
                 tilePrefab.GetComponentInChildren<TileScript>();
-            bool current;
             if (tile.x == keeperTileX && tile.y == keeperTileY)
             {
-                current = true;
                 _UIControl.TilePosition = tilePrefab;
             }
             else
-                current = false;
-
-            //tile set to discovered
-            tileScript.TileCreate (current, tile, tempSprite);
+                tileScript.TileCreate(tile, tempSprite);
             UpdateCurrentTiles(tilePrefab,
             tileScript.tile.x,
-            tileScript.tile.y);
+            tileScript.tile.y, index);
+            index++;
         }
     }
 
-    void UpdateCurrentTiles(GameObject tile, int x, int y)
+    void UpdateCurrentTiles(GameObject tile, int x, int y, int index)
     {
+        testCurrentTiles[index] =tile;
         currentTiles[x, y] = tile;
     }
 
@@ -197,65 +196,38 @@ public class SaveHandler : MonoBehaviour
                 if (keeperTileX - 1 == k && keeperTileY - 1 == j)
                 {
                     miniMapTiles[0] = currentTiles[k, j];
-                    currentTiles[k, j]
-                        .GetComponentInChildren<TileScript>()
-                        .Discovery();
                 }
                 else if (keeperTileX == k && keeperTileY - 1 == j)
                 {
                     miniMapTiles[1] = currentTiles[k, j];
-                    currentTiles[k, j]
-                        .GetComponentInChildren<TileScript>()
-                        .Discovery();
                 }
                 else if (keeperTileX + 1 == k && keeperTileY - 1 == j)
                 {
                     miniMapTiles[2] = currentTiles[k, j];
-                    currentTiles[k, j]
-                        .GetComponentInChildren<TileScript>()
-                        .Discovery();
                 }
                 else if (keeperTileX - 1 == k && keeperTileY == j)
                 {
                     miniMapTiles[3] = currentTiles[k, j];
-                    currentTiles[k, j]
-                        .GetComponentInChildren<TileScript>()
-                        .Discovery();
                 }
                 else if (keeperTileX == k && keeperTileY == j)
                 {
                     miniMapTiles[4] = currentTiles[k, j];
-                    currentTiles[k, j]
-                        .GetComponentInChildren<TileScript>()
-                        .Discovery();
                 }
                 else if (keeperTileX + 1 == k && keeperTileY == j)
                 {
                     miniMapTiles[5] = currentTiles[k, j];
-                    currentTiles[k, j]
-                        .GetComponentInChildren<TileScript>()
-                        .Discovery();
                 }
                 else if (keeperTileX - 1 == k && keeperTileY + 1 == j)
                 {
                     miniMapTiles[6] = currentTiles[k, j];
-                    currentTiles[k, j]
-                        .GetComponentInChildren<TileScript>()
-                        .Discovery();
                 }
                 else if (keeperTileX == k && keeperTileY + 1 == j)
                 {
                     miniMapTiles[7] = currentTiles[k, j];
-                    currentTiles[k, j]
-                        .GetComponentInChildren<TileScript>()
-                        .Discovery();
                 }
                 else if (keeperTileX + 1 == k && keeperTileY + 1 == j)
                 {
                     miniMapTiles[8] = currentTiles[k, j];
-                    currentTiles[k, j]
-                        .GetComponentInChildren<TileScript>()
-                        .Discovery();
                 }
             }
         }
@@ -263,16 +235,18 @@ public class SaveHandler : MonoBehaviour
         {
             if (miniMapTiles[i] != null)
             {
+                miniMapTiles[i]
+                    .GetComponentInChildren<TileScript>()
+                    .Discovery();
                 if (i == 4)
                     miniMapTiles[i]
                         .GetComponentInChildren<TileScript>()
-                        .UpdateTile(true);
+                        .UpdateTile(_UIControl.keeper);
                 else
                     miniMapTiles[i]
                         .GetComponentInChildren<TileScript>()
-                        .UpdateTile(false);
+                        .UpdateTile(_UIControl.tile);
 
-                //Debug.Log("I exist: Minimap tile " + index);
                 Instantiate(miniMapTiles[i], _UIControl.miniMapPanel.transform);
                 _UIControl
                     .navButtons[i]
@@ -281,8 +255,6 @@ public class SaveHandler : MonoBehaviour
             }
             else
             {
-                //if (i == 7) Debug.Log(miniMapTiles[i]);
-                //Debug.LogError("I don't exist: Minimap tile " + index);
                 _UIControl
                     .navButtons[i]
                     .GetComponentInChildren<Button>()
@@ -290,6 +262,36 @@ public class SaveHandler : MonoBehaviour
                 Instantiate(_UIControl.blockedTile,
                 _UIControl.miniMapPanel.transform);
             }
+        }
+    }
+
+    public void UpdateKeeperLocationX(int x)
+    {
+        if (keeperTileX + x <= 12 && keeperTileX + x >= 0)
+        {
+            keeperTileX += x;
+            _GameData.keeper.tileX = keeperTileX;
+        }
+    }
+
+    public void UpdateKeeperLocationY(int y)
+    {
+        if (keeperTileY + y <= 7 && keeperTileY + y >= 0)
+        {
+            keeperTileY += y;
+            _GameData.keeper.tileY = keeperTileY;
+        }
+    }
+
+    public void updateLocalMap()
+    {
+        foreach (GameObject tile in currentTiles)
+        {
+            TileScript script = tile.GetComponentInChildren<TileScript>();
+            if (script.tile.x == keeperTileX && script.tile.y == keeperTileY)
+                script.UpdateTile(_UIControl.keeper);
+            else
+                script.UpdateTile(_UIControl.tile);
         }
     }
 
@@ -317,12 +319,11 @@ public class SaveHandler : MonoBehaviour
                         new StateClass(stateTypeArray[index],
                             k,
                             j,
-                            GenerateTiles());
+                            GenerateTiles(index));
 
                     _GameData.stateCoords[index] = newState;
                     index++;
                 }
-                //Debug.Log("Tile created: " + k + ", " + j);
             }
             Debug
                 .Log("Line 81 of MapGen makes states discovered, marked as breakpoint");
@@ -333,40 +334,7 @@ public class SaveHandler : MonoBehaviour
         }
     }
 
-    public void UpdateKeeperLocationX(int x)
-    {
-        if (keeperTileX + x <= 12 && keeperTileX + x >= 0)
-        {
-            keeperTileX += x;
-            _GameData.keeper.tileX = keeperTileX;
-        }
-    }
-
-    public void UpdateKeeperLocationY(int y)
-    {
-        if (keeperTileY + y <= 7 && keeperTileY + y >= 0)
-        {
-            keeperTileY += y;
-            _GameData.keeper.tileY = keeperTileY;
-        }
-    }
-
-    public void updateLocalMap()
-    {
-        foreach (GameObject tile in currentTiles)
-        {
-            TileScript script = tile.GetComponentInChildren<TileScript>();
-            bool current;
-            if (script.tile.x == keeperTileX && script.tile.y == keeperTileY)
-                current = true;
-            else
-                current = false;
-            script.UpdateTile (current);
-            //Debug.Log(script.tile.x + ", " + script.tile.y);
-        }
-    }
-
-    TileClass[] GenerateTiles()
+    TileClass[] GenerateTiles(int type)
     {
         TileClass[] tiles = new TileClass[104];
 
@@ -385,12 +353,45 @@ public class SaveHandler : MonoBehaviour
                 tiles[index].x = k;
                 tiles[index].y = j;
 
-                Debug.Log("Tile created: " + k + ", " + j);
                 index++;
             }
         }
 
-        //        Debug.Log("Tiles created");
+        int[] tileTypes =
+        { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 13, 13, 14, 15, -1 };
+
+        /* Type tile list
+                0  = fire
+                1  = water
+                2  = earth
+                3  = air
+                4  = arcane
+                5  = mystic
+                6  = time
+                7  = ghost
+                8  = hallow
+                9  = summon
+                10 = alchemy (now plant)
+                11 = overseer
+                12 = channel
+                13 = plain
+                14 = mountain
+                15 = body of water
+        */
+        //Assigns type
+        tileTypes[18] = type;
+
+        for (int i = 0; i < tiles.Length; i++)
+        {
+            int assignedType = tileTypes[UnityEngine.Random.Range(0, 18)];
+            tiles[i].type = assignedType;
+            tiles[i].tileColor = _UIControl.tileColours[assignedType];
+            if (assignedType == 14 || assignedType == 15)
+            {
+                tiles[i].access = 0;
+            }
+        }
+
         return tiles;
     }
 }
