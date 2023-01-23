@@ -64,7 +64,8 @@ public class SaveHandler : MonoBehaviour
     {
         _GameData.keeper.tileX = 0;
         _GameData.keeper.tileY = 0;
-
+        keeperTileX = 0;
+        keeperTileY = 0;
         if (System.IO.File.Exists(saveLocation))
         {
             File.Delete (saveLocation);
@@ -155,14 +156,14 @@ public class SaveHandler : MonoBehaviour
 
     void LocalMapUI(TileClass[] tiles)
     {
-        int index =0;
+        int index = 0;
         foreach (TileClass tile in tiles)
         {
             GameObject tilePrefab =
                 Instantiate(_UIControl.tileInstance,
                 _UIControl.localMapPanel.transform);
             Sprite tempSprite = _UIControl.tile;
-            Debug.Log(tempSprite);
+            Debug.Log (tempSprite);
             TileScript tileScript =
                 tilePrefab.GetComponentInChildren<TileScript>();
             if (tile.x == keeperTileX && tile.y == keeperTileY)
@@ -173,14 +174,15 @@ public class SaveHandler : MonoBehaviour
                 tileScript.TileCreate(tile, tempSprite);
             UpdateCurrentTiles(tilePrefab,
             tileScript.tile.x,
-            tileScript.tile.y, index);
+            tileScript.tile.y,
+            index);
             index++;
         }
     }
 
     void UpdateCurrentTiles(GameObject tile, int x, int y, int index)
     {
-        testCurrentTiles[index] =tile;
+        testCurrentTiles[index] = tile;
         currentTiles[x, y] = tile;
     }
 
@@ -233,8 +235,16 @@ public class SaveHandler : MonoBehaviour
         }
         for (int i = 0; i < miniMapTiles.Length; i++)
         {
+            //int illegalTile =
+            int illegalTile = 0;
             if (miniMapTiles[i] != null)
             {
+                illegalTile =
+                    miniMapTiles[i]
+                        .GetComponentInChildren<TileScript>()
+                        .tile
+                        .type;
+
                 miniMapTiles[i]
                     .GetComponentInChildren<TileScript>()
                     .Discovery();
@@ -262,6 +272,12 @@ public class SaveHandler : MonoBehaviour
                 Instantiate(_UIControl.blockedTile,
                 _UIControl.miniMapPanel.transform);
             }
+
+            if (illegalTile == 15 || illegalTile == 14)
+                _UIControl
+                    .navButtons[i]
+                    .GetComponentInChildren<Button>()
+                    .interactable = false;
         }
     }
 
@@ -319,7 +335,7 @@ public class SaveHandler : MonoBehaviour
                         new StateClass(stateTypeArray[index],
                             k,
                             j,
-                            GenerateTiles(index));
+                            GenerateTiles(stateTypeArray[index]));
 
                     _GameData.stateCoords[index] = newState;
                     index++;
@@ -357,8 +373,9 @@ public class SaveHandler : MonoBehaviour
             }
         }
 
+        //Assigns type
         int[] tileTypes =
-        { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 13, 13, 14, 15, -1 };
+        { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
 
         /* Type tile list
                 0  = fire
@@ -378,12 +395,20 @@ public class SaveHandler : MonoBehaviour
                 14 = mountain
                 15 = body of water
         */
-        //Assigns type
-        tileTypes[18] = type;
-
+        int assignedType = 0;
         for (int i = 0; i < tiles.Length; i++)
         {
-            int assignedType = tileTypes[UnityEngine.Random.Range(0, 18)];
+            int variation = UnityEngine.Random.Range(0, 5);
+            if (variation == 0)
+            {
+                int randomType = UnityEngine.Random.Range(0, 15);
+                assignedType = tileTypes[randomType];
+            }
+            else if (variation == 1)
+                assignedType = tileTypes[type];
+            else
+                assignedType = 13;
+
             tiles[i].type = assignedType;
             tiles[i].tileColor = _UIControl.tileColours[assignedType];
             if (assignedType == 14 || assignedType == 15)
