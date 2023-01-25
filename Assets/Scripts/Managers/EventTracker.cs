@@ -19,13 +19,13 @@ public class EventTracker : MonoBehaviour
         }
     }
 
-    public static Toggle story;
+    static Toggle story;
 
-    public static Toggle unlock;
+    static Toggle unlock;
 
-    public static Toggle combat;
+    static Toggle combat;
 
-    public static Toggle loot;
+    static Toggle loot;
 
     public static TextMeshProUGUI logOutput;
 
@@ -33,19 +33,28 @@ public class EventTracker : MonoBehaviour
 
     private static bool Initialised = false;
 
-
     //checks for elements
     public static void initialise()
     {
         if (Initialised == false)
         {
             Initialised = true;
-            logOutput = GameObject.Find("Text_Log").GetComponent<TextMeshProUGUI>();
+            logOutput =
+                GameObject.Find("Text_Log").GetComponent<TextMeshProUGUI>();
             story = GameObject.Find("Toggle_Story").GetComponent<Toggle>();
             unlock = GameObject.Find("Toggle_Unlock").GetComponent<Toggle>();
             combat = GameObject.Find("Toggle_Combat").GetComponent<Toggle>();
             loot = GameObject.Find("Toggle_Loot").GetComponent<Toggle>();
-            Debug.Log(story+ " ,"+unlock+ " ,"+combat+ " ,"+loot);
+            Debug
+                .Log(logOutput +
+                "," +
+                story +
+                " ," +
+                unlock +
+                " ," +
+                combat +
+                " ," +
+                loot);
         }
     }
 
@@ -58,11 +67,12 @@ public class EventTracker : MonoBehaviour
     public static void NewEvent(int type, string content)
     {
         Log log = new Log(type, content);
-        Debug.Log(log.Content);
+
+        //Debug.Log(log.Content);
         logs.Insert(0, log);
         updateEvents();
     }
-    
+
     // updates event list
     public static void updateEvents()
     {
@@ -82,7 +92,7 @@ public class EventTracker : MonoBehaviour
                     if (story.isOn == true)
                     {
                         entryOutput =
-                            "Story = " + entry.Content + "\n -+-*-+- \n";
+                            "Story: " + entry.Content + "\n -+-*-+- \n";
                         //Debug.Log("Story = " + entryOutput);
                     }
                     else
@@ -94,7 +104,7 @@ public class EventTracker : MonoBehaviour
                     if (unlock.isOn == true)
                     {
                         entryOutput =
-                            "Unlocked = " + entry.Content + "\n -+-*-+- \n";
+                            "Unlocked: " + entry.Content + "\n -+-*-+- \n";
                         //Debug.Log("Unlocked = " + entryOutput);
                     }
                     else
@@ -106,7 +116,7 @@ public class EventTracker : MonoBehaviour
                     if (combat.isOn == true)
                     {
                         entryOutput =
-                            "Combat = " + entry.Content + "\n -+-*-+- \n";
+                            "Combat: " + entry.Content + "\n -+-*-+- \n";
                         //Debug.Log("Combat = " + entryOutput);
                     }
                     else
@@ -118,7 +128,7 @@ public class EventTracker : MonoBehaviour
                     if (loot.isOn == true)
                     {
                         entryOutput =
-                            "Loot = " + entry.Content + "\n -+-*-+- \n";
+                            "Loot: " + entry.Content + "\n -+-*-+- \n";
                         //Debug.Log("Loot = " + entryOutput);
                     }
                     else

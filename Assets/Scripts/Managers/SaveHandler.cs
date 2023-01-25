@@ -35,8 +35,6 @@ public class SaveHandler : MonoBehaviour
 
     GameObject[] miniMapTiles = new GameObject[9];
 
-    public Sprite[] tileSprites;
-
     void Start()
     {
         saveLocation = Application.persistentDataPath + "/Saves/GameData.json";
@@ -50,12 +48,15 @@ public class SaveHandler : MonoBehaviour
             Debug.LogError("Savefile not found at " + saveLocation);
             Directory
                 .CreateDirectory(Application.persistentDataPath + "/Saves");
-            MapCreator();
+            //MapCreator();
         }
     }
 
     public void SaveFile()
     {
+        _GameData.keeper.tileX = keeperTileX;
+        _GameData.keeper.tileY = keeperTileY;
+
         saveJson = JsonUtility.ToJson(_GameData);
         System.IO.File.WriteAllText (saveLocation, saveJson);
     }
@@ -115,11 +116,32 @@ public class SaveHandler : MonoBehaviour
         _GameData = JsonUtility.FromJson<GameData>(saveJson);
         keeperStateX = _GameData.keeper.stateX;
         keeperStateY = _GameData.keeper.stateY;
+        foreach (StateClass state in _GameData.stateCoords)
+        {
+            if (
+                _GameData.keeper.stateX == state.x &&
+                _GameData.keeper.stateY == state.y
+            ) currentState = state;
+        }
+
         keeperTileX = _GameData.keeper.tileX;
         keeperTileY = _GameData.keeper.tileY;
         WorldMapUI();
         LocalMapUI(currentState.tiles);
         MiniMapUI();
+    }
+
+    public void MapMade(int tileX, int tileY, int stateX, int stateY, StateClass state)
+    {
+        EventTracker
+            .NewEvent(0,
+            "You have discovered a giant egg in your home nation of " +
+            state.stateName);
+        currentState = state;
+        WorldMapUI();
+        LocalMapUI(currentState.tiles);
+        MiniMapUI();
+        SaveFile();
     }
 
     void WorldMapUI()
@@ -131,25 +153,11 @@ public class SaveHandler : MonoBehaviour
                 _UIControl.worldMapList.transform);
             StateScript prefabScript =
                 statePrefab.GetComponentInChildren<StateScript>();
-            bool current;
-            if (state.x == keeperStateX && state.y == keeperStateY)
-            {
-                current = true;
-                currentState = state;
-                _UIControl.StatePosition = statePrefab;
-            }
-            else
-                current = false;
             StateClass createState = state;
 
-            //state set to disovered
-            createState.discovered = true;
-            Sprite tempSprite = _UIControl.stateSprites[state.specialisation];
+            Sprite tempSprite = _UIControl.stateSprites[state.type];
             prefabScript
-                .StateCreate(current,
-                createState,
-                _UIControl.worldMapPanel,
-                tempSprite);
+                .StateCreate(createState, _UIControl.worldMapPanel, tempSprite);
             statePrefab.SetActive(prefabScript.state.discovered);
         }
     }
@@ -163,15 +171,14 @@ public class SaveHandler : MonoBehaviour
                 Instantiate(_UIControl.tileInstance,
                 _UIControl.localMapPanel.transform);
             Sprite tempSprite = _UIControl.tile;
-            Debug.Log (tempSprite);
             TileScript tileScript =
                 tilePrefab.GetComponentInChildren<TileScript>();
             if (tile.x == keeperTileX && tile.y == keeperTileY)
             {
                 _UIControl.TilePosition = tilePrefab;
+                tempSprite = _UIControl.keeper;
             }
-            else
-                tileScript.TileCreate(tile, tempSprite);
+            tileScript.TileCreate (tile, tempSprite);
             UpdateCurrentTiles(tilePrefab,
             tileScript.tile.x,
             tileScript.tile.y,
@@ -186,7 +193,7 @@ public class SaveHandler : MonoBehaviour
         currentTiles[x, y] = tile;
     }
 
-    public void MiniMapUI()
+    void MiniMapUI()
     {
         foreach (Transform child in _UIControl.miniMapPanel.transform)
         Destroy(child.gameObject);
@@ -286,7 +293,6 @@ public class SaveHandler : MonoBehaviour
         if (keeperTileX + x <= 12 && keeperTileX + x >= 0)
         {
             keeperTileX += x;
-            _GameData.keeper.tileX = keeperTileX;
         }
     }
 
@@ -295,11 +301,10 @@ public class SaveHandler : MonoBehaviour
         if (keeperTileY + y <= 7 && keeperTileY + y >= 0)
         {
             keeperTileY += y;
-            _GameData.keeper.tileY = keeperTileY;
         }
     }
 
-    public void updateLocalMap()
+    void updateLocalMap()
     {
         foreach (GameObject tile in currentTiles)
         {
@@ -311,112 +316,13 @@ public class SaveHandler : MonoBehaviour
         }
     }
 
-    public void MapCreator()
+    public void MapChecker()
     {
         if (System.IO.File.Exists(saveLocation))
         {
             Debug.LogError("Map Already exists. Denied");
         }
-        else
-        {
-            HashSet<int> stateTypeNumbers = new HashSet<int>();
-            while (stateTypeNumbers.Count < 16)
-            {
-                stateTypeNumbers.Add(UnityEngine.Random.Range(0, 16));
-            }
-            int[] stateTypeArray = new int[stateTypeNumbers.Count()];
-            stateTypeNumbers.CopyTo (stateTypeArray);
-            int index = 0;
-            for (int j = 0; j < 4; j++)
-            {
-                for (int k = 0; k < 4; k++)
-                {
-                    StateClass newState =
-                        new StateClass(stateTypeArray[index],
-                            k,
-                            j,
-                            GenerateTiles(stateTypeArray[index]));
-
-                    _GameData.stateCoords[index] = newState;
-                    index++;
-                }
-            }
-            Debug
-                .Log("Line 81 of MapGen makes states discovered, marked as breakpoint");
-            SaveFile();
-            WorldMapUI();
-            LocalMapUI(currentState.tiles);
-            MiniMapUI();
-        }
-    }
-
-    TileClass[] GenerateTiles(int type)
-    {
-        TileClass[] tiles = new TileClass[104];
-
-        //creates tiles
-        for (int i = 0; i < tiles.Length; i++)
-        {
-            tiles[i] = new TileClass();
-        }
-
-        //Assigns tile x and y
-        int index = 0;
-        for (int j = 0; j <= 7; j++)
-        {
-            for (int k = 0; k <= 12; k++)
-            {
-                tiles[index].x = k;
-                tiles[index].y = j;
-
-                index++;
-            }
-        }
-
-        //Assigns type
-        int[] tileTypes =
-        { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
-
-        /* Type tile list
-                0  = fire
-                1  = water
-                2  = earth
-                3  = air
-                4  = arcane
-                5  = mystic
-                6  = time
-                7  = ghost
-                8  = hallow
-                9  = summon
-                10 = alchemy (now plant)
-                11 = overseer
-                12 = channel
-                13 = plain
-                14 = mountain
-                15 = body of water
-        */
-        int assignedType = 0;
-        for (int i = 0; i < tiles.Length; i++)
-        {
-            int variation = UnityEngine.Random.Range(0, 5);
-            if (variation == 0)
-            {
-                int randomType = UnityEngine.Random.Range(0, 15);
-                assignedType = tileTypes[randomType];
-            }
-            else if (variation == 1)
-                assignedType = tileTypes[type];
-            else
-                assignedType = 13;
-
-            tiles[i].type = assignedType;
-            tiles[i].tileColor = _UIControl.tileColours[assignedType];
-            if (assignedType == 14 || assignedType == 15)
-            {
-                tiles[i].access = 0;
-            }
-        }
-
-        return tiles;
+        //        else
+        //            mapCreator.GetComponentInChildren<MapCreator>();
     }
 }
