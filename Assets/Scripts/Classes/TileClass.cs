@@ -22,8 +22,6 @@ public class TileClass
 
     public float explored;
 
-    public List<MapNavClass> occupants = new List<MapNavClass>();
-
     public TileFeature[] features = new TileFeature[4];
 
     public TileClass()

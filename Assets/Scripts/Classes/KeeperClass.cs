@@ -9,7 +9,7 @@ public class KeeperClass
 
     public int stateY;
 
-    public int TilePosition;
+    public int tilePosition;
 
     public int tileX;
 
@@ -23,5 +23,5 @@ public class KeeperClass
 
     public List<string> skills;
 
-    public List<ObjectClass> inventory;
+    public List<Item> inventory;
 }

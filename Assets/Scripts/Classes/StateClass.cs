@@ -24,19 +24,19 @@ public class StateClass
     public TileClass[] tiles;
 
     public StateClass(
-        int X,
-        int Y,
-        int Type,
-        string StateName,
-        string StateFancy,
-        TileClass[] Tiles
+        int x,
+        int y,
+        int type,
+        string stateName,
+        string stateFancy,
+        TileClass[] tiles
     )
     {
-        this.x = X;
-        this.y = Y;
-        this.type = Type;
-        this.stateName = StateName;
-        this.stateFancy = StateFancy;
-        this.tiles = Tiles;
+        this.x = x;
+        this.y = y;
+        this.type = type;
+        this.stateName = stateName;
+        this.stateFancy = stateFancy;
+        this.tiles = tiles;
     }
 }

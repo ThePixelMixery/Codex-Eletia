@@ -16,16 +16,25 @@ public class TileFeature
         Resource
         Point of Interest
     */
-    public int subtype;
-
     public string featureName;
 
-    public string requiredSkill;
+    public List<NPCClass> occupants;
 
-    public List<ObjectClass> objects;
+    public TileFeature(int type, string featureName)
+    {
+        this.type = type;
+        this.featureName = featureName;
+    }
 
-    public CivClass civ;
-
-    //public TileFeature(int type, string name)
-
+    public TileFeature(
+        int type,
+        string featureName,
+        List<NPCClass> occupants
+    )
+    {
+        this.type = type;
+        this.featureName = featureName;
+        this.occupants = new List<NPCClass>();
+        this.occupants = occupants;
+    }
 }

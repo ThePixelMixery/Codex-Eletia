@@ -7,7 +7,7 @@ public class GameData
 {
     public KeeperClass keeper = new KeeperClass();
 
-    public List<MapNavClass> mapNavigators;
-
     public StateClass[] stateCoords;
+
+    public QuestData quests = new QuestData();
 }

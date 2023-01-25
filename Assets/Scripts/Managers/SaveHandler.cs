@@ -48,7 +48,6 @@ public class SaveHandler : MonoBehaviour
             Debug.LogError("Savefile not found at " + saveLocation);
             Directory
                 .CreateDirectory(Application.persistentDataPath + "/Saves");
-            //MapCreator();
         }
     }
 
@@ -56,6 +55,9 @@ public class SaveHandler : MonoBehaviour
     {
         _GameData.keeper.tileX = keeperTileX;
         _GameData.keeper.tileY = keeperTileY;
+        _GameData.keeper.stateX = keeperStateX;
+        _GameData.keeper.stateY = keeperStateY;
+        
 
         saveJson = JsonUtility.ToJson(_GameData);
         System.IO.File.WriteAllText (saveLocation, saveJson);
@@ -322,7 +324,7 @@ public class SaveHandler : MonoBehaviour
         {
             Debug.LogError("Map Already exists. Denied");
         }
-        //        else
-        //            mapCreator.GetComponentInChildren<MapCreator>();
+        else
+        _UIControl.mapCreator.GetComponentInChildren<MapCreator>().MapBase();
     }
 }

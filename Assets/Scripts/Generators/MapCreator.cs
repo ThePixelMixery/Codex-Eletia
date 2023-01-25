@@ -11,25 +11,13 @@ public class MapCreator : MonoBehaviour
 {
     public GameObject save;
 
+    int capital;
+
     SaveHandler Handler;
 
-    bool Initialised = false;
-
-    void Start()
+    public void MapBase()
     {
-        initialise();
-    }
-
-    void initialise()
-    {
-        if (Initialised == false)
-        {
-            Handler = save.GetComponentInChildren<SaveHandler>();
-        }
-    }
-
-    void MapBase()
-    {
+        Handler = save.GetComponentInChildren<SaveHandler>();
         HashSet<int> stateTypeNumbers = new HashSet<int>();
         while (stateTypeNumbers.Count < 16)
         {
@@ -301,6 +289,9 @@ public class MapCreator : MonoBehaviour
         int[] featureTypeArray = new int[featureTypeNumbers.Count()];
         featureTypeNumbers.CopyTo (featureTypeArray);
 
+        //[] loot table
+        //[] civ builder
+        List<NPCClass> npcs = new List<NPCClass>();
         for (int i = 0; i < 4; i++)
         {
             switch (type)
@@ -309,20 +300,32 @@ public class MapCreator : MonoBehaviour
                     switch (featureTypeArray[i])
                     {
                         case 0:
+                            //random loot table?
                             break;
                         case 1:
+                            //civbuild
                             break;
                         case 2:
+                            npcs.Add(NPCGen.NPC());
+                            features[i] = new TileFeature(2, "Bedouin Tent", npcs);
                             break;
                         case 3:
+                            // trapping, hunting, foraging
+                            // Rabbit, Lizard, Hog(night), Deer
+                            // Berries, Cactus
+                            features[i] = new TileFeature(3, "Trapping ground");
                             break;
                         case 4:
+                            features[i] = new TileFeature(4, "Oasis");
                             break;
                         case 5:
+                            //enemy table
                             break;
                         case 6:
+                            //ores (gold, silver, copper), coal, gems
                             break;
                         case 7:
+                            //points of interest table
                             break;
                         default:
                             break;
@@ -332,16 +335,20 @@ public class MapCreator : MonoBehaviour
                     switch (featureTypeArray[i])
                     {
                         case 0:
+                            //random loot table?
                             break;
                         case 1:
+                            //civbuild
                             break;
                         case 2:
+                            //occupant generator
                             break;
                         case 3:
                             break;
                         case 4:
                             break;
                         case 5:
+                            //enemy table
                             break;
                         case 6:
                             break;
@@ -355,16 +362,20 @@ public class MapCreator : MonoBehaviour
                     switch (featureTypeArray[i])
                     {
                         case 0:
+                            //random loot table?
                             break;
                         case 1:
+                            //civbuild
                             break;
                         case 2:
+                            //occupant generator
                             break;
                         case 3:
                             break;
                         case 4:
                             break;
                         case 5:
+                            //enemy table
                             break;
                         case 6:
                             break;
@@ -378,16 +389,20 @@ public class MapCreator : MonoBehaviour
                     switch (featureTypeArray[i])
                     {
                         case 0:
+                            //random loot table?
                             break;
                         case 1:
+                            //civbuild
                             break;
                         case 2:
+                            //occupant generator
                             break;
                         case 3:
                             break;
                         case 4:
                             break;
                         case 5:
+                            //enemy table
                             break;
                         case 6:
                             break;
@@ -401,16 +416,20 @@ public class MapCreator : MonoBehaviour
                     switch (featureTypeArray[i])
                     {
                         case 0:
+                            //random loot table?
                             break;
                         case 1:
+                            //civbuild
                             break;
                         case 2:
+                            //occupant generator
                             break;
                         case 3:
                             break;
                         case 4:
                             break;
                         case 5:
+                            //enemy table
                             break;
                         case 6:
                             break;
@@ -424,16 +443,20 @@ public class MapCreator : MonoBehaviour
                     switch (featureTypeArray[i])
                     {
                         case 0:
+                            //random loot table?
                             break;
                         case 1:
+                            //civbuild
                             break;
                         case 2:
+                            //occupant generator
                             break;
                         case 3:
                             break;
                         case 4:
                             break;
                         case 5:
+                            //enemy table
                             break;
                         case 6:
                             break;
@@ -447,16 +470,20 @@ public class MapCreator : MonoBehaviour
                     switch (featureTypeArray[i])
                     {
                         case 0:
+                            //random loot table?
                             break;
                         case 1:
+                            //civbuild
                             break;
                         case 2:
+                            //occupant generator
                             break;
                         case 3:
                             break;
                         case 4:
                             break;
                         case 5:
+                            //enemy table
                             break;
                         case 6:
                             break;
@@ -470,16 +497,20 @@ public class MapCreator : MonoBehaviour
                     switch (featureTypeArray[i])
                     {
                         case 0:
+                            //random loot table?
                             break;
                         case 1:
+                            //civbuild
                             break;
                         case 2:
+                            //occupant generator
                             break;
                         case 3:
                             break;
                         case 4:
                             break;
                         case 5:
+                            //enemy table
                             break;
                         case 6:
                             break;
@@ -493,16 +524,20 @@ public class MapCreator : MonoBehaviour
                     switch (featureTypeArray[i])
                     {
                         case 0:
+                            //random loot table?
                             break;
                         case 1:
+                            //civbuild
                             break;
                         case 2:
+                            //occupant generator
                             break;
                         case 3:
                             break;
                         case 4:
                             break;
                         case 5:
+                            //enemy table
                             break;
                         case 6:
                             break;
@@ -516,16 +551,20 @@ public class MapCreator : MonoBehaviour
                     switch (featureTypeArray[i])
                     {
                         case 0:
+                            //random loot table?
                             break;
                         case 1:
+                            //civbuild
                             break;
                         case 2:
+                            //occupant generator
                             break;
                         case 3:
                             break;
                         case 4:
                             break;
                         case 5:
+                            //enemy table
                             break;
                         case 6:
                             break;
@@ -539,16 +578,20 @@ public class MapCreator : MonoBehaviour
                     switch (featureTypeArray[i])
                     {
                         case 0:
+                            //random loot table?
                             break;
                         case 1:
+                            //civbuild
                             break;
                         case 2:
+                            //occupant generator
                             break;
                         case 3:
                             break;
                         case 4:
                             break;
                         case 5:
+                            //enemy table
                             break;
                         case 6:
                             break;
@@ -562,16 +605,20 @@ public class MapCreator : MonoBehaviour
                     switch (featureTypeArray[i])
                     {
                         case 0:
+                            //random loot table?
                             break;
                         case 1:
+                            //civbuild
                             break;
                         case 2:
+                            //occupant generator
                             break;
                         case 3:
                             break;
                         case 4:
                             break;
                         case 5:
+                            //enemy table
                             break;
                         case 6:
                             break;
@@ -585,16 +632,20 @@ public class MapCreator : MonoBehaviour
                     switch (featureTypeArray[i])
                     {
                         case 0:
+                            //random loot table?
                             break;
                         case 1:
+                            //civbuild
                             break;
                         case 2:
+                            //occupant generator
                             break;
                         case 3:
                             break;
                         case 4:
                             break;
                         case 5:
+                            //enemy table
                             break;
                         case 6:
                             break;
@@ -608,16 +659,20 @@ public class MapCreator : MonoBehaviour
                     switch (featureTypeArray[i])
                     {
                         case 0:
+                            //random loot table?
                             break;
                         case 1:
+                            //civbuild
                             break;
                         case 2:
+                            //occupant generator
                             break;
                         case 3:
                             break;
                         case 4:
                             break;
                         case 5:
+                            //enemy table
                             break;
                         case 6:
                             break;
