@@ -23,9 +23,13 @@ public class UIController
 
     public GameObject[] navButtons = new GameObject[8];
 
+    public GameObject ActionList;
+
     public GameObject stateInstance;
 
     public GameObject tileInstance;
+
+    public GameObject actionInstance;
 
     public GameObject TilePosition;
 
@@ -34,4 +38,7 @@ public class UIController
     public Color[] tileColours;
 
     public Sprite[] stateSprites;
+
+    public Sprite[] tileFeatures;
+
 }

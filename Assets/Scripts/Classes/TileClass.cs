@@ -22,7 +22,7 @@ public class TileClass
 
     public float explored;
 
-    public TileFeature[] features = new TileFeature[4];
+    public FeatureClass[] features = new FeatureClass[4];
 
     public TileClass()
     {

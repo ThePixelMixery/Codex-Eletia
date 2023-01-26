@@ -274,12 +274,17 @@ public class MapCreator : MonoBehaviour
             }
         }
 
+        for (int i = 0; i < tiles.Length; i++)
+        {
+            tiles[i].features = GenerateFeatures(tiles[i].type);
+        }
+
         return tiles;
     }
 
-    TileFeature[] GenerateFeatures(int type)
+    FeatureClass[] GenerateFeatures(int type)
     {
-        TileFeature[] features = new TileFeature[4];
+        FeatureClass[] features = new FeatureClass[4];
         HashSet<int> featureTypeNumbers = new HashSet<int>();
 
         while (featureTypeNumbers.Count < 4)
@@ -292,6 +297,13 @@ public class MapCreator : MonoBehaviour
         //[] loot table
         //[] civ builder
         List<NPCClass> npcs = new List<NPCClass>();
+        for (int i = 0; i < 4; i++)
+        {
+            features[i] = new FeatureClass(3, "Trapping ground");
+            features[i].discovered = true;
+        }
+
+        /*
         for (int i = 0; i < 4; i++)
         {
             switch (type)
@@ -307,16 +319,16 @@ public class MapCreator : MonoBehaviour
                             break;
                         case 2:
                             npcs.Add(NPCGen.NPC());
-                            features[i] = new TileFeature(2, "Bedouin Tent", npcs);
+                            features[i] = new FeatureClass(2, "Bedouin Tent", npcs);
                             break;
                         case 3:
                             // trapping, hunting, foraging
                             // Rabbit, Lizard, Hog(night), Deer
                             // Berries, Cactus
-                            features[i] = new TileFeature(3, "Trapping ground");
+                            features[i] = new FeatureClass(3, "Trapping ground");
                             break;
                         case 4:
-                            features[i] = new TileFeature(4, "Oasis");
+                            features[i] = new FeatureClass(4, "Oasis");
                             break;
                         case 5:
                             //enemy table
@@ -686,6 +698,7 @@ public class MapCreator : MonoBehaviour
                     break;
             }
         }
+*/
         return features;
     }
 }

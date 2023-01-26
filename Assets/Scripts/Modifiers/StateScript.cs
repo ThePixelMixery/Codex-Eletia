@@ -12,9 +12,6 @@ public class StateScript : MonoBehaviour
     public StateClass state;
     public string stateType;
 
-    //Save
-    string stateSaveLocation;
-
     //ListObject
     public TextMeshProUGUI stateTitle;
     public GameObject details;

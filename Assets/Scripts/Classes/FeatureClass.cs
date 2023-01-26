@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TileFeature
+[System.Serializable]
+public class FeatureClass
 {
     public int type;
+
+    public int subtype;
 
     /*
         Loot
@@ -17,21 +20,27 @@ public class TileFeature
         Point of Interest
     */
     public string featureName;
+    public bool discovered;
 
     public List<NPCClass> occupants;
 
-    public TileFeature(int type, string featureName)
+    public List<ActionClass> actions;
+
+
+    public FeatureClass(int type, string featureName)
     {
+        this.discovered = false;
         this.type = type;
         this.featureName = featureName;
     }
 
-    public TileFeature(
+    public FeatureClass(
         int type,
         string featureName,
         List<NPCClass> occupants
     )
     {
+        this.discovered = false;
         this.type = type;
         this.featureName = featureName;
         this.occupants = new List<NPCClass>();

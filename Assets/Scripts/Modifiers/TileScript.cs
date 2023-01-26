@@ -11,7 +11,14 @@ public class TileScript : MonoBehaviour
 
     public GameObject tileTile;
 
-    
+    public GameObject Feature1;
+
+    public GameObject Feature2;
+
+    public GameObject Feature3;
+
+    public GameObject Feature4;
+
     void Start()
     {
         //Debug.Log (tile.explored);
@@ -27,14 +34,24 @@ public class TileScript : MonoBehaviour
         tile.explored += exploredMore;
     }
 
-    public void TileCreate(TileClass tempTile, Sprite tempSprite) //bool current,
+    public void TileCreate(
+        TileClass tempTile,
+        Sprite tempSprite,
+        Sprite featureSprite1,
+        Sprite featureSprite2,
+        Sprite featureSprite3,
+        Sprite featureSprite4
+    ) //bool current,
     {
         tile = tempTile;
 
         //if (tile.type > 0)
-
         tileTile.GetComponent<Image>().sprite = tempSprite;
         tileTile.GetComponent<Image>().color = tile.tileColor;
+        Feature1.GetComponent<Image>().sprite = featureSprite1;
+        Feature2.GetComponent<Image>().sprite = featureSprite2;
+        Feature3.GetComponent<Image>().sprite = featureSprite3;
+        Feature4.GetComponent<Image>().sprite = featureSprite4;
         tileTile.SetActive(tile.discovered);
     }
 
