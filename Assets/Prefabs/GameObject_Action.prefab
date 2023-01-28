@@ -342,7 +342,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2856260517549247191}
-  - component: {fileID: 2480422680708626211}
+  - component: {fileID: 1481815203589639342}
   m_Layer: 0
   m_Name: GameObject_Action
   m_TagString: Untagged
@@ -374,7 +374,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 65}
   m_Pivot: {x: 0, y: 0.5}
---- !u!114 &2480422680708626211
+--- !u!114 &1481815203589639342
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -386,12 +386,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9839921091b123e6b9543f43da466606, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actionText: {fileID: 0}
-  actionDetail: {fileID: 0}
-  actionFlavour: {fileID: 0}
-  actionTextString: 
-  actionDetailString: 
-  actionFlavourString: 
+  actionButton: {fileID: 5469927921895719709}
+  actionDetail: {fileID: 8097466866771837149}
+  actionFlavour: {fileID: 5696922941856179164}
+  button: {fileID: 3107151308654895650}
 --- !u!1 &8650250807845662118
 GameObject:
   m_ObjectHideFlags: 0
@@ -404,7 +402,7 @@ GameObject:
   - component: {fileID: 1078384422660992142}
   - component: {fileID: 5696922941856179164}
   m_Layer: 0
-  m_Name: Text_Detail
+  m_Name: Text_Flavour
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -539,7 +537,7 @@ GameObject:
   - component: {fileID: 4353115280605555354}
   - component: {fileID: 8097466866771837149}
   m_Layer: 0
-  m_Name: Text_Title
+  m_Name: Text_Results
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

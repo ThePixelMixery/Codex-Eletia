@@ -9,8 +9,6 @@ public class KeeperClass
 
     public int stateY;
 
-    public int tilePosition;
-
     public int tileX;
 
     public int tileY;

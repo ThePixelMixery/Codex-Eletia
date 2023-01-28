@@ -1,24 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class ActionScript : MonoBehaviour
 {
     // Start is called before the first frame update
-    public TextMeshProUGUI actionText;
+    public TextMeshProUGUI actionButton;
+
     public TextMeshProUGUI actionDetail;
+
     public TextMeshProUGUI actionFlavour;
 
-    public string actionTextString;
-    public string actionDetailString;
-    public string actionFlavourString;
+    public Button button;
 
-
-    public void UpdateStrings()
+    public void CreateAction(string button, string results, string flavour, bool skillOrObject)
     {
-        this.actionText.text=actionTextString;
-        this.actionDetail.text=actionDetailString;
-        this.actionFlavour.text=actionFlavourString;
+        this.actionButton.text = button;
+        this.actionDetail.text = results;
+        this.actionFlavour.text = flavour;
+        this.button.interactable = skillOrObject;
     }
 }

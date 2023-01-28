@@ -20,12 +20,12 @@ public class FeatureClass
         Point of Interest
     */
     public string featureName;
+
     public bool discovered;
 
-    public List<NPCClass> occupants;
+    public List<NPCClass> occupants = new List<NPCClass>();
 
-    public List<ActionClass> actions;
-
+    public List<Resource> resources= new List<Resource>();
 
     public FeatureClass(int type, string featureName)
     {
@@ -34,16 +34,21 @@ public class FeatureClass
         this.featureName = featureName;
     }
 
-    public FeatureClass(
-        int type,
-        string featureName,
-        List<NPCClass> occupants
-    )
+    public FeatureClass(int type, string featureName, List<NPCClass> occupants)
     {
         this.discovered = false;
         this.type = type;
         this.featureName = featureName;
         this.occupants = new List<NPCClass>();
         this.occupants = occupants;
+    }
+
+    public FeatureClass(int type, string featureName, List<Resource> resources)
+    {
+        this.discovered = false;
+        this.type = type;
+        this.featureName = featureName;
+        this.resources = new List<Resource>();
+        this.resources = resources;
     }
 }

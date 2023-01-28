@@ -62,7 +62,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 22, y: 22}
-  m_Spacing: {x: 1, y: 1}
+  m_Spacing: {x: 0, y: 0}
   m_Constraint: 1
   m_ConstraintCount: 2
 --- !u!1 &1845339493776985414
@@ -440,16 +440,24 @@ MonoBehaviour:
     explored: 0
     features:
     - type: 0
+      subtype: 0
       featureName: 
+      discovered: 0
       occupants: []
     - type: 0
+      subtype: 0
       featureName: 
+      discovered: 0
       occupants: []
     - type: 0
+      subtype: 0
       featureName: 
+      discovered: 0
       occupants: []
     - type: 0
+      subtype: 0
       featureName: 
+      discovered: 0
       occupants: []
   tileTile: {fileID: 3348727747165831029}
   Feature1: {fileID: 5603994342000025287}

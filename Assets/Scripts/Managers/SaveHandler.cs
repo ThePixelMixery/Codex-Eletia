@@ -13,32 +13,17 @@ public class SaveHandler : MonoBehaviour
 
     public GameData _GameData = new GameData();
 
-    public UIController _UIControl = new UIController();
+    public GameObject MenuManager;
+
+    MenuManager menus;
+
+    public GameObject mapCreator;
 
     string saveJson;
 
-    StateClass currentState;
-
-    TileClass currentTile;
-
-    int keeperCurrentState;
-
-    int keeperStateX;
-
-    int keeperStateY;
-
-    int keeperTileX;
-
-    int keeperTileY;
-
-    public GameObject[] testCurrentTiles = new GameObject[104];
-
-    GameObject[,] currentTiles = new GameObject[13, 8];
-
-    GameObject[] miniMapTiles = new GameObject[9];
-
     void Start()
     {
+        menus = MenuManager.GetComponentInChildren<MenuManager>();
         saveLocation = Application.persistentDataPath + "/Saves/GameData.json";
         _GameData.stateCoords = new StateClass[16];
         if (System.IO.File.Exists(saveLocation))
@@ -55,21 +40,23 @@ public class SaveHandler : MonoBehaviour
 
     public void SaveFile()
     {
-        _GameData.keeper.tileX = keeperTileX;
-        _GameData.keeper.tileY = keeperTileY;
-        _GameData.keeper.stateX = keeperStateX;
-        _GameData.keeper.stateY = keeperStateY;
+        _GameData.keeper.tileX = menus.keeperTileX;
+        _GameData.keeper.tileY = menus.keeperTileY;
+        _GameData.keeper.stateX = menus.keeperStateX;
+        _GameData.keeper.stateY = menus.keeperStateY;
 
         saveJson = JsonUtility.ToJson(_GameData);
         System.IO.File.WriteAllText (saveLocation, saveJson);
+        Debug.Log("Game Saved!");
     }
 
     public void DeleteFiles()
     {
         _GameData.keeper.tileX = 0;
         _GameData.keeper.tileY = 0;
-        keeperTileX = 0;
-        keeperTileY = 0;
+
+        menus.keeperTileX = 0;
+        menus.keeperTileY = 0;
         if (System.IO.File.Exists(saveLocation))
         {
             File.Delete (saveLocation);
@@ -80,15 +67,16 @@ public class SaveHandler : MonoBehaviour
         {
             Debug.LogError("Save not found at " + saveLocation);
         }
-        foreach (Transform child in _UIControl.worldMapList.transform)
+
+        foreach (Transform child in menus.worldMapList.transform)
         {
             Destroy(child.gameObject);
         }
-        foreach (Transform child in _UIControl.worldMapPanel.transform)
+        foreach (Transform child in menus.worldMapPanel.transform)
         {
             Destroy(child.gameObject);
         }
-        foreach (Transform child in _UIControl.localMapPanel.transform)
+        foreach (Transform child in menus.localMapPanel.transform)
         {
             Destroy(child.gameObject);
         }
@@ -103,287 +91,9 @@ public class SaveHandler : MonoBehaviour
 
     public void Loader()
     {
-        foreach (Transform child in _UIControl.worldMapList.transform)
-        {
-            Destroy(child.gameObject);
-        }
-        foreach (Transform child in _UIControl.worldMapPanel.transform)
-        {
-            Destroy(child.gameObject);
-        }
-        foreach (Transform child in _UIControl.localMapPanel.transform)
-        {
-            Destroy(child.gameObject);
-        }
-
         saveJson = File.ReadAllText(saveLocation);
         _GameData = JsonUtility.FromJson<GameData>(saveJson);
-        keeperStateX = _GameData.keeper.stateX;
-        keeperStateY = _GameData.keeper.stateY;
-        keeperTileX = _GameData.keeper.tileX;
-        keeperTileY = _GameData.keeper.tileY;
-
-        foreach (StateClass state in _GameData.stateCoords)
-        {
-            if (
-                _GameData.keeper.stateX == state.x &&
-                _GameData.keeper.stateY == state.y
-            ) currentState = state;
-            foreach (TileClass tile in state.tiles)
-            {
-                if (
-                    _GameData.keeper.tileX == tile.x &&
-                    _GameData.keeper.tileY == tile.y
-                ) currentTile = tile;
-            }
-        }
-
-        WorldMapUI();
-        LocalMapUI(currentState.tiles);
-        MiniMapUI();
-        ActionList(currentTile.features);
-    }
-
-    public void MapMade(
-        int tileX,
-        int tileY,
-        int stateX,
-        int stateY,
-        StateClass state
-    )
-    {
-        EventTracker
-            .NewEvent(0,
-            "You have discovered a giant egg in your home nation of " +
-            state.stateName);
-        WorldMapUI();
-        LocalMapUI(currentState.tiles);
-        MiniMapUI();
-        SaveFile();
-    }
-
-    void WorldMapUI()
-    {
-        foreach (StateClass state in _GameData.stateCoords)
-        {
-            GameObject statePrefab =
-                Instantiate(_UIControl.stateInstance,
-                _UIControl.worldMapList.transform);
-            StateScript prefabScript =
-                statePrefab.GetComponentInChildren<StateScript>();
-            StateClass createState = state;
-            if (state.x == keeperStateX && state.y == keeperStateY)
-            {
-                currentState = state;
-                _UIControl.StatePosition = statePrefab;
-            }
-            Sprite tempSprite = _UIControl.stateSprites[state.type];
-            prefabScript
-                .StateCreate(createState, _UIControl.worldMapPanel, tempSprite);
-            statePrefab.SetActive(prefabScript.state.discovered);
-        }
-    }
-
-    void LocalMapUI(TileClass[] tiles)
-    {
-        int index = 0;
-        foreach (TileClass tile in tiles)
-        {
-            GameObject tilePrefab =
-                Instantiate(_UIControl.tileInstance,
-                _UIControl.localMapPanel.transform);
-            Sprite tempSprite = _UIControl.tile;
-            TileScript tileScript =
-                tilePrefab.GetComponentInChildren<TileScript>();
-            if (tile.x == keeperTileX && tile.y == keeperTileY)
-            {
-                _UIControl.TilePosition = tilePrefab;
-                tempSprite = _UIControl.keeper;
-            }
-            int featureSelect = 0;
-            Sprite featureSprite1 = _UIControl.tileFeatures[featureSelect];
-            featureSelect = tile.features[1].type;
-            Sprite featureSprite2 = _UIControl.tileFeatures[featureSelect];
-            featureSelect = tile.features[2].type;
-            Sprite featureSprite3 = _UIControl.tileFeatures[featureSelect];
-            featureSelect = tile.features[3].type;
-            Sprite featureSprite4 = _UIControl.tileFeatures[featureSelect];
-
-            tileScript.TileCreate (
-                tile,
-                tempSprite,
-                featureSprite1,
-                featureSprite2,
-                featureSprite3,
-                featureSprite4
-            );
-            UpdateCurrentTiles(tilePrefab,
-            tileScript.tile.x,
-            tileScript.tile.y,
-            index);
-            index++;
-        }
-    }
-
-    void UpdateCurrentTiles(GameObject tile, int x, int y, int index)
-    {
-        testCurrentTiles[index] = tile;
-        currentTiles[x, y] = tile;
-    }
-
-    public void MiniMapUI()
-    {
-        foreach (Transform child in _UIControl.miniMapPanel.transform)
-        Destroy(child.gameObject);
-        Array.Clear(miniMapTiles, 0, 9);
-
-        for (int j = 0; j < 8; j++)
-        {
-            for (int k = 0; k < 13; k++)
-            {
-                if (keeperTileX - 1 == k && keeperTileY - 1 == j)
-                {
-                    miniMapTiles[0] = currentTiles[k, j];
-                }
-                else if (keeperTileX == k && keeperTileY - 1 == j)
-                {
-                    miniMapTiles[1] = currentTiles[k, j];
-                }
-                else if (keeperTileX + 1 == k && keeperTileY - 1 == j)
-                {
-                    miniMapTiles[2] = currentTiles[k, j];
-                }
-                else if (keeperTileX - 1 == k && keeperTileY == j)
-                {
-                    miniMapTiles[3] = currentTiles[k, j];
-                }
-                else if (keeperTileX == k && keeperTileY == j)
-                {
-                    miniMapTiles[4] = currentTiles[k, j];
-                    currentTile =
-                        currentTiles[k, j]
-                            .GetComponentInChildren<TileScript>()
-                            .tile;
-                }
-                else if (keeperTileX + 1 == k && keeperTileY == j)
-                {
-                    miniMapTiles[5] = currentTiles[k, j];
-                }
-                else if (keeperTileX - 1 == k && keeperTileY + 1 == j)
-                {
-                    miniMapTiles[6] = currentTiles[k, j];
-                }
-                else if (keeperTileX == k && keeperTileY + 1 == j)
-                {
-                    miniMapTiles[7] = currentTiles[k, j];
-                }
-                else if (keeperTileX + 1 == k && keeperTileY + 1 == j)
-                {
-                    miniMapTiles[8] = currentTiles[k, j];
-                }
-            }
-        }
-        for (int i = 0; i < 9; i++)
-        {
-            int illegalTile = 0;
-            if (miniMapTiles[i] != null)
-            {
-                _UIControl
-                    .navButtons[i]
-                    .GetComponentInChildren<Button>()
-                    .interactable = true;
-
-                illegalTile =
-                    miniMapTiles[i]
-                        .GetComponentInChildren<TileScript>()
-                        .tile
-                        .type;
-
-                miniMapTiles[i]
-                    .GetComponentInChildren<TileScript>()
-                    .Discovery();
-                if (i == 4)
-                {
-                    miniMapTiles[i]
-                        .GetComponentInChildren<TileScript>()
-                        .UpdateTile(_UIControl.keeper);
-                }
-                else
-                {
-                    miniMapTiles[i]
-                        .GetComponentInChildren<TileScript>()
-                        .UpdateTile(_UIControl.tile);
-                }
-                Instantiate(miniMapTiles[i], _UIControl.miniMapPanel.transform);
-            }
-            else
-            {
-                _UIControl
-                    .navButtons[i]
-                    .GetComponentInChildren<Button>()
-                    .interactable = false;
-                Instantiate(_UIControl.blockedTile,
-                _UIControl.miniMapPanel.transform);
-            }
-
-            if (illegalTile == 15 || illegalTile == 14)
-                _UIControl
-                    .navButtons[i]
-                    .GetComponentInChildren<Button>()
-                    .interactable = false;
-        }
-        ActionList(currentTile.features);
-    }
-
-    void ActionList(FeatureClass[] features)
-    {
-        foreach (Transform child in _UIControl.ActionList.transform)
-        Destroy(child.gameObject);
-        List<ActionClass> actionsList = new List<ActionClass>();
-        actionsList.Clear();
-        foreach (FeatureClass feature in features)
-        {
-            if (feature.discovered)
-            {
-                foreach (ActionClass action in feature.actions)
-                actionsList.Add(action);
-            }
-        }
-        foreach (ActionClass action in actionsList)
-        {
-            GameObject actionPrefab =
-                Instantiate(_UIControl.actionInstance, _UIControl.ActionList.transform);
-        }
-    }
-
-    public void UpdateKeeperLocationX(int x)
-    {
-        if (keeperTileX + x <= 12 && keeperTileX + x >= 0)
-        {
-            keeperTileX += x;
-        }
-    }
-
-    public void UpdateKeeperLocationY(int y)
-    {
-        if (keeperTileY + y <= 7 && keeperTileY + y >= 0)
-        {
-            keeperTileY += y;
-        }
-    }
-
-    void updateLocalMap()
-    {
-        foreach (GameObject tile in currentTiles)
-        {
-            TileScript script = tile.GetComponentInChildren<TileScript>();
-            if (script.tile.x == keeperTileX && script.tile.y == keeperTileY)
-            {
-                script.UpdateTile(_UIControl.keeper);
-            }
-            else
-                script.UpdateTile(_UIControl.tile);
-        }
+        menus.LoadUI();
     }
 
     public void MapChecker()
@@ -393,9 +103,15 @@ public class SaveHandler : MonoBehaviour
             Debug.LogError("Map Already exists. Denied");
         }
         else
-            _UIControl
-                .mapCreator
-                .GetComponentInChildren<MapCreator>()
-                .MapBase();
+            mapCreator.GetComponentInChildren<MapCreator>().MapBase();
+    }
+
+    public void KeeperLocationUpdate(int tileX, int tileY, int stateX, int stateY)
+    {
+    _GameData.keeper.tileX = tileX;
+    _GameData.keeper.tileX = tileY;
+    _GameData.keeper.stateX = stateX;
+    _GameData.keeper.stateX = stateY;
+    Debug.Log("Keeper dropped onto state: "+stateX+", "+stateY+ " at tile "+ tileX+", "+tileY);
     }
 }

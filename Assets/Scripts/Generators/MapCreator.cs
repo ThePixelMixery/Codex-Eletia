@@ -10,14 +10,20 @@ using UnityEngine.UI;
 public class MapCreator : MonoBehaviour
 {
     public GameObject save;
+    public GameObject menus;
+    public GameObject resourcesObject;
 
     int capital;
 
-    SaveHandler Handler;
+    SaveHandler handler;
+    MenuManager menuManager;
+    ResourceDatabase resourceData;
 
     public void MapBase()
     {
-        Handler = save.GetComponentInChildren<SaveHandler>();
+        resourceData = resourcesObject.GetComponentInChildren<ResourceDatabase>();
+        handler = save.GetComponentInChildren<SaveHandler>();
+        menuManager = menus.GetComponentInChildren<MenuManager>();
         HashSet<int> stateTypeNumbers = new HashSet<int>();
         while (stateTypeNumbers.Count < 16)
         {
@@ -39,7 +45,7 @@ public class MapCreator : MonoBehaviour
                         StateFancy(stateTypeArray[index]),
                         GenerateTiles(stateTypeArray[index]));
 
-                Handler._GameData.stateCoords[index] = newState;
+                handler._GameData.stateCoords[index] = newState;
                 index++;
             }
 
@@ -53,14 +59,15 @@ public class MapCreator : MonoBehaviour
         int tileX = UnityEngine.Random.Range(0, 12);
         int tileY = UnityEngine.Random.Range(0, 7);
 
-        foreach (StateClass state in Handler._GameData.stateCoords)
+        foreach (StateClass state in handler._GameData.stateCoords)
         {
             if (select == state.type)
             {
                 state.discovered = true;
-                Handler.MapMade(tileX, tileY, state.x, state.y, state);
+                menuManager.MapMade(tileX, tileY, state.x, state.y, state);
             }
         }
+        handler.SaveFile();
     }
 
     string StateNamer(int type)
@@ -267,7 +274,7 @@ public class MapCreator : MonoBehaviour
                 assignedType = 13;
 
             tiles[i].type = assignedType;
-            tiles[i].tileColor = Handler._UIControl.tileColours[assignedType];
+            tiles[i].tileColor = menuManager.tileColours[assignedType];
             if (assignedType == 14 || assignedType == 15)
             {
                 tiles[i].access = 0;
@@ -297,9 +304,12 @@ public class MapCreator : MonoBehaviour
         //[] loot table
         //[] civ builder
         List<NPCClass> npcs = new List<NPCClass>();
+        List<Resource> resources = new List<Resource>();
+        
         for (int i = 0; i < 4; i++)
         {
-            features[i] = new FeatureClass(3, "Trapping ground");
+            resources.Add(resourceData.GetResource(0));
+            features[i] = new FeatureClass(3, "Trapping ground", resources);
             features[i].discovered = true;
         }
 

@@ -2,66 +2,70 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Resource
 {
     public int id;
 
     public string resourceName;
 
-    public string flavourText;
+    public string action;
 
-    public int maxCount;
+    public string flavourText;
 
     public int minCount;
 
-    public List<Item> items;
+    public int maxCount;
+
+    public Item item;
 
     public string skill;
+
+    public string tool;
+
+    public int duration;
+
+    public bool day;
 
     public Resource(
         int id,
         string resourceName,
+        string action,
         string flavourText,
-        int maxCount,
         int minCount,
-        List<Item> items,
-        string skill
+        int maxCount,
+        Item item,
+        string skill,
+        string tool,
+        int duration,
+        bool day
     )
     {
         this.id = id;
         this.resourceName = resourceName;
+        this.action = action;
         this.flavourText = flavourText;
-        this.maxCount = maxCount;
         this.minCount = minCount;
-        this.items = items;
+        this.maxCount = maxCount;
+        this.item = item;
         this.skill = skill;
-    }
-
-        public Resource(
-        int id,
-        string resourceName,
-        string flavourText,
-        int maxCount,
-        int minCount,
-        List<Item> items
-    )
-    {
-        this.id = id;
-        this.resourceName = resourceName;
-        this.flavourText = flavourText;
-        this.maxCount = maxCount;
-        this.minCount = minCount;
-        this.items = items;
+        this.tool = tool;
+        this.duration = duration;
+        this.day = day;
     }
 
     Resource(Resource resource)
     {
         this.id = resource.id;
         this.resourceName = resource.resourceName;
+        this.action = resource.action;
         this.flavourText = resource.flavourText;
-        this.maxCount = resource.maxCount;
         this.minCount = resource.minCount;
-        this.items = resource.items;
+        this.maxCount = resource.maxCount;
+        this.item = resource.item;
         this.skill = resource.skill;
+        this.tool = resource.tool;
+        this.duration = resource.duration;
+        this.day = resource.day;
     }
 }

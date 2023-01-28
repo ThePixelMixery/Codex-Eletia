@@ -6,4 +6,6 @@ using UnityEngine;
 public class NPCClass
 {
     public string npcName;
+    public string homeName;
+    public string flavourText;
 }
