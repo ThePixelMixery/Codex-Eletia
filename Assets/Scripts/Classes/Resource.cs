@@ -23,6 +23,10 @@ public class Resource
 
     public string tool;
 
+    public int successChance;
+
+    public int staminaCost;
+
     public int duration;
 
     public bool day;
@@ -32,6 +36,7 @@ public class Resource
         string resourceName,
         string action,
         string flavourText,
+        int staminaCost
         int minCount,
         int maxCount,
         Item item,
@@ -45,6 +50,7 @@ public class Resource
         this.resourceName = resourceName;
         this.action = action;
         this.flavourText = flavourText;
+        this.staminaCost = staminaCost;
         this.minCount = minCount;
         this.maxCount = maxCount;
         this.item = item;
@@ -60,6 +66,7 @@ public class Resource
         this.resourceName = resource.resourceName;
         this.action = resource.action;
         this.flavourText = resource.flavourText;
+        this.staminaCost = resource.staminaCost;
         this.minCount = resource.minCount;
         this.maxCount = resource.maxCount;
         this.item = resource.item;
