@@ -3,76 +3,89 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
+public struct require
+{
+    public Item item;
+
+    public int count;
+}
+
+[System.Serializable]
+public struct outcome
+{
+    public Item item;
+
+    public int min;
+
+    public int max;
+
+    public double chance;
+}
+
+[System.Serializable]
 public class Resource
 {
     public int id;
 
-    public string resourceName;
-
     public string action;
+
+    public string resourceName;
+    public int duration;
 
     public string flavourText;
 
-    public int minCount;
-
-    public int maxCount;
-
-    public Item item;
+    public int staminaCost;
 
     public string skill;
 
     public string tool;
 
-    public int successChance;
+    public int time;
 
-    public int staminaCost;
+    public List<require> requires = new List<require>();
 
-    public int duration;
-
-    public bool day;
+    public List<outcome> outcomes = new List<outcome>();
 
     public Resource(
         int id,
-        string resourceName,
         string action,
+        string resourceName,
+        int duration,
         string flavourText,
-        int staminaCost
-        int minCount,
-        int maxCount,
-        Item item,
+        int staminaCost,
         string skill,
         string tool,
-        int duration,
-        bool day
+        int time,
+        List<require> requires,
+        List<outcome> outcomes
+        
     )
     {
         this.id = id;
-        this.resourceName = resourceName;
         this.action = action;
+        this.resourceName = resourceName;
+        this.duration = duration;
         this.flavourText = flavourText;
         this.staminaCost = staminaCost;
-        this.minCount = minCount;
-        this.maxCount = maxCount;
-        this.item = item;
         this.skill = skill;
         this.tool = tool;
-        this.duration = duration;
-        this.day = day;
+        this.time = time;
+        this.requires = requires;
+        this.outcomes = outcomes;
     }
 
     Resource(Resource resource)
     {
         this.id = resource.id;
-        this.resourceName = resource.resourceName;
         this.action = resource.action;
+        this.resourceName = resource.resourceName;
+        this.duration = resource.duration;
         this.flavourText = resource.flavourText;
-        this.staminaCost = resource.staminaCost;
-        this.minCount = resource.minCount;
-        this.maxCount = resource.maxCount;
-        this.item = resource.item;
         this.skill = resource.skill;
         this.tool = resource.tool;
-        this.duration = resource.duration;
-        this.day = resource.day;
+        this.time = resource.time;
+        this.staminaCost = resource.staminaCost;
+        this.requires = resource.requires;
+        this.outcomes = resource.outcomes;
     }
 }

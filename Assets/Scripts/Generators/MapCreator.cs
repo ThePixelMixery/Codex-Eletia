@@ -10,18 +10,23 @@ using UnityEngine.UI;
 public class MapCreator : MonoBehaviour
 {
     public GameObject save;
+
     public GameObject menus;
+
     public GameObject resourcesObject;
 
     int capital;
 
     SaveHandler handler;
+
     MenuManager menuManager;
+
     ResourceDatabase resourceData;
 
     public void MapBase()
     {
-        resourceData = resourcesObject.GetComponentInChildren<ResourceDatabase>();
+        resourceData =
+            resourcesObject.GetComponentInChildren<ResourceDatabase>();
         handler = save.GetComponentInChildren<SaveHandler>();
         menuManager = menus.GetComponentInChildren<MenuManager>();
         HashSet<int> stateTypeNumbers = new HashSet<int>();
@@ -292,413 +297,287 @@ public class MapCreator : MonoBehaviour
     FeatureClass[] GenerateFeatures(int type)
     {
         FeatureClass[] features = new FeatureClass[4];
-        HashSet<int> featureTypeNumbers = new HashSet<int>();
 
-        while (featureTypeNumbers.Count < 4)
+        int[] featureTypeArray = new int[4];
+
+        for (int i = 0; i < featureTypeArray.Length; i++)
         {
-            featureTypeNumbers.Add(UnityEngine.Random.Range(0, 7));
+            if (UnityEngine.Random.Range(0, 1) == 1)
+                featureTypeArray[i] = UnityEngine.Random.Range(1, 7);
+            else
+                featureTypeArray[i] = 0;
         }
-        int[] featureTypeArray = new int[featureTypeNumbers.Count()];
-        featureTypeNumbers.CopyTo (featureTypeArray);
 
         //[] loot table
         //[] civ builder
         List<NPCClass> npcs = new List<NPCClass>();
         List<Resource> resources = new List<Resource>();
-        
-        for (int i = 0; i < 4; i++)
+
+        for (int i = 0; i < featureTypeArray.Length; i++)
         {
-            resources.Add(resourceData.GetResource(0));
+            resources.Add(resourceData.GetResource(100));
             features[i] = new FeatureClass(3, "Trapping ground", resources);
             features[i].discovered = true;
         }
-
-        /*
-        for (int i = 0; i < 4; i++)
+        /*for (int i = 0; i < featureTypeArray.Length; i++)
         {
-            switch (type)
+            switch (featureTypeArray[i])
             {
-                case 0:
-                    switch (featureTypeArray[i])
-                    {
-                        case 0:
-                            //random loot table?
-                            break;
-                        case 1:
-                            //civbuild
-                            break;
-                        case 2:
-                            npcs.Add(NPCGen.NPC());
-                            features[i] = new FeatureClass(2, "Bedouin Tent", npcs);
-                            break;
-                        case 3:
-                            // trapping, hunting, foraging
-                            // Rabbit, Lizard, Hog(night), Deer
-                            // Berries, Cactus
-                            features[i] = new FeatureClass(3, "Trapping ground");
-                            break;
-                        case 4:
-                            features[i] = new FeatureClass(4, "Oasis");
-                            break;
-                        case 5:
-                            //enemy table
-                            break;
-                        case 6:
-                            //ores (gold, silver, copper), coal, gems
-                            break;
-                        case 7:
-                            //points of interest table
-                            break;
-                        default:
-                            break;
-                    }
+                case 0: //nothing
+                    features[i] = new FeatureClass(0, "Nothing");
                     break;
-                case 1:
-                    switch (featureTypeArray[i])
+                case 1: //
+                    switch (type)
                     {
                         case 0:
-                            //random loot table?
                             break;
                         case 1:
-                            //civbuild
                             break;
                         case 2:
-                            //occupant generator
                             break;
                         case 3:
                             break;
                         case 4:
                             break;
                         case 5:
-                            //enemy table
                             break;
                         case 6:
                             break;
                         case 7:
+                            break;
+                        case 8:
+                            break;
+                        case 9:
+                            break;
+                        case 10:
+                            break;
+                        case 11:
+                            break;
+                        case 12:
+                            break;
+                        case 13:
                             break;
                         default:
                             break;
                     }
                     break;
                 case 2:
-                    switch (featureTypeArray[i])
+                    switch (type)
                     {
                         case 0:
-                            //random loot table?
                             break;
                         case 1:
-                            //civbuild
                             break;
                         case 2:
-                            //occupant generator
                             break;
                         case 3:
                             break;
                         case 4:
                             break;
                         case 5:
-                            //enemy table
                             break;
                         case 6:
                             break;
                         case 7:
                             break;
+                        case 8:
+                            break;
+                        case 9:
+                            break;
+                        case 10:
+                            break;
+                        case 11:
+                            break;
+                        case 12:
+                            break;
+                        case 13:
+                            break;
                         default:
                             break;
                     }
+
+                    npcs.Add(NPCGen.NPC());
+                    features[i] = new FeatureClass(2, "Bedouin Tent", npcs);
                     break;
                 case 3:
-                    switch (featureTypeArray[i])
+                    switch (type)
                     {
                         case 0:
-                            //random loot table?
                             break;
                         case 1:
-                            //civbuild
                             break;
                         case 2:
-                            //occupant generator
                             break;
                         case 3:
                             break;
                         case 4:
                             break;
                         case 5:
-                            //enemy table
                             break;
                         case 6:
                             break;
                         case 7:
                             break;
+                        case 8:
+                            break;
+                        case 9:
+                            break;
+                        case 10:
+                            break;
+                        case 11:
+                            break;
+                        case 12:
+                            break;
+                        case 13:
+                            break;
                         default:
                             break;
                     }
+
+                    features[i] = new FeatureClass(3, "Trapping ground");
                     break;
                 case 4:
-                    switch (featureTypeArray[i])
+                    switch (type)
                     {
                         case 0:
-                            //random loot table?
                             break;
                         case 1:
-                            //civbuild
                             break;
                         case 2:
-                            //occupant generator
                             break;
                         case 3:
                             break;
                         case 4:
                             break;
                         case 5:
-                            //enemy table
                             break;
                         case 6:
                             break;
                         case 7:
                             break;
+                        case 8:
+                            break;
+                        case 9:
+                            break;
+                        case 10:
+                            break;
+                        case 11:
+                            break;
+                        case 12:
+                            break;
+                        case 13:
+                            break;
                         default:
                             break;
                     }
+
+                    features[i] = new FeatureClass(4, "Oasis");
                     break;
                 case 5:
-                    switch (featureTypeArray[i])
+                    switch (type)
                     {
                         case 0:
-                            //random loot table?
                             break;
                         case 1:
-                            //civbuild
                             break;
                         case 2:
-                            //occupant generator
                             break;
                         case 3:
                             break;
                         case 4:
                             break;
                         case 5:
-                            //enemy table
                             break;
                         case 6:
                             break;
                         case 7:
                             break;
+                        case 8:
+                            break;
+                        case 9:
+                            break;
+                        case 10:
+                            break;
+                        case 11:
+                            break;
+                        case 12:
+                            break;
+                        case 13:
+                            break;
                         default:
                             break;
                     }
+
+                    //enemy table
                     break;
                 case 6:
-                    switch (featureTypeArray[i])
+                    //ores (gold, silver, copper), coal, gems
+                    switch (type)
                     {
                         case 0:
-                            //random loot table?
                             break;
                         case 1:
-                            //civbuild
                             break;
                         case 2:
-                            //occupant generator
                             break;
                         case 3:
                             break;
                         case 4:
                             break;
                         case 5:
-                            //enemy table
                             break;
                         case 6:
                             break;
                         case 7:
                             break;
+                        case 8:
+                            break;
+                        case 9:
+                            break;
+                        case 10:
+                            break;
+                        case 11:
+                            break;
+                        case 12:
+                            break;
+                        case 13:
+                            break;
                         default:
                             break;
                     }
+
                     break;
                 case 7:
-                    switch (featureTypeArray[i])
+                    //points of interest table
+                    switch (type)
                     {
                         case 0:
-                            //random loot table?
                             break;
                         case 1:
-                            //civbuild
                             break;
                         case 2:
-                            //occupant generator
                             break;
                         case 3:
                             break;
                         case 4:
                             break;
                         case 5:
-                            //enemy table
                             break;
                         case 6:
                             break;
                         case 7:
                             break;
-                        default:
+                        case 8:
                             break;
-                    }
-                    break;
-                case 8:
-                    switch (featureTypeArray[i])
-                    {
-                        case 0:
-                            //random loot table?
+                        case 9:
                             break;
-                        case 1:
-                            //civbuild
+                        case 10:
                             break;
-                        case 2:
-                            //occupant generator
+                        case 11:
                             break;
-                        case 3:
+                        case 12:
                             break;
-                        case 4:
-                            break;
-                        case 5:
-                            //enemy table
-                            break;
-                        case 6:
-                            break;
-                        case 7:
-                            break;
-                        default:
-                            break;
-                    }
-                    break;
-                case 9:
-                    switch (featureTypeArray[i])
-                    {
-                        case 0:
-                            //random loot table?
-                            break;
-                        case 1:
-                            //civbuild
-                            break;
-                        case 2:
-                            //occupant generator
-                            break;
-                        case 3:
-                            break;
-                        case 4:
-                            break;
-                        case 5:
-                            //enemy table
-                            break;
-                        case 6:
-                            break;
-                        case 7:
-                            break;
-                        default:
-                            break;
-                    }
-                    break;
-                case 10:
-                    switch (featureTypeArray[i])
-                    {
-                        case 0:
-                            //random loot table?
-                            break;
-                        case 1:
-                            //civbuild
-                            break;
-                        case 2:
-                            //occupant generator
-                            break;
-                        case 3:
-                            break;
-                        case 4:
-                            break;
-                        case 5:
-                            //enemy table
-                            break;
-                        case 6:
-                            break;
-                        case 7:
-                            break;
-                        default:
-                            break;
-                    }
-                    break;
-                case 11:
-                    switch (featureTypeArray[i])
-                    {
-                        case 0:
-                            //random loot table?
-                            break;
-                        case 1:
-                            //civbuild
-                            break;
-                        case 2:
-                            //occupant generator
-                            break;
-                        case 3:
-                            break;
-                        case 4:
-                            break;
-                        case 5:
-                            //enemy table
-                            break;
-                        case 6:
-                            break;
-                        case 7:
-                            break;
-                        default:
-                            break;
-                    }
-                    break;
-                case 12:
-                    switch (featureTypeArray[i])
-                    {
-                        case 0:
-                            //random loot table?
-                            break;
-                        case 1:
-                            //civbuild
-                            break;
-                        case 2:
-                            //occupant generator
-                            break;
-                        case 3:
-                            break;
-                        case 4:
-                            break;
-                        case 5:
-                            //enemy table
-                            break;
-                        case 6:
-                            break;
-                        case 7:
-                            break;
-                        default:
-                            break;
-                    }
-                    break;
-                case 13:
-                    switch (featureTypeArray[i])
-                    {
-                        case 0:
-                            //random loot table?
-                            break;
-                        case 1:
-                            //civbuild
-                            break;
-                        case 2:
-                            //occupant generator
-                            break;
-                        case 3:
-                            break;
-                        case 4:
-                            break;
-                        case 5:
-                            //enemy table
-                            break;
-                        case 6:
-                            break;
-                        case 7:
+                        case 13:
                             break;
                         default:
                             break;
@@ -707,8 +586,7 @@ public class MapCreator : MonoBehaviour
                 default:
                     break;
             }
-        }
-*/
+        }*/
         return features;
     }
 }

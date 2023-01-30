@@ -20,8 +20,7 @@ public class ItemDatabase : MonoBehaviour
 
     public Item GetItem(string itemName)
     {
-        return items
-            .Find(item => item.itemName == itemName);
+        return items.Find(item => item.itemName == itemName);
     }
 
     //Ref: int id, name, flavour, weight, quest, consume, icon, stats, effect
@@ -32,9 +31,19 @@ public class ItemDatabase : MonoBehaviour
                 new Item(0,
                     "Raw Meat",
                     "The tender flesh of a fallen beast, it must be taken to the flame",
+                    null,
                     0.5f,
                     false,
                     true,
+                    defaultSprite,
+                    new Dictionary<string, int> { { "Water", -5 } }),
+                new Item(1,
+                    "Arrow",
+                    "The tender flesh of a fallen beast, it must be taken to the flame",
+                    null,
+                    0.5f,
+                    false,
+                    false,
                     defaultSprite,
                     new Dictionary<string, int> { { "Water", -5 } })
             };

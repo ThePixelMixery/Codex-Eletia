@@ -11,6 +11,8 @@ public class Item
 
     public string flavourText;
 
+    public string group;
+
     public float weight;
 
     public bool quest;
@@ -27,6 +29,7 @@ public class Item
         int id,
         string itemName,
         string flavourtext,
+        string group,
         float weight,
         bool quest,
         bool consumable,
@@ -38,6 +41,7 @@ public class Item
         this.id = id;
         this.itemName = itemName;
         this.flavourText = flavourText;
+        this.group = group;
         this.weight = weight;
         this.quest = quest;
         this.consumable = consumable;
@@ -51,6 +55,7 @@ public class Item
         this.id = item.id;
         this.itemName = item.itemName;
         this.flavourText = item.flavourText;
+        this.group = item.group;
         this.weight = item.weight;
         this.quest = item.quest;
         this.consumable = item.consumable;

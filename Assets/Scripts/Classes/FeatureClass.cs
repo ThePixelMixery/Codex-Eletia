@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 [System.Serializable]
 public class FeatureClass
 {
@@ -9,16 +10,6 @@ public class FeatureClass
 
     public int subtype;
 
-    /*
-        Loot
-        Civilisation
-        Hut/Shack/Cabin
-        Food
-        Water
-        Enemy
-        Resource
-        Point of Interest
-    */
     public string featureName;
 
     public bool discovered;
@@ -48,6 +39,16 @@ public class FeatureClass
         this.discovered = false;
         this.type = type;
         this.featureName = featureName;
+        this.resources = new List<Resource>();
+        this.resources = resources;
+    }
+    public FeatureClass(int type, string featureName, List<NPCClass> occupants, List<Resource> resources)
+    {
+        this.discovered = false;
+        this.type = type;
+        this.featureName = featureName;
+        this.occupants = new List<NPCClass>();
+        this.occupants = occupants;
         this.resources = new List<Resource>();
         this.resources = resources;
     }

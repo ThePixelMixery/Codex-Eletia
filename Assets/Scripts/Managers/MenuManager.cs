@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,6 +21,8 @@ public class MenuManager : MonoBehaviour
     public GameObject worldMapPanel;
 
     public GameObject localMapPanel;
+
+    public TextMeshProUGUI tileTitle;
 
     public GameObject miniMapPanel;
 
@@ -312,6 +315,7 @@ public class MenuManager : MonoBehaviour
                 }
             }
         }
+
         for (int i = 0; i < 9; i++)
         {
             int illegalTile = 0;
@@ -354,6 +358,8 @@ public class MenuManager : MonoBehaviour
                 navButtons[i].GetComponentInChildren<Button>().interactable =
                     false;
         }
+
+        tileTitle.text = currentTile.locationName;
         ActionList(currentTile.features);
     }
 
@@ -362,51 +368,84 @@ public class MenuManager : MonoBehaviour
         foreach (Transform child in ExploreActionList.transform)
         Destroy(child.gameObject);
 
-        Debug.Log("Prior to clear: "+ actionsList.Count+ ", "+ npcList.Count);
-
         actionsList.Clear();
         npcList.Clear();
-        Debug.Log("After clear: "+ actionsList.Count+ ", "+ npcList.Count);
-                    
+
         foreach (FeatureClass feature in features)
         {
-            if (feature.occupants.Count != 0 && feature.discovered== true)
-            npcList.Add(feature.occupants[0]);
-            if (feature.resources.Count != 0 && feature.discovered== true)
-            actionsList.Add(feature.resources[0]);
+            if (feature.occupants.Count != 0 && feature.discovered == true)
+                npcList.Add(feature.occupants[0]);
+            if (feature.resources.Count != 0 && feature.discovered == true)
+                actionsList.Add(feature.resources[0]);
         }
-        Debug.Log("After addition: "+ actionsList.Count+ ", "+ npcList.Count);
-
         foreach (NPCClass npc in npcList)
         {
             GameObject actionPrefab =
                 Instantiate(actionInstance, ExploreActionList.transform);
             ActionScript script =
                 actionPrefab.GetComponentInChildren<ActionScript>();
+
             script
                 .CreateAction("Talk",
-                "Visit " + npc.npcName + " at the " + npc.homeName,
                 npc.flavourText,
+                0,
+                "Visit " + npc.npcName + "at the " + npc.homeName,
+                0,
+                null,
+                null,
+                0,
+                null,
+                null,
                 true);
         }
 
         foreach (Resource resource in actionsList)
         {
+            List<string> requirements = new List<string>();
+            foreach (require req in resource.requires)
+            {
+                requirements
+                    .Add(req.item.itemName + " (" + req.count.ToString() + ")");
+            }
+            string reqsOutput = String.Join(", ", requirements.ToArray());
+            List<string> results = new List<string>();
+            foreach (outcome result in resource.outcomes)
+            {
+                results
+                    .Add(result.min.ToString() +
+                    "-" +
+                    result.max.ToString() +
+                    " " +
+                    result.item.itemName +
+                    " (" +
+                    result.chance.ToString() +
+                    "%) ");
+            }
+            string outOutput = String.Join(", ", results.ToArray());
+            Debug.Log (outOutput);
             GameObject actionPrefab =
                 Instantiate(actionInstance, ExploreActionList.transform);
             ActionScript script =
                 actionPrefab.GetComponentInChildren<ActionScript>();
             script
                 .CreateAction(resource.action,
-                resource.resourceName +
-                " provides " +
-                resource.minCount +
-                "-" +
-                resource.maxCount +
-                " " +
-                resource.item.itemName,
+                resource.resourceName,
+                resource.duration,
                 resource.flavourText,
-                save._GameData.keeper.skills.Contains(resource.skill));
+                resource.staminaCost,
+                resource.tool,
+                resource.skill,
+                resource.time,
+                reqsOutput,
+                outOutput,
+                true);
+            //" provides " +
+            //resource.outcome +
+            //"-" +
+            //resource.maxCount +
+            //" " +
+            //resource.item.itemName,
+            //                save._GameData.keeper.skills.Contains(resource.skill));
         }
     }
 
