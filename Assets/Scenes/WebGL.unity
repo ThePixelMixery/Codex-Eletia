@@ -8337,6 +8337,7 @@ MonoBehaviour:
   stateInstance: {fileID: 5686242799520098868, guid: 612f7e7eb64a83d7a9934ec667f3ecfd, type: 3}
   tileInstance: {fileID: 5402177375487433437, guid: 9437233a2e330dff1a8678d75830cfab, type: 3}
   actionInstance: {fileID: 7471881766936330790, guid: 851b20a39a0dc8db285e697bf8ed59cb, type: 3}
+  exploreInstance: {fileID: 7471881766936330790, guid: 3a8fbd185be036add8216e31a5c5bbf8, type: 3}
   TilePosition: {fileID: 0}
   StatePosition: {fileID: 0}
   tileColours:

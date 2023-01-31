@@ -8,8 +8,6 @@ public class FeatureClass
 {
     public int type;
 
-    public int subtype;
-
     public string featureName;
 
     public bool discovered;

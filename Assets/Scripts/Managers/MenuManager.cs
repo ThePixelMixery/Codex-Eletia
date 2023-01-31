@@ -16,6 +16,8 @@ public class MenuManager : MonoBehaviour
 
     public GameObject mapCreator;
 
+    public TextMeshProUGUI timeDisplay;
+
     public GameObject worldMapList;
 
     public GameObject worldMapPanel;
@@ -41,6 +43,8 @@ public class MenuManager : MonoBehaviour
     public GameObject tileInstance;
 
     public GameObject actionInstance;
+
+    public GameObject exploreInstance;
 
     public GameObject TilePosition;
 
@@ -95,6 +99,8 @@ public class MenuManager : MonoBehaviour
     public int keeperTileX;
 
     public int keeperTileY;
+
+    public int timeNumber;
 
     bool initialised;
 
@@ -360,10 +366,10 @@ public class MenuManager : MonoBehaviour
         }
 
         tileTitle.text = currentTile.locationName;
-        ActionList(currentTile.features);
+        ActionList (currentTile);
     }
 
-    void ActionList(FeatureClass[] features)
+    void ActionList(TileClass tile)
     {
         foreach (Transform child in ExploreActionList.transform)
         Destroy(child.gameObject);
@@ -371,7 +377,17 @@ public class MenuManager : MonoBehaviour
         actionsList.Clear();
         npcList.Clear();
 
-        foreach (FeatureClass feature in features)
+        if (tile.explored < 100)
+        {
+            GameObject actionPrefab =
+                Instantiate(exploreInstance, ExploreActionList.transform);
+            ActionScript script =
+                actionPrefab.GetComponentInChildren<ActionScript>();
+
+            script.ExploreAction(tile.locationName, tile);
+        }
+
+        foreach (FeatureClass feature in tile.features)
         {
             if (feature.occupants.Count != 0 && feature.discovered == true)
                 npcList.Add(feature.occupants[0]);
@@ -386,7 +402,7 @@ public class MenuManager : MonoBehaviour
                 actionPrefab.GetComponentInChildren<ActionScript>();
 
             script
-                .CreateAction("Talk",
+                .ReturnAction("Talk",
                 npc.flavourText,
                 0,
                 "Visit " + npc.npcName + "at the " + npc.homeName,
@@ -428,7 +444,7 @@ public class MenuManager : MonoBehaviour
             ActionScript script =
                 actionPrefab.GetComponentInChildren<ActionScript>();
             script
-                .CreateAction(resource.action,
+                .ReturnAction(resource.action,
                 resource.resourceName,
                 resource.duration,
                 resource.flavourText,
@@ -438,14 +454,56 @@ public class MenuManager : MonoBehaviour
                 resource.time,
                 reqsOutput,
                 outOutput,
-                true);
-            //" provides " +
-            //resource.outcome +
-            //"-" +
-            //resource.maxCount +
-            //" " +
-            //resource.item.itemName,
-            //                save._GameData.keeper.skills.Contains(resource.skill));
+                ActionChecker(resource.duration,
+                resource.staminaCost,
+                resource.tool,
+                resource.skill,
+                resource.time,
+                resource.requires));
+        }
+    }
+
+    bool
+    ActionChecker(
+        int duration,
+        int stamina,
+        string tool,
+        string skill,
+        int time,
+        List<require> reqs
+    )
+    {
+        bool allowed = true;
+
+        if (save._GameData.keeper.stamina - stamina < 0)
+        {
+            allowed = false;
+        }
+        if (!save._GameData.keeper.skills.Contains(skill))
+        {
+            allowed = false;
+        }
+
+        //if (!save._GameData.keeper.tools.Contains(tool)) // check for number of charges
+        //{
+        //    allowed = false;
+        //}
+        return allowed;
+    }
+
+    void UpdateTime()
+    {
+        if ((timeNumber > 4 && timeNumber < 7) || (timeNumber > 18 && timeNumber < 20))
+        {
+            timeDisplay.text = "Twilight";
+        }
+        else if (timeNumber > 6 && timeNumber < 18)
+        {
+            timeDisplay.text = "Day";
+        }
+        else
+        {
+            timeDisplay.text = "Night";
         }
     }
 

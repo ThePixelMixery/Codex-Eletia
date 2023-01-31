@@ -25,9 +25,29 @@ public class ActionScript : MonoBehaviour
 
     public TextMeshProUGUI actionReturn;
 
+    int type;
+
+    TileClass tile;
+
     public Button button;
 
-    public void CreateAction(
+    void Start()
+    {
+        button.onClick.AddListener (ClickAction);
+    }
+
+    public void ExploreAction(string locationName, TileClass tile)
+    {
+        this.actionResource.text = locationName + " for 3 hours";
+        this.actionButton.text = "Explore";
+        this.actionFlavour.text = "Scout the local area for things to do";
+        this.actionStamina.text = "0";
+        this.actionDaytime.text = "Day";
+        this.type = 0;
+        this.tile = tile;
+    }
+
+    public void ReturnAction(
         string button,
         string resource,
         int duration,
@@ -71,15 +91,21 @@ public class ActionScript : MonoBehaviour
         this.actionDetail.text = details;
         this.actionReturn.text = results;
         this.button.interactable = skillOrObject;
+        this.type = 2;
     }
 
-    void Start()
-    {
-        button.onClick.AddListener (ClickAction);
-    }
     void ClickAction()
     {
-    
-    
+        switch (type)
+        {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            default:
+                break;
+        }
     }
 }

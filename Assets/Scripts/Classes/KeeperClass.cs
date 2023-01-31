@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 [System.Serializable]
 public class KeeperClass
 {   
@@ -21,5 +22,9 @@ public class KeeperClass
 
     public List<string> skills;
 
-    public List<Item> inventory;
+    public Dictionary<string,int> tools;
+
+    public Dictionary<Item, int> inventory;
+
+    public int time;
 }
