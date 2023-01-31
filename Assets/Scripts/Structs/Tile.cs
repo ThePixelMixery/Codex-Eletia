@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [System.Serializable]
-public class TileClass
+public struct Tile
 {
     public string locationName;
 
@@ -22,10 +22,5 @@ public class TileClass
 
     public float explored;
 
-    public FeatureClass[] features = new FeatureClass[4];
-
-    public TileClass()
-    {
-        this.explored = 0.0f;
-    }
+    public Feature[] features;
 }

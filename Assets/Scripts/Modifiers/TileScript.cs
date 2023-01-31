@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class TileScript : MonoBehaviour
 {
-    public TileClass tile;
+    public Tile tile;
 
     GameObject localMapPanel;
 
@@ -35,7 +35,7 @@ public class TileScript : MonoBehaviour
     }
 
     public void TileCreate(
-        TileClass tempTile,
+        Tile tempTile,
         Sprite tempSprite,
         Sprite featureSprite1,
         Sprite featureSprite2,

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class NPCClass
+public struct NPC
 {
     public string npcName;
     public string homeName;

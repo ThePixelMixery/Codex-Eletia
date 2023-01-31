@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QuestClass
+public struct Quest
 {
     public string uniqueID;
 
@@ -14,7 +14,6 @@ public class QuestClass
 
     public GameObject questDetails;
 
-//    [SerializeField]
     public float questTimeLimit;
 
     public GameObject questTime;
@@ -23,30 +22,30 @@ public class QuestClass
 
     public List<string> questRewards;
 
-    enum questType
-    {
+    int questType;
+        /*
         kill,
         gather,
         deliver,
         find,
         explore
-    }
+        */
 
-    enum questScope
-    {
+    int questScope;
+        /*
         story,
         state,
         town,
         dragons,
         other
-    }
+        */
 
-//    [SerializeField]
-    enum questState
-    {
+    int questState;
+        /*
         known,
         active,
         failed,
         succeeded
-    }
+        */
+    
 }

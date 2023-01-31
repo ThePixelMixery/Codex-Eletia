@@ -27,7 +27,7 @@ public class ActionScript : MonoBehaviour
 
     int type;
 
-    TileClass tile;
+    Tile tile;
 
     public Button button;
 
@@ -36,7 +36,7 @@ public class ActionScript : MonoBehaviour
         button.onClick.AddListener (ClickAction);
     }
 
-    public void ExploreAction(string locationName, TileClass tile)
+    public void ExploreAction(string locationName, Tile tile)
     {
         this.actionResource.text = locationName + " for 3 hours";
         this.actionButton.text = "Explore";

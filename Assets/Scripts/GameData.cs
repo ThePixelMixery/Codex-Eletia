@@ -5,9 +5,9 @@ using UnityEngine;
 [System.Serializable]
 public class GameData
 {
-    public KeeperClass keeper = new KeeperClass();
+    public Keeper keeper = new Keeper();
 
-    public StateClass[] stateCoords;
+    public State[] stateCoords;
 
     public QuestData quests = new QuestData();
 }

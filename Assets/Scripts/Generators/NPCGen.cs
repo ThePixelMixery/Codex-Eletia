@@ -6,12 +6,12 @@ public class NPCGen
 {
     public static string NPCName;
 
-    public static NPCClass NPC()
+    public static NPC NPC()
     {
     //names
     string generatedName = "NPC";
 
-    NPCClass generatedNPC = new NPCClass();
+    NPC generatedNPC = new NPC();
     generatedNPC.npcName = generatedName; 
     
     return generatedNPC;

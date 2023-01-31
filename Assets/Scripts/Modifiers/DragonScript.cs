@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class DragonScript : MonoBehaviour
 {
-    DragonClass dragon;
+    Dragon dragon;
 
     public TextMeshProUGUI nameFancy;
 

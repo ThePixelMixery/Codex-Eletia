@@ -23,7 +23,7 @@ public struct outcome
 }
 
 [System.Serializable]
-public class Resource
+public struct Resource
 {
     public int id;
 
@@ -42,9 +42,9 @@ public class Resource
 
     public int time;
 
-    public List<require> requires = new List<require>();
+    public List<require> requires;
 
-    public List<outcome> outcomes = new List<outcome>();
+    public List<outcome> outcomes;
 
     public Resource(
         int id,

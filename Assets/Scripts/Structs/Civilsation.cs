@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class CivClass : MonoBehaviour
+public struct Civilisation
 {
     public bool castle;
 

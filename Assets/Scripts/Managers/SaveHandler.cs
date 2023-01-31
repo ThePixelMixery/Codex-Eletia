@@ -13,9 +13,9 @@ public class SaveHandler : MonoBehaviour
 
     public GameData _GameData = new GameData();
 
-    public GameObject MenuManager;
+    public GameObject MapManager;
 
-    MenuManager menus;
+    MapManager maps;
 
     public GameObject mapCreator;
 
@@ -23,9 +23,9 @@ public class SaveHandler : MonoBehaviour
 
     void Start()
     {
-        menus = MenuManager.GetComponentInChildren<MenuManager>();
+        maps = MapManager.GetComponentInChildren<MapManager>();
         saveLocation = Application.persistentDataPath + "/Saves/GameData.json";
-        _GameData.stateCoords = new StateClass[16];
+        _GameData.stateCoords = new State[16];
         if (System.IO.File.Exists(saveLocation))
         {
             Loader();
@@ -40,10 +40,10 @@ public class SaveHandler : MonoBehaviour
 
     public void SaveFile()
     {
-        _GameData.keeper.tileX = menus.keeperTileX;
-        _GameData.keeper.tileY = menus.keeperTileY;
-        _GameData.keeper.stateX = menus.keeperStateX;
-        _GameData.keeper.stateY = menus.keeperStateY;
+        _GameData.keeper.tileX = maps.keeperTileX;
+        _GameData.keeper.tileY = maps.keeperTileY;
+        _GameData.keeper.stateX = maps.keeperStateX;
+        _GameData.keeper.stateY = maps.keeperStateY;
 
         saveJson = JsonUtility.ToJson(_GameData);
         System.IO.File.WriteAllText (saveLocation, saveJson);
@@ -55,8 +55,8 @@ public class SaveHandler : MonoBehaviour
         _GameData.keeper.tileX = 0;
         _GameData.keeper.tileY = 0;
 
-        menus.keeperTileX = 0;
-        menus.keeperTileY = 0;
+        maps.keeperTileX = 0;
+        maps.keeperTileY = 0;
         if (System.IO.File.Exists(saveLocation))
         {
             File.Delete (saveLocation);
@@ -68,15 +68,15 @@ public class SaveHandler : MonoBehaviour
             Debug.LogError("Save not found at " + saveLocation);
         }
 
-        foreach (Transform child in menus.worldMapList.transform)
+        foreach (Transform child in maps.worldMapList.transform)
         {
             Destroy(child.gameObject);
         }
-        foreach (Transform child in menus.worldMapPanel.transform)
+        foreach (Transform child in maps.worldMapPanel.transform)
         {
             Destroy(child.gameObject);
         }
-        foreach (Transform child in menus.localMapPanel.transform)
+        foreach (Transform child in maps.localMapPanel.transform)
         {
             Destroy(child.gameObject);
         }
@@ -93,7 +93,7 @@ public class SaveHandler : MonoBehaviour
     {
         saveJson = File.ReadAllText(saveLocation);
         _GameData = JsonUtility.FromJson<GameData>(saveJson);
-        menus.LoadUI();
+        maps.LoadUI();
     }
 
     public void MapChecker()

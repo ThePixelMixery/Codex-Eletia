@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 [System.Serializable]
-public class DragonClass
+public struct Dragon
 {
-    public float age = 0;
+    public float age;
 
     public float bond;
 
@@ -13,8 +14,8 @@ public class DragonClass
 
     public string act;
 
-    private enum ageStage
-    {
+    public int stage;
+        /* ref
         Hatchling,
         Wyrmling,
         Juvenile,
@@ -24,5 +25,5 @@ public class DragonClass
         Wyrm,
         Greatwyrm,
         Death
-    }
+        */
 }

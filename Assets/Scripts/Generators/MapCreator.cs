@@ -11,7 +11,7 @@ public class MapCreator : MonoBehaviour
 {
     public GameObject save;
 
-    public GameObject menus;
+    public GameObject maps;
 
     public GameObject resourcesObject;
 
@@ -19,7 +19,7 @@ public class MapCreator : MonoBehaviour
 
     SaveHandler handler;
 
-    MenuManager menuManager;
+    MapManager MapManager;
 
     ResourceDatabase resourceData;
 
@@ -28,7 +28,7 @@ public class MapCreator : MonoBehaviour
         resourceData =
             resourcesObject.GetComponentInChildren<ResourceDatabase>();
         handler = save.GetComponentInChildren<SaveHandler>();
-        menuManager = menus.GetComponentInChildren<MenuManager>();
+        MapManager = maps.GetComponentInChildren<MapManager>();
         HashSet<int> stateTypeNumbers = new HashSet<int>();
         while (stateTypeNumbers.Count < 16)
         {
@@ -42,13 +42,14 @@ public class MapCreator : MonoBehaviour
         {
             for (int k = 0; k < 4; k++)
             {
-                StateClass newState =
-                    new StateClass(k,
+                State newState =
+                    new State(k,
                         j,
                         stateTypeArray[index],
                         StateNamer(stateTypeArray[index]),
                         StateFancy(stateTypeArray[index]),
-                        GenerateTiles(stateTypeArray[index]));
+                        null,
+                        GenerateTiles(stateTypeArray[index]),false);
 
                 handler._GameData.stateCoords[index] = newState;
                 index++;
@@ -64,12 +65,13 @@ public class MapCreator : MonoBehaviour
         int tileX = UnityEngine.Random.Range(0, 12);
         int tileY = UnityEngine.Random.Range(0, 7);
 
-        foreach (StateClass state in handler._GameData.stateCoords)
+        for ( int i=0; i< handler._GameData.stateCoords.Length; i++)
         {
-            if (select == state.type)
+            if (select == handler._GameData.stateCoords[i].type)
             {
-                state.discovered = true;
-                menuManager.MapMade(tileX, tileY, state.x, state.y, state);
+                State stateSelected = handler._GameData.stateCoords[i];
+                stateSelected.discovered = true;
+                MapManager.MapMade(tileX, tileY, stateSelected.x, stateSelected.y, stateSelected);
             }
         }
         handler.SaveFile();
@@ -237,14 +239,14 @@ public class MapCreator : MonoBehaviour
         return typeFancy;
     }
 
-    TileClass[] GenerateTiles(int type)
+    Tile[] GenerateTiles(int type)
     {
-        TileClass[] tiles = new TileClass[104];
+        Tile[] tiles = new Tile[104];
 
         //creates tiles
         for (int i = 0; i < tiles.Length; i++)
         {
-            tiles[i] = new TileClass();
+            tiles[i] = new Tile();
         }
 
         //Assigns tile x and y
@@ -279,7 +281,7 @@ public class MapCreator : MonoBehaviour
                 assignedType = 13;
 
             tiles[i].type = assignedType;
-            tiles[i].tileColor = menuManager.tileColours[assignedType];
+            tiles[i].tileColor = MapManager.tileColours[assignedType];
             if (assignedType == 14 || assignedType == 15)
             {
                 tiles[i].access = 0;
@@ -294,9 +296,9 @@ public class MapCreator : MonoBehaviour
         return tiles;
     }
 
-    FeatureClass[] GenerateFeatures(int type)
+    Feature[] GenerateFeatures(int type)
     {
-        FeatureClass[] features = new FeatureClass[4];
+        Feature[] features = new Feature[4];
 
         int[] featureTypeArray = new int[4];
 
@@ -310,13 +312,13 @@ public class MapCreator : MonoBehaviour
 
         //[] loot table
         //[] civ builder
-        List<NPCClass> npcs = new List<NPCClass>();
+        List<NPC> npcs = new List<NPC>();
         List<Resource> resources = new List<Resource>();
 
         for (int i = 0; i < featureTypeArray.Length; i++)
         {
             resources.Add(resourceData.GetResource(100));
-            features[i] = new FeatureClass(3, "Trapping ground", resources);
+            features[i] = new Feature(3, "Trapping ground", null,resources,false);
             features[i].discovered = true;
         }
         /*for (int i = 0; i < featureTypeArray.Length; i++)
@@ -324,7 +326,7 @@ public class MapCreator : MonoBehaviour
             switch (featureTypeArray[i])
             {
                 case 0: //nothing
-                    features[i] = new FeatureClass(0, "Nothing");
+                    features[i] = new Feature(0, "Nothing");
                     break;
                 case 1: //
                     switch (type)
@@ -397,7 +399,7 @@ public class MapCreator : MonoBehaviour
                     }
 
                     npcs.Add(NPCGen.NPC());
-                    features[i] = new FeatureClass(2, "Bedouin Tent", npcs);
+                    features[i] = new Feature(2, "Bedouin Tent", npcs);
                     break;
                 case 3:
                     switch (type)
@@ -434,7 +436,7 @@ public class MapCreator : MonoBehaviour
                             break;
                     }
 
-                    features[i] = new FeatureClass(3, "Trapping ground");
+                    features[i] = new Feature(3, "Trapping ground");
                     break;
                 case 4:
                     switch (type)
@@ -471,7 +473,7 @@ public class MapCreator : MonoBehaviour
                             break;
                     }
 
-                    features[i] = new FeatureClass(4, "Oasis");
+                    features[i] = new Feature(4, "Oasis");
                     break;
                 case 5:
                     switch (type)

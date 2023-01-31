@@ -9,7 +9,7 @@ public class StateScript : MonoBehaviour
     public int explored;
     public int exploredOutput;
     public int influence;
-    public StateClass state;
+    public State state;
     public string stateType;
 
     //ListObject
@@ -26,7 +26,7 @@ public class StateScript : MonoBehaviour
     public GameObject stateTile;
 
     public void StateCreate(
-        StateClass tempState,
+        State tempState,
         GameObject stateImagePanel,
         Sprite tempSprite
     )

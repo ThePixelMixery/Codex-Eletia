@@ -5,31 +5,34 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [System.Serializable]
-public class StateClass
+public struct State
 {
-    public string stateName;
-
-    public int type;
-
-    public string stateFancy;
-
-    public bool discovered;
-
     public int x;
 
     public int y;
 
-    public List<CivClass> townList;
+    public int type;
 
-    public TileClass[] tiles;
+    public string stateName;
 
-    public StateClass(
+    public string stateFancy;
+    
+    public List<Civilisation> townList;
+
+    public Tile[] tiles;
+
+    public bool discovered;
+
+
+    public State(
         int x,
         int y,
         int type,
         string stateName,
         string stateFancy,
-        TileClass[] tiles
+        List<Civilisation> townList,
+        Tile[] tiles,
+        bool discovered
     )
     {
         this.x = x;
@@ -37,6 +40,8 @@ public class StateClass
         this.type = type;
         this.stateName = stateName;
         this.stateFancy = stateFancy;
+        this.townList = townList;
         this.tiles = tiles;
+        this.discovered = discovered;
     }
 }

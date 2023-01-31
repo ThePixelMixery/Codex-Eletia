@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Item
+public struct Item
 {
     public int id;
 
@@ -21,14 +21,14 @@ public class Item
 
     public Sprite icon;
 
-    public Dictionary<string, int> stats = new Dictionary<string, int>();
+    public Dictionary<string, int> stats;
 
     //public Effect effect;
 
     public Item(
         int id,
         string itemName,
-        string flavourtext,
+        string flavourText,
         string group,
         float weight,
         bool quest,

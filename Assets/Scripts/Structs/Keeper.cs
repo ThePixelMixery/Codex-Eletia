@@ -2,10 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public struct tool
+{
+    string toolName;
+
+    int charges;
+}
 
 [System.Serializable]
-public class KeeperClass
-{   
+public struct Keeper
+{
     public int stateX;
 
     public int stateY;
@@ -22,9 +29,11 @@ public class KeeperClass
 
     public List<string> skills;
 
-    public Dictionary<string,int> tools;
+    public List<string> toolKeys;
 
-    public Dictionary<Item, int> inventory;
+    public List<int> toolValue;
+
+    public Dictionary<string, int> tools;
 
     public int time;
 }
