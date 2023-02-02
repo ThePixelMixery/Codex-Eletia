@@ -319,7 +319,6 @@ public class MapCreator : MonoBehaviour
         {
             resources.Add(resourceData.GetResource(100));
             features[i] = new Feature(3, "Trapping ground", null,resources,false);
-            features[i].discovered = true;
         }
         /*for (int i = 0; i < featureTypeArray.Length; i++)
         {

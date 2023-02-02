@@ -17,6 +17,10 @@ public class SaveHandler : MonoBehaviour
 
     MapManager maps;
 
+    public GameObject clockObject;
+
+    TimeScript clock;
+
     public GameObject mapCreator;
 
     string saveJson;
@@ -24,8 +28,11 @@ public class SaveHandler : MonoBehaviour
     void Start()
     {
         maps = MapManager.GetComponentInChildren<MapManager>();
+        clock = clockObject.GetComponentInChildren<TimeScript>();
         saveLocation = Application.persistentDataPath + "/Saves/GameData.json";
         _GameData.stateCoords = new State[16];
+        
+        
         if (System.IO.File.Exists(saveLocation))
         {
             Loader();
@@ -44,6 +51,7 @@ public class SaveHandler : MonoBehaviour
         _GameData.keeper.tileY = maps.keeperTileY;
         _GameData.keeper.stateX = maps.keeperStateX;
         _GameData.keeper.stateY = maps.keeperStateY;
+        _GameData.keeper.time = clock.time;
 
         saveJson = JsonUtility.ToJson(_GameData);
         System.IO.File.WriteAllText (saveLocation, saveJson);
@@ -52,6 +60,8 @@ public class SaveHandler : MonoBehaviour
 
     public void DeleteFiles()
     {
+        _GameData.keeper.time = 7;
+
         _GameData.keeper.tileX = 0;
         _GameData.keeper.tileY = 0;
 
@@ -93,6 +103,7 @@ public class SaveHandler : MonoBehaviour
     {
         saveJson = File.ReadAllText(saveLocation);
         _GameData = JsonUtility.FromJson<GameData>(saveJson);
+        clock.LoadTime();
         maps.LoadUI();
     }
 
@@ -106,12 +117,25 @@ public class SaveHandler : MonoBehaviour
             mapCreator.GetComponentInChildren<MapCreator>().MapBase();
     }
 
-    public void KeeperLocationUpdate(int tileX, int tileY, int stateX, int stateY)
+    public void KeeperLocationUpdate(
+        int tileX,
+        int tileY,
+        int stateX,
+        int stateY
+    )
     {
-    _GameData.keeper.tileX = tileX;
-    _GameData.keeper.tileX = tileY;
-    _GameData.keeper.stateX = stateX;
-    _GameData.keeper.stateX = stateY;
-    Debug.Log("Keeper dropped onto state: "+stateX+", "+stateY+ " at tile "+ tileX+", "+tileY);
+        _GameData.keeper.tileX = tileX;
+        _GameData.keeper.tileX = tileY;
+        _GameData.keeper.stateX = stateX;
+        _GameData.keeper.stateX = stateY;
+        Debug
+            .Log("Keeper dropped onto state: " +
+            stateX +
+            ", " +
+            stateY +
+            " at tile " +
+            tileX +
+            ", " +
+            tileY);
     }
 }

@@ -82,25 +82,14 @@ public class MapManager : MonoBehaviour
 
     public int keeperTileY;
 
-    bool initialised;
-
     void Start()
     {
-        Initialise();
-    }
-
-    void Initialise()
-    {
-        if (initialised == false)
-        {
-            save = saveObject.GetComponentInChildren<SaveHandler>();
-            minimap = miniMapper.GetComponentInChildren<MiniMapper>();
-            keeperStateX = save._GameData.keeper.stateX;
-            keeperStateY = save._GameData.keeper.stateY;
-            keeperTileX = save._GameData.keeper.tileX;
-            keeperTileY = save._GameData.keeper.tileY;
-            initialised = true;
-        }
+        save = saveObject.GetComponentInChildren<SaveHandler>();
+        minimap = miniMapper.GetComponentInChildren<MiniMapper>();
+        keeperStateX = save._GameData.keeper.stateX;
+        keeperStateY = save._GameData.keeper.stateY;
+        keeperTileX = save._GameData.keeper.tileX;
+        keeperTileY = save._GameData.keeper.tileY;
     }
 
     public void MapMade(

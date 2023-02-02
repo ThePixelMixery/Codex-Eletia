@@ -68,7 +68,7 @@ public class ResourceDatabase : MonoBehaviour
                 new Resource(100,
                 "Hunt",
                 "Deer",
-                4,
+                2,
                 "A gentle creature, a staple of the hunter's diet",
                 0, //net yet set up
                 "Tracking",

@@ -11,6 +11,12 @@ public class MiniMapper : MonoBehaviour
 
     SaveHandler save;
 
+    Keeper keeper;
+
+    public GameObject clockObject;
+
+    TimeScript clock;
+
     public GameObject miniMapPanel;
 
     public GameObject blockedTile;
@@ -35,20 +41,11 @@ public class MiniMapper : MonoBehaviour
 
     public GameObject[] navButtons = new GameObject[9];
 
-    bool initialised;
-
     void Start()
     {
-        Initialise();
-    }
-
-    void Initialise()
-    {
-        if (initialised == false)
-        {
-            save = saveObject.GetComponentInChildren<SaveHandler>();
-            initialised = true;
-        }
+        save = saveObject.GetComponentInChildren<SaveHandler>();
+        keeper = save._GameData.keeper;
+        clock = clockObject.GetComponentInChildren<TimeScript>();
     }
 
     public void MiniMapUI(
@@ -176,7 +173,7 @@ public class MiniMapper : MonoBehaviour
 
         foreach (Feature feature in tile.features)
         {
-            if (feature.occupants.Count != 0 && feature.discovered == true)
+            if (feature.occupants != null && feature.occupants.Count != 0 && feature.discovered == true)
                 npcList.Add(feature.occupants[0]);
             if (feature.resources.Count != 0 && feature.discovered == true)
                 actionsList.Add(feature.resources[0]);
@@ -260,20 +257,14 @@ public class MiniMapper : MonoBehaviour
     )
     {
         bool allowed = true;
+        int currentTime = clock.time;
+        int predictedTime = currentTime + duration;
+        if (predictedTime >= 24) predictedTime = predictedTime % 24;
+        if (time != clock.timeOfDay || time != 3) allowed = false;
+        if (keeper.stamina - stamina < 0) allowed = false;
+        if (!keeper.skills.Contains(skill)) allowed = false;
+        if (clock.timeOfDay != time || time != 3) allowed = false;
 
-        if (save._GameData.keeper.stamina - stamina < 0)
-        {
-            allowed = false;
-        }
-        if (!save._GameData.keeper.skills.Contains(skill))
-        {
-            allowed = false;
-        }
-
-        //if (!save._GameData.keeper.tools.Contains(tool)) // check for number of charges
-        //{
-        //    allowed = false;
-        //}
         return allowed;
     }
 }

@@ -33,7 +33,7 @@ public struct Keeper
 
     public List<int> toolValue;
 
-    public Dictionary<string, int> tools;
+    public List<tool> tools;
 
     public int time;
 }

@@ -99,6 +99,7 @@ public class ActionScript : MonoBehaviour
         switch (type)
         {
             case 0:
+                //tile.explored
                 break;
             case 1:
                 break;

@@ -31,36 +31,23 @@ public class EventTracker : MonoBehaviour
 
     private static List<Log> logs = new List<Log>();
 
-    private static bool Initialised = false;
-
-    //checks for elements
-    public static void initialise()
-    {
-        if (Initialised == false)
-        {
-            Initialised = true;
-            logOutput =
-                GameObject.Find("Text_Log").GetComponent<TextMeshProUGUI>();
-            story = GameObject.Find("Toggle_Story").GetComponent<Toggle>();
-            unlock = GameObject.Find("Toggle_Unlock").GetComponent<Toggle>();
-            combat = GameObject.Find("Toggle_Combat").GetComponent<Toggle>();
-            loot = GameObject.Find("Toggle_Loot").GetComponent<Toggle>();
-            Debug
-                .Log(logOutput +
-                "," +
-                story +
-                " ," +
-                unlock +
-                " ," +
-                combat +
-                " ," +
-                loot);
-        }
-    }
-
     void Start()
     {
-        initialise();
+        logOutput = GameObject.Find("Text_Log").GetComponent<TextMeshProUGUI>();
+        story = GameObject.Find("Toggle_Story").GetComponent<Toggle>();
+        unlock = GameObject.Find("Toggle_Unlock").GetComponent<Toggle>();
+        combat = GameObject.Find("Toggle_Combat").GetComponent<Toggle>();
+        loot = GameObject.Find("Toggle_Loot").GetComponent<Toggle>();
+        Debug
+            .Log(logOutput +
+            "," +
+            story +
+            " ," +
+            unlock +
+            " ," +
+            combat +
+            " ," +
+            loot);
     }
 
     // for external use of creating events
