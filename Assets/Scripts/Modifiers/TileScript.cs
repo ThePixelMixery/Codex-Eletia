@@ -11,26 +11,11 @@ public class TileScript : MonoBehaviour
 
     public GameObject tileTile;
 
-    public GameObject Feature0;
-
-    public GameObject Feature1;
-
-    public GameObject Feature2;
-
-    public GameObject Feature3;
+    public GameObject[] Features = new GameObject[4];
 
     void Start()
     {
         //Debug.Log (tile.explored);
-    }
-
-    public void ExploredMore(float exploredMore)
-    {
-        tile.explored += exploredMore;
-        if (tile.explored >= 25) tile.features[0].discovered = true;
-        if (tile.explored >= 50) tile.features[1].discovered = true;
-        if (tile.explored >= 75) tile.features[2].discovered = true;
-        if (tile.explored >= 100) tile.features[3].discovered = true;
     }
 
     public void TileCreate(
@@ -47,14 +32,14 @@ public class TileScript : MonoBehaviour
         //if (tile.type > 0)
         tileTile.GetComponent<Image>().sprite = tempSprite;
         tileTile.GetComponent<Image>().color = tile.tileColor;
-        Feature0.GetComponent<Image>().sprite = featureSprite1;
-        Feature0.SetActive(tile.features[0].discovered);
-        Feature1.GetComponent<Image>().sprite = featureSprite2;
-        Feature1.SetActive(tile.features[1].discovered);
-        Feature2.GetComponent<Image>().sprite = featureSprite3;
-        Feature2.SetActive(tile.features[2].discovered);
-        Feature3.GetComponent<Image>().sprite = featureSprite4;
-        Feature3.SetActive(tile.features[3].discovered);
+        Features[0].GetComponent<Image>().sprite = featureSprite1;
+        Features[0].SetActive(tile.features[0].discovered);
+        Features[1].GetComponent<Image>().sprite = featureSprite2;
+        Features[1].SetActive(tile.features[1].discovered);
+        Features[2].GetComponent<Image>().sprite = featureSprite3;
+        Features[2].SetActive(tile.features[2].discovered);
+        Features[3].GetComponent<Image>().sprite = featureSprite4;
+        Features[3].SetActive(tile.features[3].discovered);
         tileTile.SetActive(tile.discovered);
     }
 
@@ -67,5 +52,20 @@ public class TileScript : MonoBehaviour
     {
         tileTile.GetComponent<Image>().sprite = tempSprite;
         tileTile.SetActive(tile.discovered);
+    }
+
+    public void FeatureHandler()
+    {
+        if (tile.explored >= 100)
+            tile.features[3].discovered = true;
+        else if (tile.explored >= 75)
+            tile.features[2].discovered = true;
+        else if (tile.explored >= 50)
+            tile.features[1].discovered = true;
+        else if (tile.explored >= 25) tile.features[0].discovered = true;
+        for (int i = 0; i < 4; i++)
+        {
+            Features[i].SetActive(tile.features[i].discovered);
+        }
     }
 }

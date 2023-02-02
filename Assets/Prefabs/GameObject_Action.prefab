@@ -1723,6 +1723,18 @@ MonoBehaviour:
   actionFlavour: {fileID: 8097466866771837149}
   actionDetail: {fileID: 6904393033364296879}
   actionReturn: {fileID: 7214123696771332166}
+  MapManager: {fileID: 0}
+  tileObject: {fileID: 0}
+  tile:
+    locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
   button: {fileID: 3107151308654895650}
 --- !u!114 &6721901495083921583
 MonoBehaviour:

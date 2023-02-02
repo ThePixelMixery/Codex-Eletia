@@ -227,15 +227,13 @@ public class MapManager : MonoBehaviour
             );
             UpdateCurrentTiles(tilePrefab,
             tileScript.tile.x,
-            tileScript.tile.y,
-            index);
+            tileScript.tile.y);//, index);
             index++;
         }
     }
 
-    void UpdateCurrentTiles(GameObject tile, int x, int y, int index)
+    void UpdateCurrentTiles(GameObject tile, int x, int y)
     {
-        testCurrentTiles[index] = tile;
         currentTiles[x, y] = tile;
     }
 
@@ -255,7 +253,17 @@ public class MapManager : MonoBehaviour
         }
     }
 
-    void updateLocalMap()
+    public void UpdateCurrentTile(GameObject newTile)
+    {
+    TileScript newScript = newTile.GetComponentInChildren<TileScript>();
+    if (newScript.tile.x == currentTile.x && newScript.tile.y == currentTile.y) {currentTile = newScript.tile;
+    UpdateCurrentTiles(newTile, currentTile.x, currentTile.y);
+    UpdateLocalMap();
+    }
+    else Debug.LogError("NewTile is not equal to current tile");
+    }
+
+    void UpdateLocalMap()
     {
         foreach (GameObject tile in currentTiles)
         {
@@ -267,6 +275,7 @@ public class MapManager : MonoBehaviour
             else
                 script.UpdateTile(tileSprite);
         }
-        minimap.MiniMapUI (keeperTileX, keeperTileY, currentTiles, currentTile);
+        Debug.Log("Local Map Update");
+        minimap.MiniMapUI (keeperTileX, keeperTileY, currentTiles, currentTile );
     }
 }

@@ -460,10 +460,11 @@ MonoBehaviour:
       occupants: []
       resources: []
   tileTile: {fileID: 3348727747165831029}
-  Feature0: {fileID: 5603994342000025287}
-  Feature1: {fileID: 2830931058301489697}
-  Feature2: {fileID: 4590093032705128322}
-  Feature3: {fileID: 1845339493776985414}
+  Features:
+  - {fileID: 5603994342000025287}
+  - {fileID: 2830931058301489697}
+  - {fileID: 4590093032705128322}
+  - {fileID: 1845339493776985414}
 --- !u!1 &5603994342000025287
 GameObject:
   m_ObjectHideFlags: 0

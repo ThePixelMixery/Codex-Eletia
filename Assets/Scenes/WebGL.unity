@@ -564,6 +564,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saveObject: {fileID: 1184143802}
   clockObject: {fileID: 1914918691}
+  mapManager: {fileID: 0}
   miniMapPanel: {fileID: 250540620}
   blockedTile: {fileID: 2962992882202361934, guid: 46be911e39a21b50db39c9a7df52bef3, type: 3}
   tileSprite: {fileID: 21300000, guid: 3cc504dedfe2ef28aaf3f375f3c475bc, type: 3}

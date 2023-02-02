@@ -25,9 +25,12 @@ public class ActionScript : MonoBehaviour
 
     public TextMeshProUGUI actionReturn;
 
-    int type;
+    public GameObject mapManager;
 
-    Tile tile;
+    public GameObject tileObject;
+    public Tile tile;
+
+    int type;
 
     public Button button;
 
@@ -36,7 +39,7 @@ public class ActionScript : MonoBehaviour
         button.onClick.AddListener (ClickAction);
     }
 
-    public void ExploreAction(string locationName, Tile tile)
+    public void ExploreAction(string locationName, GameObject tileObject)
     {
         this.actionResource.text = locationName + " for 3 hours";
         this.actionButton.text = "Explore";
@@ -44,7 +47,8 @@ public class ActionScript : MonoBehaviour
         this.actionStamina.text = "0";
         this.actionDaytime.text = "Day";
         this.type = 0;
-        this.tile = tile;
+        this.tileObject = tileObject;
+        this.tile = tileObject.GetComponentInChildren<TileScript>().tile;
     }
 
     public void ReturnAction(
@@ -99,7 +103,11 @@ public class ActionScript : MonoBehaviour
         switch (type)
         {
             case 0:
-                //tile.explored
+                Debug.Log(tile.explored);
+                tile.explored += 25;
+                Debug.Log(tile.explored);
+                tileObject.GetComponentInChildren<TileScript>().FeatureHandler();
+                mapManager.GetComponentInChildren<MapManager>().UpdateCurrentTile(tileObject);
                 break;
             case 1:
                 break;

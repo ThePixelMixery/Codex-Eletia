@@ -17,6 +17,8 @@ public class MiniMapper : MonoBehaviour
 
     TimeScript clock;
 
+    public GameObject mapManager;
+
     public GameObject miniMapPanel;
 
     public GameObject blockedTile;
@@ -38,6 +40,8 @@ public class MiniMapper : MonoBehaviour
     List<Resource> actionsList = new List<Resource>();
 
     List<NPC> npcList = new List<NPC>();
+
+    GameObject tileObject;
 
     public GameObject[] navButtons = new GameObject[9];
 
@@ -82,10 +86,12 @@ public class MiniMapper : MonoBehaviour
                 else if (keeperTileX == k && keeperTileY == j)
                 {
                     miniMapTiles[4] = currentTiles[k, j];
+                    tileObject = currentTiles[k, j];
                     currentTile =
-                        currentTiles[k, j]
+                        tileObject
                             .GetComponentInChildren<TileScript>()
                             .tile;
+                    Debug.Log(currentTile.explored);
                 }
                 else if (keeperTileX + 1 == k && keeperTileY == j)
                 {
@@ -150,11 +156,13 @@ public class MiniMapper : MonoBehaviour
         }
 
         tileTitle.text = currentTile.locationName;
-        ActionList (currentTile);
+        ActionList (tileObject);
     }
 
-    void ActionList(Tile tile)
+    void ActionList(GameObject tileObject)
     {
+        Tile tile = tileObject.GetComponentInChildren<TileScript>().tile;
+        GameObject mapRef = mapManager;
         foreach (Transform child in ExploreActionList.transform)
         Destroy(child.gameObject);
 
@@ -167,14 +175,17 @@ public class MiniMapper : MonoBehaviour
                 Instantiate(exploreInstance, ExploreActionList.transform);
             ActionScript script =
                 actionPrefab.GetComponentInChildren<ActionScript>();
-
-            script.ExploreAction(tile.locationName, tile);
+            script.mapManager = mapRef;
+            script.ExploreAction(tile.locationName, tileObject);
         }
 
         foreach (Feature feature in tile.features)
         {
-            if (feature.occupants != null && feature.occupants.Count != 0 && feature.discovered == true)
-                npcList.Add(feature.occupants[0]);
+            if (
+                feature.occupants != null &&
+                feature.occupants.Count != 0 &&
+                feature.discovered == true
+            ) npcList.Add(feature.occupants[0]);
             if (feature.resources.Count != 0 && feature.discovered == true)
                 actionsList.Add(feature.resources[0]);
         }
@@ -184,6 +195,7 @@ public class MiniMapper : MonoBehaviour
                 Instantiate(actionInstance, ExploreActionList.transform);
             ActionScript script =
                 actionPrefab.GetComponentInChildren<ActionScript>();
+            script.mapManager = mapRef;
 
             script
                 .ReturnAction("Talk",
@@ -226,6 +238,8 @@ public class MiniMapper : MonoBehaviour
                 Instantiate(actionInstance, ExploreActionList.transform);
             ActionScript script =
                 actionPrefab.GetComponentInChildren<ActionScript>();
+            script.mapManager = mapRef;
+
             script
                 .ReturnAction(resource.action,
                 resource.resourceName,
