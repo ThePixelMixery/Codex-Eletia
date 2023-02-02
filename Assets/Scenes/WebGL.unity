@@ -564,7 +564,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saveObject: {fileID: 1184143802}
   clockObject: {fileID: 1914918691}
-  mapManager: {fileID: 0}
+  mapManager: {fileID: 936750708}
   miniMapPanel: {fileID: 250540620}
   blockedTile: {fileID: 2962992882202361934, guid: 46be911e39a21b50db39c9a7df52bef3, type: 3}
   tileSprite: {fileID: 21300000, guid: 3cc504dedfe2ef28aaf3f375f3c475bc, type: 3}
@@ -8429,111 +8429,944 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 21300000, guid: f520bf77ec45797f5938d48169efb3ab, type: 3}
-  testCurrentTiles:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  saveCurrentTiles:
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  - locationName: 
+    access: 0
+    x: 0
+    y: 0
+    type: 0
+    discovered: 0
+    tileColor: {r: 0, g: 0, b: 0, a: 0}
+    explored: 0
+    features: []
+  keeperCurrentState: 0
   keeperStateX: 0
   keeperStateY: 0
   keeperTileX: 0
@@ -11848,6 +12681,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _GameData:
     keeper:
+      state: 0
       stateX: 0
       stateY: 0
       tileX: 0

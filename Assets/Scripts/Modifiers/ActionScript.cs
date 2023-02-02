@@ -28,6 +28,7 @@ public class ActionScript : MonoBehaviour
     public GameObject mapManager;
 
     public GameObject tileObject;
+
     public Tile tile;
 
     int type;
@@ -48,7 +49,6 @@ public class ActionScript : MonoBehaviour
         this.actionDaytime.text = "Day";
         this.type = 0;
         this.tileObject = tileObject;
-        this.tile = tileObject.GetComponentInChildren<TileScript>().tile;
     }
 
     public void ReturnAction(
@@ -103,11 +103,12 @@ public class ActionScript : MonoBehaviour
         switch (type)
         {
             case 0:
-                Debug.Log(tile.explored);
-                tile.explored += 25;
-                Debug.Log(tile.explored);
-                tileObject.GetComponentInChildren<TileScript>().FeatureHandler();
-                mapManager.GetComponentInChildren<MapManager>().UpdateCurrentTile(tileObject);
+                tileObject
+                    .GetComponentInChildren<TileScript>()
+                    .FeatureHandler(25);
+                mapManager
+                    .GetComponentInChildren<MapManager>()
+                    .UpdateCurrentTile(tileObject);
                 break;
             case 1:
                 break;

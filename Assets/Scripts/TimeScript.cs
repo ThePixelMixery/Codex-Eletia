@@ -24,9 +24,10 @@ public class TimeScript : MonoBehaviour
     void Start()
     {
         save = saveObject.GetComponentInChildren<SaveHandler>();
+        time = save._GameData.keeper.time;
     }
 
-    void displayTime()
+    void displayTime(int time)
     {
         switch (time)
         {
@@ -42,11 +43,6 @@ public class TimeScript : MonoBehaviour
             default:
                 break;
         }
-    }
-
-    public void LoadTime()
-    {
-        time = save._GameData.keeper.time;
     }
 
     public int TimeCheck()

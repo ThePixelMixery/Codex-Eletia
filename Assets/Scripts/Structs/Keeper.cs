@@ -13,6 +13,8 @@ public struct tool
 [System.Serializable]
 public struct Keeper
 {
+    public int state;
+    
     public int stateX;
 
     public int stateY;

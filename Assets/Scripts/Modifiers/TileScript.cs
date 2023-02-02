@@ -54,15 +54,31 @@ public class TileScript : MonoBehaviour
         tileTile.SetActive(tile.discovered);
     }
 
-    public void FeatureHandler()
-    {
+    public void FeatureHandler(int exploredAmount)
+    {   
+        Debug.Log("Before add on tile" + tile.explored);
+        tile.explored = tile.explored + exploredAmount;
+        Debug.Log("After add on tile" + tile.explored);
         if (tile.explored >= 100)
+        {
             tile.features[3].discovered = true;
+            Debug.Log("Feature 4 discovered!");
+        }
         else if (tile.explored >= 75)
+        {
             tile.features[2].discovered = true;
+            Debug.Log("Feature 3 discovered!");
+        }
         else if (tile.explored >= 50)
+        {
             tile.features[1].discovered = true;
-        else if (tile.explored >= 25) tile.features[0].discovered = true;
+            Debug.Log("Feature 2 discovered!");
+        }
+        else if (tile.explored >= 25)
+        {
+            tile.features[0].discovered = true;
+            Debug.Log("Feature 1 discovered!");
+        }
         for (int i = 0; i < 4; i++)
         {
             Features[i].SetActive(tile.features[i].discovered);

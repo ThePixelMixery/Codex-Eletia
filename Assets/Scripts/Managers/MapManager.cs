@@ -62,7 +62,7 @@ public class MapManager : MonoBehaviour
 
     public Sprite[] tileFeatures;
 
-    public GameObject[] testCurrentTiles = new GameObject[104];
+    public Tile[] saveCurrentTiles = new Tile[104];
 
     GameObject[,] currentTiles = new GameObject[13, 8];
 
@@ -72,7 +72,7 @@ public class MapManager : MonoBehaviour
 
     Tile currentTile;
 
-    int keeperCurrentState;
+    public int keeperCurrentState;
 
     public int keeperStateX;
 
@@ -109,7 +109,7 @@ public class MapManager : MonoBehaviour
         keeperStateX = stateX;
         keeperStateY = stateY;
         currentState = state;
-        save.KeeperLocationUpdate (tileX, tileY, stateX, stateY);
+        save.KeeperLocationUpdate (tileX, tileY, stateX, stateY, currentState.id);
         save.SaveFile();
         foreach (Tile tile in state.tiles)
         {
@@ -227,7 +227,10 @@ public class MapManager : MonoBehaviour
             );
             UpdateCurrentTiles(tilePrefab,
             tileScript.tile.x,
-            tileScript.tile.y);//, index);
+            tileScript.tile.y);
+            SaveCurrentTiles(tilePrefab,
+            tileScript.tile.x,
+            tileScript.tile.y, index);
             index++;
         }
     }
@@ -235,6 +238,11 @@ public class MapManager : MonoBehaviour
     void UpdateCurrentTiles(GameObject tile, int x, int y)
     {
         currentTiles[x, y] = tile;
+    }
+
+    void SaveCurrentTiles(GameObject tile, int x, int y, int index)
+    {
+        saveCurrentTiles[index] = tile.GetComponentInChildren<TileScript>().tile;
     }
 
     public void UpdateKeeperLocationX(int x)
@@ -255,16 +263,23 @@ public class MapManager : MonoBehaviour
 
     public void UpdateCurrentTile(GameObject newTile)
     {
-    TileScript newScript = newTile.GetComponentInChildren<TileScript>();
-    if (newScript.tile.x == currentTile.x && newScript.tile.y == currentTile.y) {currentTile = newScript.tile;
-    UpdateCurrentTiles(newTile, currentTile.x, currentTile.y);
-    UpdateLocalMap();
-    }
-    else Debug.LogError("NewTile is not equal to current tile");
+        TileScript newScript = newTile.GetComponentInChildren<TileScript>();
+        if (
+            newScript.tile.x == currentTile.x &&
+            newScript.tile.y == currentTile.y
+        )
+        {
+            currentTile = newScript.tile;
+            UpdateCurrentTiles(newTile, currentTile.x, currentTile.y);
+            UpdateLocalMap();
+        }
+        else
+            Debug.LogError("NewTile is not equal to current tile");
     }
 
     void UpdateLocalMap()
     {
+        int index = 0;
         foreach (GameObject tile in currentTiles)
         {
             TileScript script = tile.GetComponentInChildren<TileScript>();
@@ -274,8 +289,9 @@ public class MapManager : MonoBehaviour
             }
             else
                 script.UpdateTile(tileSprite);
+            SaveCurrentTiles (tile, script.tile.x, script.tile.y, index);
+        index++;
         }
-        Debug.Log("Local Map Update");
-        minimap.MiniMapUI (keeperTileX, keeperTileY, currentTiles, currentTile );
+        minimap.MiniMapUI (keeperTileX, keeperTileY, currentTiles, currentTile);
     }
 }

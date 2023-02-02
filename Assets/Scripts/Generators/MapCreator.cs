@@ -43,7 +43,7 @@ public class MapCreator : MonoBehaviour
             for (int k = 0; k < 4; k++)
             {
                 State newState =
-                    new State(k,
+                    new State(index,k,
                         j,
                         stateTypeArray[index],
                         StateNamer(stateTypeArray[index]),

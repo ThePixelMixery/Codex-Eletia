@@ -31,8 +31,7 @@ public class SaveHandler : MonoBehaviour
         clock = clockObject.GetComponentInChildren<TimeScript>();
         saveLocation = Application.persistentDataPath + "/Saves/GameData.json";
         _GameData.stateCoords = new State[16];
-        
-        
+
         if (System.IO.File.Exists(saveLocation))
         {
             Loader();
@@ -51,7 +50,16 @@ public class SaveHandler : MonoBehaviour
         _GameData.keeper.tileY = maps.keeperTileY;
         _GameData.keeper.stateX = maps.keeperStateX;
         _GameData.keeper.stateY = maps.keeperStateY;
+        _GameData.keeper.state = maps.keeperCurrentState;
         _GameData.keeper.time = clock.time;
+
+        int index = 0;
+        foreach (Tile tile in maps.saveCurrentTiles)
+        {
+            _GameData.stateCoords[_GameData.keeper.state].tiles[index] =
+                maps.saveCurrentTiles[index];
+            index++;
+        }
 
         saveJson = JsonUtility.ToJson(_GameData);
         System.IO.File.WriteAllText (saveLocation, saveJson);
@@ -103,7 +111,6 @@ public class SaveHandler : MonoBehaviour
     {
         saveJson = File.ReadAllText(saveLocation);
         _GameData = JsonUtility.FromJson<GameData>(saveJson);
-        clock.LoadTime();
         maps.LoadUI();
     }
 
@@ -121,15 +128,19 @@ public class SaveHandler : MonoBehaviour
         int tileX,
         int tileY,
         int stateX,
-        int stateY
+        int stateY,
+        int stateId
     )
     {
-        _GameData.keeper.tileX = tileX;
-        _GameData.keeper.tileX = tileY;
+        _GameData.keeper.state = stateId;
         _GameData.keeper.stateX = stateX;
         _GameData.keeper.stateX = stateY;
+        _GameData.keeper.tileX = tileX;
+        _GameData.keeper.tileX = tileY;
         Debug
-            .Log("Keeper dropped onto state: " +
+            .Log("Keeper dropped onto state: (ID: " +
+            stateId +
+            ")" +
             stateX +
             ", " +
             stateY +

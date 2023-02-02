@@ -7,6 +7,8 @@ using UnityEngine.UI;
 [System.Serializable]
 public struct State
 {
+    public int id;
+
     public int x;
 
     public int y;
@@ -25,6 +27,7 @@ public struct State
 
 
     public State(
+        int id,
         int x,
         int y,
         int type,
@@ -35,6 +38,7 @@ public struct State
         bool discovered
     )
     {
+        this.id =id;
         this.x = x;
         this.y = y;
         this.type = type;

@@ -91,7 +91,6 @@ public class MiniMapper : MonoBehaviour
                         tileObject
                             .GetComponentInChildren<TileScript>()
                             .tile;
-                    Debug.Log(currentTile.explored);
                 }
                 else if (keeperTileX + 1 == k && keeperTileY == j)
                 {
