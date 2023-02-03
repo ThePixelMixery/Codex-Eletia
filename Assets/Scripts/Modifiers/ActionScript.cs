@@ -31,9 +31,11 @@ public class ActionScript : MonoBehaviour
 
     public Tile tile;
 
+    public Button button;
+
     int type;
 
-    public Button button;
+    GameObject actionObject;
 
     void Start()
     {
@@ -62,7 +64,8 @@ public class ActionScript : MonoBehaviour
         int daytime,
         string details,
         string results,
-        bool skillOrObject
+        bool skillOrObject,
+        GameObject actionObject
     )
     {
         this.actionResource.text = resource + " for " + duration + " hours";
@@ -96,6 +99,7 @@ public class ActionScript : MonoBehaviour
         this.actionReturn.text = results;
         this.button.interactable = skillOrObject;
         this.type = 2;
+        this.actionObject = actionObject;
     }
 
     void ClickAction()
@@ -113,6 +117,7 @@ public class ActionScript : MonoBehaviour
             case 1:
                 break;
             case 2:
+                actionObject.SetActive(false);
                 break;
             default:
                 break;

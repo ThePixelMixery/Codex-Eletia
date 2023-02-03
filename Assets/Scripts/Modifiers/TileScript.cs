@@ -28,7 +28,7 @@ public class TileScript : MonoBehaviour
     ) //bool current,
     {
         tile = tempTile;
-
+        
         //if (tile.type > 0)
         tileTile.GetComponent<Image>().sprite = tempSprite;
         tileTile.GetComponent<Image>().color = tile.tileColor;
@@ -55,7 +55,7 @@ public class TileScript : MonoBehaviour
     }
 
     public void FeatureHandler(int exploredAmount)
-    {   
+    {
         Debug.Log("Before add on tile" + tile.explored);
         tile.explored = tile.explored + exploredAmount;
         Debug.Log("After add on tile" + tile.explored);

@@ -207,7 +207,8 @@ public class MiniMapper : MonoBehaviour
                 0,
                 null,
                 null,
-                true);
+                true,
+                actionPrefab);
         }
 
         foreach (Resource resource in actionsList)
@@ -250,12 +251,13 @@ public class MiniMapper : MonoBehaviour
                 resource.time,
                 reqsOutput,
                 outOutput,
+                /*
                 ActionChecker(resource.duration,
                 resource.staminaCost,
                 resource.tool,
                 resource.skill,
                 resource.time,
-                resource.requires));
+                resource.requires),*/ true, actionPrefab);
         }
     }
 

@@ -109,7 +109,12 @@ public class MapManager : MonoBehaviour
         keeperStateX = stateX;
         keeperStateY = stateY;
         currentState = state;
-        save.KeeperLocationUpdate (tileX, tileY, stateX, stateY, currentState.id);
+        save
+            .KeeperLocationUpdate(tileX,
+            tileY,
+            stateX,
+            stateY,
+            currentState.id);
         save.SaveFile();
         foreach (Tile tile in state.tiles)
         {
@@ -150,20 +155,18 @@ public class MapManager : MonoBehaviour
         keeperStateY = save._GameData.keeper.stateY;
         keeperTileX = save._GameData.keeper.tileX;
         keeperTileY = save._GameData.keeper.tileY;
-        foreach (State state in save._GameData.stateCoords)
+        keeperCurrentState = save._GameData.keeper.state;
+        currentState = save._GameData.stateCoords[keeperCurrentState];
+        int index = 0;
+        foreach (Tile tile in currentState.tiles)
         {
-            if (keeperStateX == state.x && keeperStateY == state.y)
-            {
-                foreach (Tile tile in state.tiles)
-                {
-                    if (keeperTileX == tile.x && keeperTileY == tile.y)
-                        currentTile = tile;
-                }
-                currentState = state;
-            }
+            if (keeperTileX == tile.x && keeperTileY == tile.y)
+                currentTile = tile;
+            saveCurrentTiles[index] = tile;
+            index++;
         }
         WorldMapUI();
-        LocalMapUI(currentState.tiles);
+        LocalMapUI (saveCurrentTiles);
         minimap.MiniMapUI (keeperTileX, keeperTileY, currentTiles, currentTile);
     }
 
@@ -230,7 +233,8 @@ public class MapManager : MonoBehaviour
             tileScript.tile.y);
             SaveCurrentTiles(tilePrefab,
             tileScript.tile.x,
-            tileScript.tile.y, index);
+            tileScript.tile.y,
+            index);
             index++;
         }
     }
@@ -242,7 +246,8 @@ public class MapManager : MonoBehaviour
 
     void SaveCurrentTiles(GameObject tile, int x, int y, int index)
     {
-        saveCurrentTiles[index] = tile.GetComponentInChildren<TileScript>().tile;
+        saveCurrentTiles[index] =
+            tile.GetComponentInChildren<TileScript>().tile;
     }
 
     public void UpdateKeeperLocationX(int x)
@@ -289,8 +294,8 @@ public class MapManager : MonoBehaviour
             }
             else
                 script.UpdateTile(tileSprite);
-            SaveCurrentTiles (tile, script.tile.x, script.tile.y, index);
-        index++;
+            SaveCurrentTiles(tile, script.tile.x, script.tile.y, index);
+            index++;
         }
         minimap.MiniMapUI (keeperTileX, keeperTileY, currentTiles, currentTile);
     }
