@@ -11,8 +11,4 @@ public class LootScript : MonoBehaviour
     public Button move;
     public Sprite fromLoot;
     public Sprite toLoot;
-    Item item;
-    List<Item> items = new List<Item>();
-    GameObject Source;
-    GameObject Invo;
 }

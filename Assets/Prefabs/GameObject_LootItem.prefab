@@ -402,7 +402,7 @@ GameObject:
   - component: {fileID: 7332407611588184459}
   - component: {fileID: 4081666979128528394}
   m_Layer: 0
-  m_Name: GameObject_Item
+  m_Name: GameObject_LootItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

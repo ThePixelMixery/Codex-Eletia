@@ -38,4 +38,7 @@ public struct Keeper
     public List<tool> tools;
 
     public int time;
+
+    public List<Item> inventory;
+    public int weightMax;
 }

@@ -17,8 +17,6 @@ public class MiniMapper : MonoBehaviour
 
     TimeScript clock;
 
-    public GameObject mapManager;
-
     public GameObject miniMapPanel;
 
     public GameObject blockedTile;
@@ -161,7 +159,6 @@ public class MiniMapper : MonoBehaviour
     void ActionList(GameObject tileObject)
     {
         Tile tile = tileObject.GetComponentInChildren<TileScript>().tile;
-        GameObject mapRef = mapManager;
         foreach (Transform child in ExploreActionList.transform)
         Destroy(child.gameObject);
 
@@ -174,7 +171,6 @@ public class MiniMapper : MonoBehaviour
                 Instantiate(exploreInstance, ExploreActionList.transform);
             ActionScript script =
                 actionPrefab.GetComponentInChildren<ActionScript>();
-            script.mapManager = mapRef;
             script.ExploreAction(tile.locationName, tileObject);
         }
 
@@ -194,8 +190,6 @@ public class MiniMapper : MonoBehaviour
                 Instantiate(actionInstance, ExploreActionList.transform);
             ActionScript script =
                 actionPrefab.GetComponentInChildren<ActionScript>();
-            script.mapManager = mapRef;
-
             script
                 .ReturnAction("Talk",
                 npc.flavourText,
@@ -238,8 +232,6 @@ public class MiniMapper : MonoBehaviour
                 Instantiate(actionInstance, ExploreActionList.transform);
             ActionScript script =
                 actionPrefab.GetComponentInChildren<ActionScript>();
-            script.mapManager = mapRef;
-
             script
                 .ReturnAction(resource.action,
                 resource.resourceName,

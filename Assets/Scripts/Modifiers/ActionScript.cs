@@ -25,11 +25,11 @@ public class ActionScript : MonoBehaviour
 
     public TextMeshProUGUI actionReturn;
 
-    public GameObject mapManager;
+    MapManager maps;
+
+    LootMenu loots;
 
     public GameObject tileObject;
-
-    public Tile tile;
 
     public Button button;
 
@@ -40,6 +40,14 @@ public class ActionScript : MonoBehaviour
     void Start()
     {
         button.onClick.AddListener (ClickAction);
+        maps =
+            GameObject
+                .Find("GameObject_MapManager")
+                .GetComponent<MapManager>();
+        loots =
+            GameObject
+                .Find("GameObject_LootMenu")
+                .GetComponent<LootMenu>();
     }
 
     public void ExploreAction(string locationName, GameObject tileObject)
@@ -110,13 +118,12 @@ public class ActionScript : MonoBehaviour
                 tileObject
                     .GetComponentInChildren<TileScript>()
                     .FeatureHandler(25);
-                mapManager
-                    .GetComponentInChildren<MapManager>()
-                    .UpdateCurrentTile(tileObject);
+                maps.UpdateCurrentTile(tileObject);
                 break;
             case 1:
                 break;
             case 2:
+                //loots.ToKeeper();
                 actionObject.SetActive(false);
                 break;
             default:
