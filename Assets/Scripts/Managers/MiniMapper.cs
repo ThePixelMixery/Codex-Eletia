@@ -201,6 +201,7 @@ public class MiniMapper : MonoBehaviour
                 0,
                 null,
                 null,
+                null,
                 true,
                 actionPrefab);
         }
@@ -243,6 +244,7 @@ public class MiniMapper : MonoBehaviour
                 resource.time,
                 reqsOutput,
                 outOutput,
+                resource.outcomes, //resource.outcomes,
                 /*
                 ActionChecker(resource.duration,
                 resource.staminaCost,

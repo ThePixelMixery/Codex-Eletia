@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class LootMenu : MonoBehaviour
 {
+    public GameObject lootMenu;
+
     public GameObject saveObject;
 
     SaveHandler save;
@@ -24,7 +26,13 @@ public class LootMenu : MonoBehaviour
 
     public TextMeshProUGUI toWeight;
 
+    public GameObject nothing;
+
     public Button button;
+
+    public Sprite moveTo;
+
+    public Sprite moveFrom;
 
     Item item;
 
@@ -39,25 +47,47 @@ public class LootMenu : MonoBehaviour
     void Start()
     {
         save = saveObject.GetComponentInChildren<SaveHandler>();
-            }
+        lootMenu.SetActive(false);
+    }
 
-    public void ToKeeper(List<Item> items, string sourceName)
+    public void ToKeeper(List<outcome> outcomes, string sourceName)
     {
-        //toStorage (keeper)
+        ClearLists();
+        lootMenu.SetActive(true);
+
+        //to Storage (keeper)
         toStorage = save._GameData.keeper.inventory;
         toText.text = "Keeper";
         float maxToStorageWeight = save._GameData.keeper.weightMax;
-        float toStorageWeight = CalculateWeight(fromStorage);
+        float toStorageWeight = CalculateWeight(toStorage);
         toWeight.text = toStorageWeight + "/" + maxToStorageWeight;
         CheckWeight(maxToStorageWeight, toStorageWeight, true);
+        PopulateList(toStorage, false);
 
         //from storage (resource)
-        fromStorage = items;
         fromText.text = sourceName;
-        float maxFromStorageWeight = save._GameData.keeper.weightMax;
-        float fromStorageWeight = CalculateWeight(fromStorage);
-        fromWeight.text = toStorageWeight + "/" + maxToStorageWeight;
-        CheckWeight(maxFromStorageWeight, fromStorageWeight, true);
+        float maxFromStorageWeight = 100;
+        List<Item> result = OutcomeCalculator(outcomes);
+        if (result.Count == 0)
+            nothing.SetActive(true);
+        else
+        {
+            nothing.SetActive(false);
+            float fromStorageWeight = CalculateWeight(result);
+            fromWeight.text = toStorageWeight + "/" + maxToStorageWeight;
+            CheckWeight(maxFromStorageWeight, fromStorageWeight, true);
+            PopulateList(fromStorage, true);
+        }
+    }
+
+    void ClearLists()
+    {
+        foreach (Transform child in sourceObject.transform)
+        {
+            if (child.gameObject.name != "Text_Nothing") Destroy(child.gameObject);
+        }
+        foreach (Transform child in invoObject.transform)
+        Destroy(child.gameObject);
     }
 
     float CalculateWeight(List<Item> toWeigh)
@@ -68,6 +98,25 @@ public class LootMenu : MonoBehaviour
             weight += item.weight;
         }
         return weight;
+    }
+
+    List<Item> OutcomeCalculator(List<outcome> outcomes)
+    {
+        List<Item> results = new List<Item>();
+        foreach (outcome outcome in outcomes)
+        {
+            int amount = 0;
+            double rand = Random.Range(1, outcome.chance);
+            if (rand <= 1)
+            {
+                amount = Random.Range(outcome.min, outcome.max);
+            }
+            for (int i = 0; i < amount; i++)
+            {
+                results.Add(outcome.item);
+            }
+        }
+        return results;
     }
 
     void CheckWeight(float maxWeight, float compareWeight, bool toStorage)
@@ -87,6 +136,32 @@ public class LootMenu : MonoBehaviour
                 toWeight.color = new Color(1, 1, 1, 1);
             else
                 fromWeight.color = new Color(1, 1, 1, 1);
+        }
+    }
+
+    void PopulateList(List<Item> items, bool from)
+    {
+        if (from)
+        {
+            foreach (Item item in items)
+            {
+                GameObject lootItem =
+                    Instantiate(lootInstance, sourceObject.transform);
+                LootScript script =
+                    lootItem.GetComponentInChildren<LootScript>();
+                script.CreateLoot(item.itemName, item.weight, moveTo);
+            }
+        }
+        else
+        {
+            foreach (Item item in items)
+            {
+                GameObject lootItem =
+                    Instantiate(lootInstance, sourceObject.transform);
+                LootScript script =
+                    lootItem.GetComponentInChildren<LootScript>();
+                script.CreateLoot(item.itemName, item.weight, moveTo);
+            }
         }
     }
 }

@@ -25,9 +25,14 @@ public class ActionScript : MonoBehaviour
 
     public TextMeshProUGUI actionReturn;
 
+    List<Item> items;
+    List<outcome> outcome;
+    
     MapManager maps;
 
     LootMenu loots;
+
+    string resourceName;
 
     public GameObject tileObject;
 
@@ -72,11 +77,13 @@ public class ActionScript : MonoBehaviour
         int daytime,
         string details,
         string results,
+        List<outcome> outcome,
         bool skillOrObject,
         GameObject actionObject
     )
     {
-        this.actionResource.text = resource + " for " + duration + " hours";
+        resourceName = resource;
+        this.actionResource.text = resourceName + " for " + duration + " hours";
         this.actionButton.text = button;
         this.actionFlavour.text = flavour;
         this.actionStamina.text = stamina.ToString();
@@ -105,6 +112,7 @@ public class ActionScript : MonoBehaviour
         this.actionDaytime.text = timeOfDay;
         this.actionDetail.text = details;
         this.actionReturn.text = results;
+        this.outcome = outcome;
         this.button.interactable = skillOrObject;
         this.type = 2;
         this.actionObject = actionObject;
@@ -123,7 +131,7 @@ public class ActionScript : MonoBehaviour
             case 1:
                 break;
             case 2:
-                //loots.ToKeeper();
+                loots.ToKeeper(outcome, resourceName);
                 actionObject.SetActive(false);
                 break;
             default:

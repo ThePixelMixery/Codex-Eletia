@@ -19,7 +19,7 @@ public struct outcome
 
     public int max;
 
-    public double chance;
+    public float chance;
 }
 
 [System.Serializable]
