@@ -31,6 +31,8 @@ public class SaveHandler : MonoBehaviour
         clock = clockObject.GetComponentInChildren<TimeScript>();
         saveLocation = Application.persistentDataPath + "/Saves/GameData.json";
         _GameData.stateCoords = new State[16];
+        _GameData.keeper = new Keeper();
+        _GameData.quests = new QuestData();
 
         if (System.IO.File.Exists(saveLocation))
         {
@@ -46,20 +48,14 @@ public class SaveHandler : MonoBehaviour
 
     public void SaveFile()
     {
+        _GameData.stateCoords = maps.tempMap;
         _GameData.keeper.tileX = maps.keeperTileX;
         _GameData.keeper.tileY = maps.keeperTileY;
+        _GameData.keeper.tile = maps.keeperTile;
         _GameData.keeper.stateX = maps.keeperStateX;
         _GameData.keeper.stateY = maps.keeperStateY;
-        _GameData.keeper.state = maps.keeperCurrentState;
+        _GameData.keeper.state = maps.keeperState;
         _GameData.keeper.time = clock.time;
-
-        int index = 0;
-        foreach (Tile tile in maps.saveCurrentTiles)
-        {
-            _GameData.stateCoords[_GameData.keeper.state].tiles[index] =
-                maps.saveCurrentTiles[index];
-            index++;
-        }
 
         saveJson = JsonUtility.ToJson(_GameData);
         System.IO.File.WriteAllText (saveLocation, saveJson);
@@ -68,13 +64,14 @@ public class SaveHandler : MonoBehaviour
 
     public void DeleteFiles()
     {
+        Array.Clear(_GameData.stateCoords, 0, 16);
         _GameData.keeper.time = 7;
-
         _GameData.keeper.tileX = 0;
         _GameData.keeper.tileY = 0;
 
         maps.keeperTileX = 0;
         maps.keeperTileY = 0;
+
         if (System.IO.File.Exists(saveLocation))
         {
             File.Delete (saveLocation);
@@ -111,7 +108,15 @@ public class SaveHandler : MonoBehaviour
     {
         saveJson = File.ReadAllText(saveLocation);
         _GameData = JsonUtility.FromJson<GameData>(saveJson);
-        maps.LoadUI();
+
+        maps
+            .LoadSavedMap(_GameData.stateCoords,
+            _GameData.keeper.state,
+            _GameData.keeper.stateX,
+            _GameData.keeper.stateY,
+            _GameData.keeper.tile,
+            _GameData.keeper.tileX,
+            _GameData.keeper.tileY);
     }
 
     public void MapChecker()
@@ -127,6 +132,7 @@ public class SaveHandler : MonoBehaviour
     public void KeeperLocationUpdate(
         int tileX,
         int tileY,
+        int tileId,
         int stateX,
         int stateY,
         int stateId
@@ -135,6 +141,7 @@ public class SaveHandler : MonoBehaviour
         _GameData.keeper.state = stateId;
         _GameData.keeper.stateX = stateX;
         _GameData.keeper.stateX = stateY;
+        _GameData.keeper.state = tileId;
         _GameData.keeper.tileX = tileX;
         _GameData.keeper.tileX = tileY;
         Debug

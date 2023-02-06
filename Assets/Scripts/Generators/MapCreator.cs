@@ -43,13 +43,15 @@ public class MapCreator : MonoBehaviour
             for (int k = 0; k < 4; k++)
             {
                 State newState =
-                    new State(index,k,
+                    new State(index,
+                        k,
                         j,
                         stateTypeArray[index],
                         StateNamer(stateTypeArray[index]),
                         StateFancy(stateTypeArray[index]),
                         null,
-                        GenerateTiles(stateTypeArray[index]),false);
+                        GenerateTiles(stateTypeArray[index]),
+                        false);
 
                 handler._GameData.stateCoords[index] = newState;
                 index++;
@@ -64,14 +66,21 @@ public class MapCreator : MonoBehaviour
         Alerter.DragonSelected();
         int tileX = UnityEngine.Random.Range(0, 12);
         int tileY = UnityEngine.Random.Range(0, 7);
-
-        for ( int i=0; i< handler._GameData.stateCoords.Length; i++)
+        int tile = (tileY * 13) + tileX;
+        for (int i = 0; i < handler._GameData.stateCoords.Length; i++)
         {
             if (select == handler._GameData.stateCoords[i].type)
             {
                 State stateSelected = handler._GameData.stateCoords[i];
+                Tile tileSelected = handler._GameData.stateCoords[i].tiles[tile];
                 stateSelected.discovered = true;
-                MapManager.MapMade(tileX, tileY, stateSelected.x, stateSelected.y, stateSelected);
+                MapManager
+                    .MapMade(tileX,
+                    tileY,
+                    tileSelected,
+                    stateSelected.x,
+                    stateSelected.y,
+                    stateSelected);
             }
         }
         handler.SaveFile();
@@ -279,7 +288,7 @@ public class MapCreator : MonoBehaviour
                 assignedType = tileTypes[type];
             else
                 assignedType = 13;
-
+            tiles[i].id = i;
             tiles[i].type = assignedType;
             tiles[i].tileColor = MapManager.tileColours[assignedType];
             if (assignedType == 14 || assignedType == 15)
@@ -302,7 +311,7 @@ public class MapCreator : MonoBehaviour
 
         int[] featureTypeArray = new int[4];
 
-        for (int i = 0; i < featureTypeArray.Length; i++)
+        for (int i = 0; i < 4; i++)
         {
             if (UnityEngine.Random.Range(0, 1) == 1)
                 featureTypeArray[i] = UnityEngine.Random.Range(1, 7);
@@ -318,8 +327,10 @@ public class MapCreator : MonoBehaviour
         for (int i = 0; i < featureTypeArray.Length; i++)
         {
             resources.Add(resourceData.GetResource(100));
-            features[i] = new Feature(3, "Trapping ground", null,resources,false);
+            features[i] =
+                new Feature(3, "Trapping ground", null, resources, false);
         }
+
         /*for (int i = 0; i < featureTypeArray.Length; i++)
         {
             switch (featureTypeArray[i])

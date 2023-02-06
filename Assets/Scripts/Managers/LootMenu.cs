@@ -34,15 +34,13 @@ public class LootMenu : MonoBehaviour
 
     public Sprite moveFrom;
 
-    Item item;
-
     bool destination;
 
     bool overMax;
 
-    List<Item> fromStorage = new List<Item>();
+    List<Stack> fromStorage = new List<Stack>();
 
-    List<Item> toStorage = new List<Item>();
+    List<Stack> toStorage = new List<Stack>();
 
     void Start()
     {
@@ -62,59 +60,65 @@ public class LootMenu : MonoBehaviour
         float toStorageWeight = CalculateWeight(toStorage);
         toWeight.text = toStorageWeight + "/" + maxToStorageWeight;
         CheckWeight(maxToStorageWeight, toStorageWeight, true);
-        PopulateList(toStorage, false);
+        PopulateList (toStorage, invoObject);
 
         //from storage (resource)
         fromText.text = sourceName;
         float maxFromStorageWeight = 100;
-        List<Item> result = OutcomeCalculator(outcomes);
-        if (result.Count == 0)
+        List<Stack> fromStorage = OutcomeCalculator(outcomes);
+        if (fromStorage.Count == 0)
             nothing.SetActive(true);
         else
         {
             nothing.SetActive(false);
-            float fromStorageWeight = CalculateWeight(result);
-            fromWeight.text = toStorageWeight + "/" + maxToStorageWeight;
+            float fromStorageWeight = CalculateWeight(fromStorage);
+            fromWeight.text = fromStorageWeight + "/100";
             CheckWeight(maxFromStorageWeight, fromStorageWeight, true);
-            PopulateList(fromStorage, true);
+            PopulateList (fromStorage, sourceObject);
         }
     }
 
     void ClearLists()
     {
         foreach (Transform child in sourceObject.transform)
-        {
-            if (child.gameObject.name != "Text_Nothing") Destroy(child.gameObject);
-        }
+        Destroy(child.gameObject);
         foreach (Transform child in invoObject.transform)
         Destroy(child.gameObject);
     }
 
-    float CalculateWeight(List<Item> toWeigh)
+    float CalculateWeight(List<Stack> stacks)
     {
         float weight = 0;
-        foreach (Item item in toWeigh)
+        List<Item> weighStack = new List<Item>();
+        for (int i = 0; i < weighStack.Count; i++)
+        {
+            for (int j = 0; j < stacks[i].count; j++)
+            {
+                weighStack.Add(stacks[i].item);
+            }
+        }
+        foreach (Item item in weighStack)
         {
             weight += item.weight;
         }
         return weight;
     }
 
-    List<Item> OutcomeCalculator(List<outcome> outcomes)
+    List<Stack> OutcomeCalculator(List<outcome> outcomes)
     {
-        List<Item> results = new List<Item>();
+        List<Stack> results = new List<Stack>();
+        Item outcomeItem;
         foreach (outcome outcome in outcomes)
         {
             int amount = 0;
-            double rand = Random.Range(1, outcome.chance);
+            double rand = Random.Range(0, 1);
             if (rand <= 1)
             {
                 amount = Random.Range(outcome.min, outcome.max);
             }
-            for (int i = 0; i < amount; i++)
-            {
-                results.Add(outcome.item);
-            }
+            outcomeItem = outcome.item;
+            Stack loot = new Stack(amount, outcomeItem);
+            results.Add (loot);
         }
         return results;
     }
@@ -139,29 +143,34 @@ public class LootMenu : MonoBehaviour
         }
     }
 
-    void PopulateList(List<Item> items, bool from)
+    void PopulateList(List<Stack> stacks, GameObject listObject)
     {
-        if (from)
+        Sprite moveSprite;
+        bool source;
+        if (listObject == sourceObject)
         {
-            foreach (Item item in items)
-            {
-                GameObject lootItem =
-                    Instantiate(lootInstance, sourceObject.transform);
-                LootScript script =
-                    lootItem.GetComponentInChildren<LootScript>();
-                script.CreateLoot(item.itemName, item.weight, moveTo);
-            }
+            moveSprite = moveTo;
+            source = true;
         }
         else
         {
-            foreach (Item item in items)
-            {
-                GameObject lootItem =
-                    Instantiate(lootInstance, sourceObject.transform);
-                LootScript script =
-                    lootItem.GetComponentInChildren<LootScript>();
-                script.CreateLoot(item.itemName, item.weight, moveTo);
-            }
+            moveSprite = moveFrom;
+            source = false;
         }
+        if (stacks == null)
+            Debug.LogError("No stacks to display");
+        else
+            foreach (Stack stack in stacks)
+            {
+                GameObject lootStack =
+                    Instantiate(lootInstance, listObject.transform);
+                LootScript script =
+                    lootStack.GetComponentInChildren<LootScript>();
+                script.CreateLoot (stack, moveSprite, source);
+            }
+    }
+
+    public void AddToList()
+    {
     }
 }

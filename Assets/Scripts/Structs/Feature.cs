@@ -25,8 +25,8 @@ public struct Feature
     {
         this.type = type;
         this.featureName = featureName;
+        this.discovered = discovered;
         this.occupants = occupants;
         this.resources = resources;
-        this.discovered = discovered;
     }
 }

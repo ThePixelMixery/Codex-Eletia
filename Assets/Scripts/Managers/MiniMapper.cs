@@ -41,6 +41,8 @@ public class MiniMapper : MonoBehaviour
 
     GameObject tileObject;
 
+    int currentState;
+
     public GameObject[] navButtons = new GameObject[9];
 
     void Start()
@@ -54,7 +56,8 @@ public class MiniMapper : MonoBehaviour
         int keeperTileX,
         int keeperTileY,
         GameObject[,] currentTiles,
-        Tile currentTile
+        int currentTile,
+        int currentState
     )
     {
         foreach (Transform child in miniMapPanel.transform)
@@ -86,9 +89,7 @@ public class MiniMapper : MonoBehaviour
                     miniMapTiles[4] = currentTiles[k, j];
                     tileObject = currentTiles[k, j];
                     currentTile =
-                        tileObject
-                            .GetComponentInChildren<TileScript>()
-                            .tile;
+                        tileObject.GetComponentInChildren<TileScript>().tile.id;
                 }
                 else if (keeperTileX + 1 == k && keeperTileY == j)
                 {
@@ -152,7 +153,7 @@ public class MiniMapper : MonoBehaviour
                     false;
         }
 
-        tileTitle.text = currentTile.locationName;
+        tileTitle.text = save._GameData.stateCoords[currentState].tiles[currentTile].locationName;
         ActionList (tileObject);
     }
 
@@ -173,7 +174,6 @@ public class MiniMapper : MonoBehaviour
                 actionPrefab.GetComponentInChildren<ActionScript>();
             script.ExploreAction(tile.locationName, tileObject);
         }
-
         foreach (Feature feature in tile.features)
         {
             if (
@@ -251,7 +251,9 @@ public class MiniMapper : MonoBehaviour
                 resource.tool,
                 resource.skill,
                 resource.time,
-                resource.requires),*/ true, actionPrefab);
+                resource.requires),*/
+                true,
+                actionPrefab);
         }
     }
 

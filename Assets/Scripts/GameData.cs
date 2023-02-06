@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class GameData
+public struct GameData
 {
-    public Keeper keeper = new Keeper();
+    public Keeper keeper;
 
     public State[] stateCoords;
 
-    public QuestData quests = new QuestData();
+    public QuestData quests;
 }

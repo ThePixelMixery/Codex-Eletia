@@ -8,6 +8,8 @@ public struct Tile
 {
     public string locationName;
 
+    public int id;
+    
     public int access;
 
     public int x;

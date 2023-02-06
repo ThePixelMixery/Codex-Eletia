@@ -38,8 +38,6 @@ public class MapManager : MonoBehaviour
 
     public GameObject StatePosition;
 
-    public Color[] tileColours = new Color[16];
-
     /* colour ref
         new Color(1, 0.5f, 0.5f, 1); //fire
         new Color(0.5f, 1, 1, 1), //water
@@ -57,73 +55,100 @@ public class MapManager : MonoBehaviour
         new Color(1, 1, 1, 1), //plain
         new Color(0, 0.25f, 0.5f, 1), //ocean
         new Color(0.5f, 0.25f, 0, 1) //mountain
-        */
+    */
+    public Color[] tileColours = new Color[16];
+
     public Sprite[] stateSprites;
 
     public Sprite[] tileFeatures;
 
-    public Tile[] saveCurrentTiles = new Tile[104];
+    public State[] tempMap;
 
-    GameObject[,] currentTiles = new GameObject[13, 8];
+    GameObject[] tiles1d = new GameObject[104];
+
+    GameObject[,] tiles2d = new GameObject[13, 8];
 
     GameObject[] panels;
 
-    State currentState;
-
-    Tile currentTile;
-
-    public int keeperCurrentState;
+    public int keeperState;
 
     public int keeperStateX;
 
     public int keeperStateY;
 
+    public int keeperTile;
+
     public int keeperTileX;
 
     public int keeperTileY;
 
+    //shorthands
     void Start()
     {
         save = saveObject.GetComponentInChildren<SaveHandler>();
         minimap = miniMapper.GetComponentInChildren<MiniMapper>();
-        keeperStateX = save._GameData.keeper.stateX;
-        keeperStateY = save._GameData.keeper.stateY;
-        keeperTileX = save._GameData.keeper.tileX;
-        keeperTileY = save._GameData.keeper.tileY;
     }
 
+    //load map from save to local
+    public void LoadSavedMap(
+        State[] loadSave,
+        int keeperState,
+        int keeperStateX,
+        int keeperStateY,
+        int keeperTile,
+        int keeperTileX,
+        int keeperTileY
+    )
+    {
+        tempMap = loadSave;
+        keeperState = keeperState;
+        keeperStateX = keeperStateX;
+        keeperStateY = keeperStateY;
+        keeperTile = keeperTile;
+        keeperTileX = keeperTileX;
+        keeperTileY = keeperTileY;
+        LoadUI();
+    }
+
+    //* move to Save File
     public void MapMade(
         int tileX,
         int tileY,
+        Tile tile,
         int stateX,
         int stateY,
         State state
     )
     {
+        //Send starter event to tracker
         EventTracker
             .NewEvent(0,
             "You have discovered a giant egg in your home nation of " +
             state.stateName);
+
+        //update current class based on new map
         keeperTileX = tileX;
         keeperTileY = tileY;
+        keeperTile = tile.id;
         keeperStateX = stateX;
         keeperStateY = stateY;
-        currentState = state;
+        keeperState = state.id;
+
+        // update keeper location in save and save
         save
             .KeeperLocationUpdate(tileX,
             tileY,
+            tile.id,
             stateX,
             stateY,
-            currentState.id);
+            state.id);
         save.SaveFile();
-        foreach (Tile tile in state.tiles)
-        {
-            if (tile.x == keeperTileX && tile.y == keeperTileY)
-                currentTile = tile;
-        }
+
+        //Loads UI
         LoadUI();
     }
 
+    //Delete all map objects
     public void Reset()
     {
         foreach (Transform child in worldMapList.transform)
@@ -140,6 +165,7 @@ public class MapManager : MonoBehaviour
         }
     }
 
+    //Changes main area based on top nav buttons
     public void CloseMenus()
     {
         panels = GameObject.FindGameObjectsWithTag("MainPanel");
@@ -149,44 +175,41 @@ public class MapManager : MonoBehaviour
         }
     }
 
+    //loads UI based on current information
     public void LoadUI()
     {
-        keeperStateX = save._GameData.keeper.stateX;
-        keeperStateY = save._GameData.keeper.stateY;
-        keeperTileX = save._GameData.keeper.tileX;
-        keeperTileY = save._GameData.keeper.tileY;
-        keeperCurrentState = save._GameData.keeper.state;
-        currentState = save._GameData.stateCoords[keeperCurrentState];
-        int index = 0;
-        foreach (Tile tile in currentState.tiles)
-        {
-            if (keeperTileX == tile.x && keeperTileY == tile.y)
-                currentTile = tile;
-            saveCurrentTiles[index] = tile;
-            index++;
-        }
         WorldMapUI();
-        LocalMapUI (saveCurrentTiles);
-        minimap.MiniMapUI (keeperTileX, keeperTileY, currentTiles, currentTile);
+        LocalMapUI(tempMap[keeperState].tiles);
     }
 
+    //updates minimap from explore action
     public void ExploreButton()
     {
-        minimap.MiniMapUI (keeperTileX, keeperTileY, currentTiles, currentTile);
+        minimap.MiniMapUI (
+            keeperTileX,
+            keeperTileY,
+            tiles2d,
+            keeperTile,
+            keeperState
+        );
     }
 
+    //Map > World Object generation
     void WorldMapUI()
     {
-        foreach (State state in save._GameData.stateCoords)
+        //creates state in state list > creates state tile
+        foreach (State state in tempMap)
         {
             GameObject statePrefab =
                 Instantiate(stateInstance, worldMapList.transform);
             StateScript prefabScript =
                 statePrefab.GetComponentInChildren<StateScript>();
             State createState = state;
+
+            //sets current state
             if (state.x == keeperStateX && state.y == keeperStateY)
             {
-                currentState = state;
+                keeperState = state.id;
                 StatePosition = statePrefab;
             }
             Sprite tempSprite = stateSprites[state.type];
@@ -195,8 +218,10 @@ public class MapManager : MonoBehaviour
         }
     }
 
+    // 1d array generation
     void LocalMapUI(Tile[] tiles)
     {
+        //Creates tile object for local map
         int index = 0;
         foreach (Tile tile in tiles)
         {
@@ -205,6 +230,8 @@ public class MapManager : MonoBehaviour
             Sprite tempSprite = tileSprite;
             TileScript tileScript =
                 tilePrefab.GetComponentInChildren<TileScript>();
+
+            //differentiates and updates keeper location
             if (tile.x == keeperTileX && tile.y == keeperTileY)
             {
                 TilePosition = tilePrefab;
@@ -228,75 +255,89 @@ public class MapManager : MonoBehaviour
                 featureSprite3,
                 featureSprite4
             );
-            UpdateCurrentTiles(tilePrefab,
-            tileScript.tile.x,
-            tileScript.tile.y);
-            SaveCurrentTiles(tilePrefab,
-            tileScript.tile.x,
-            tileScript.tile.y,
-            index);
+
+            //* Updates 2d tiles based on generated objects
+            Update2dTiles(tilePrefab, tileScript.tile.x, tileScript.tile.y);
+
+            //* Updates 2d tiles based on generated objects
+            Update1dTiles (tilePrefab, index);
             index++;
         }
     }
 
-    void UpdateCurrentTiles(GameObject tile, int x, int y)
+    // updates current tile array (2d)
+    void Update2dTiles(GameObject tile, int x, int y)
     {
-        currentTiles[x, y] = tile;
+        tiles2d[x, y] = tile;
     }
 
-    void SaveCurrentTiles(GameObject tile, int x, int y, int index)
+    // updates current tile array (1d)
+    void Update1dTiles(GameObject tile, int index)
     {
-        saveCurrentTiles[index] =
-            tile.GetComponentInChildren<TileScript>().tile;
+        tiles1d[index] = tile;
     }
 
+    // Update keeperLocation Horizontal from nav buttons
     public void UpdateKeeperLocationX(int x)
     {
         if (keeperTileX + x <= 12 && keeperTileX + x >= 0)
         {
             keeperTileX += x;
         }
+        UpdateLocalMap();
     }
 
+    // Update keeperLocation Vertical from nav buttons
     public void UpdateKeeperLocationY(int y)
     {
         if (keeperTileY + y <= 7 && keeperTileY + y >= 0)
         {
             keeperTileY += y;
         }
+        UpdateLocalMap();
     }
 
+    // Update the tile the keeper is on
     public void UpdateCurrentTile(GameObject newTile)
     {
-        TileScript newScript = newTile.GetComponentInChildren<TileScript>();
-        if (
-            newScript.tile.x == currentTile.x &&
-            newScript.tile.y == currentTile.y
-        )
+        Tile newTileTile = newTile.GetComponentInChildren<TileScript>().tile;
+        if (newTileTile.x == keeperTileX && newTileTile.y == keeperTileY)
         {
-            currentTile = newScript.tile;
-            UpdateCurrentTiles(newTile, currentTile.x, currentTile.y);
+            keeperTile = newTileTile.id;
+            tempMap[keeperState].tiles[keeperTile] = newTileTile;
+            tiles1d[keeperTile] = newTile;
+            Update2dTiles(newTile, newTileTile.x, newTileTile.y);
             UpdateLocalMap();
         }
         else
             Debug.LogError("NewTile is not equal to current tile");
     }
 
+    //change local map game objects
     void UpdateLocalMap()
     {
         int index = 0;
-        foreach (GameObject tile in currentTiles)
+
+        //change differentiate keeper tile and update save tiles
+        foreach (GameObject tile in tiles1d)
         {
             TileScript script = tile.GetComponentInChildren<TileScript>();
             if (script.tile.x == keeperTileX && script.tile.y == keeperTileY)
             {
                 script.UpdateTile (keeperSprite);
+                keeperTile = script.tile.id;
             }
             else
                 script.UpdateTile(tileSprite);
-            SaveCurrentTiles(tile, script.tile.x, script.tile.y, index);
+            Update2dTiles(tile, script.tile.x, script.tile.y);
             index++;
         }
-        minimap.MiniMapUI (keeperTileX, keeperTileY, currentTiles, currentTile);
+        minimap.MiniMapUI (
+            keeperTileX,
+            keeperTileY,
+            tiles2d,
+            keeperTile,
+            keeperState
+        );
     }
 }

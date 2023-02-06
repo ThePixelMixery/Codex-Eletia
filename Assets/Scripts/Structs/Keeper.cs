@@ -14,10 +14,12 @@ public struct tool
 public struct Keeper
 {
     public int state;
-    
+
     public int stateX;
 
     public int stateY;
+
+    public int tile;
 
     public int tileX;
 
@@ -39,6 +41,7 @@ public struct Keeper
 
     public int time;
 
-    public List<Item> inventory;
+    public List<Stack> inventory;
+
     public int weightMax;
 }
