@@ -23,6 +23,7 @@ public class MapCreator : MonoBehaviour
 
     ResourceDatabase resourceData;
 
+    //creates the states, the base of the map
     public void MapBase()
     {
         resourceData =
