@@ -92,21 +92,22 @@ public class MapManager : MonoBehaviour
     //load map from save to local
     public void LoadSavedMap(
         State[] loadSave,
-        int keeperState,
-        int keeperStateX,
-        int keeperStateY,
-        int keeperTile,
-        int keeperTileX,
-        int keeperTileY
+        int KeeperState,
+        int KeeperStateX,
+        int KeeperStateY,
+        int KeeperTile,
+        int KeeperTileX,
+        int KeeperTileY
     )
     {
+
         tempMap = loadSave;
-        keeperState = keeperState;
-        keeperStateX = keeperStateX;
-        keeperStateY = keeperStateY;
-        keeperTile = keeperTile;
-        keeperTileX = keeperTileX;
-        keeperTileY = keeperTileY;
+        keeperState = KeeperState;
+        keeperStateX = KeeperStateX;
+        keeperStateY = KeeperStateY;
+        keeperTile = KeeperTile;
+        keeperTileX = KeeperTileX;
+        keeperTileY = KeeperTileY;
         LoadUI();
     }
 
@@ -180,6 +181,13 @@ public class MapManager : MonoBehaviour
     {
         WorldMapUI();
         LocalMapUI(tempMap[keeperState].tiles);
+        minimap.MiniMapUI (
+            keeperTileX,
+            keeperTileY,
+            tiles2d,
+            keeperTile,
+            keeperState
+        );
     }
 
     //updates minimap from explore action

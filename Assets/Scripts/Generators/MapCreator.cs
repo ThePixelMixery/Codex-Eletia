@@ -19,7 +19,7 @@ public class MapCreator : MonoBehaviour
 
     SaveHandler handler;
 
-    MapManager MapManager;
+    MapManager mapManager;
 
     ResourceDatabase resourceData;
 
@@ -29,7 +29,7 @@ public class MapCreator : MonoBehaviour
         resourceData =
             resourcesObject.GetComponentInChildren<ResourceDatabase>();
         handler = save.GetComponentInChildren<SaveHandler>();
-        MapManager = maps.GetComponentInChildren<MapManager>();
+        mapManager = maps.GetComponentInChildren<MapManager>();
         HashSet<int> stateTypeNumbers = new HashSet<int>();
         while (stateTypeNumbers.Count < 16)
         {
@@ -75,7 +75,8 @@ public class MapCreator : MonoBehaviour
                 State stateSelected = handler._GameData.stateCoords[i];
                 Tile tileSelected = handler._GameData.stateCoords[i].tiles[tile];
                 stateSelected.discovered = true;
-                MapManager
+                mapManager.tempMap = handler._GameData.stateCoords;
+                mapManager
                     .MapMade(tileX,
                     tileY,
                     tileSelected,
@@ -84,7 +85,6 @@ public class MapCreator : MonoBehaviour
                     stateSelected);
             }
         }
-        handler.SaveFile();
     }
 
     string StateNamer(int type)
@@ -291,7 +291,7 @@ public class MapCreator : MonoBehaviour
                 assignedType = 13;
             tiles[i].id = i;
             tiles[i].type = assignedType;
-            tiles[i].tileColor = MapManager.tileColours[assignedType];
+            tiles[i].tileColor = mapManager.tileColours[assignedType];
             if (assignedType == 14 || assignedType == 15)
             {
                 tiles[i].access = 0;
