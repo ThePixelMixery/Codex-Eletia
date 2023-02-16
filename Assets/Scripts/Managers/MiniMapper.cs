@@ -35,10 +35,6 @@ public class MiniMapper : MonoBehaviour
 
     GameObject[] miniMapTiles = new GameObject[9];
 
-    List<Resource> actionsList = new List<Resource>();
-
-    List<NPC> npcList = new List<NPC>();
-
     GameObject tileObject;
 
     int currentState;
@@ -153,18 +149,20 @@ public class MiniMapper : MonoBehaviour
                     false;
         }
 
-        tileTitle.text = save._GameData.stateCoords[currentState].tiles[currentTile].locationName;
-        ActionList (tileObject);
+        tileTitle.text =
+            save
+                ._GameData
+                .stateCoords[currentState]
+                .tiles[currentTile]
+                .locationName;
+        ExploreButton (tileObject);
     }
 
-    void ActionList(GameObject tileObject)
+    void ExploreButton(GameObject tileObject)
     {
         Tile tile = tileObject.GetComponentInChildren<TileScript>().tile;
         foreach (Transform child in ExploreActionList.transform)
         Destroy(child.gameObject);
-
-        actionsList.Clear();
-        npcList.Clear();
 
         if (tile.explored < 100)
         {
@@ -174,87 +172,97 @@ public class MiniMapper : MonoBehaviour
                 actionPrefab.GetComponentInChildren<ActionScript>();
             script.ExploreAction(tile.locationName, tileObject);
         }
-        foreach (Feature feature in tile.features)
+    }
+
+    void FeatureList(Tile tile)
+    {
+        for (int i = 0; i < tile.features.Length; i++)
         {
             if (
-                feature.occupants != null &&
-                feature.occupants.Count != 0 &&
-                feature.discovered == true
-            ) npcList.Add(feature.occupants[0]);
-            if (feature.resources.Count != 0 && feature.discovered == true)
-                actionsList.Add(feature.resources[0]);
-        }
-        foreach (NPC npc in npcList)
-        {
-            GameObject actionPrefab =
-                Instantiate(actionInstance, ExploreActionList.transform);
-            ActionScript script =
-                actionPrefab.GetComponentInChildren<ActionScript>();
-            script
-                .ReturnAction("Talk",
-                npc.flavourText,
-                0,
-                "Visit " + npc.npcName + "at the " + npc.homeName,
-                0,
-                null,
-                null,
-                0,
-                null,
-                null,
-                null,
-                true,
-                actionPrefab);
-        }
+                tile.features[i].occupants != null &&
+                tile.features[i].occupants.Count != 0 &&
+                tile.features[i].discovered == true
+            )
+            {
+                for (int j = 0; j < tile.features[i].occupants.Count; j++)
+                NPCList(tile.features[i].occupants[j], i);
 
-        foreach (Resource resource in actionsList)
+            }
+            if (
+                tile.features[i].resources != null &&
+                tile.features[i].resources.Count != 0 &&
+                tile.features[i].discovered == true
+            )
+            {
+                for (int j = 0; j < tile.features[i].resources.Count; j++)
+                ActionList(tile.features[i].resources[j], i);            }
+        }
+    }
+
+    void NPCList(NPC npc, int featureId)
+    {
+        GameObject actionPrefab =
+            Instantiate(actionInstance, ExploreActionList.transform);
+        ActionScript script =
+            actionPrefab.GetComponentInChildren<ActionScript>();
+        script
+            .TalkAction("Talk",
+            npc.flavourText,
+            0,
+            "Visit " + npc.npcName + "at the " + npc.homeName,
+            actionPrefab);
+    }
+
+    void ActionList(Resource resource, int featureId)
+    {
+        List<string> requirements = new List<string>();
+        foreach (require req in resource.requires)
         {
-            List<string> requirements = new List<string>();
-            foreach (require req in resource.requires)
-            {
-                requirements
-                    .Add(req.item.itemName + " (" + req.count.ToString() + ")");
-            }
-            string reqsOutput = String.Join(", ", requirements.ToArray());
-            List<string> results = new List<string>();
-            foreach (outcome result in resource.outcomes)
-            {
-                results
-                    .Add(result.min.ToString() +
-                    "-" +
-                    result.max.ToString() +
-                    " " +
-                    result.item.itemName +
-                    " (" +
-                    result.chance.ToString() +
-                    "%) ");
-            }
-            string outOutput = String.Join(", ", results.ToArray());
-            GameObject actionPrefab =
-                Instantiate(actionInstance, ExploreActionList.transform);
-            ActionScript script =
-                actionPrefab.GetComponentInChildren<ActionScript>();
-            script
-                .ReturnAction(resource.action,
-                resource.resourceName,
-                resource.duration,
-                resource.flavourText,
-                resource.staminaCost,
-                resource.tool,
-                resource.skill,
-                resource.time,
-                reqsOutput,
-                outOutput,
-                resource.outcomes, //resource.outcomes,
-                /*
+            requirements
+                .Add(req.item.itemName + " (" + req.count.ToString() + ")");
+        }
+        string reqsOutput = String.Join(", ", requirements.ToArray());
+        List<string> results = new List<string>();
+        foreach (outcome result in resource.outcomes)
+        {
+            results
+                .Add(result.min.ToString() +
+                "-" +
+                result.max.ToString() +
+                " " +
+                result.item.itemName +
+                " (" +
+                result.chance.ToString() +
+                "%) ");
+        }
+        string outOutput = String.Join(", ", results.ToArray());
+        GameObject actionPrefab =
+            Instantiate(actionInstance, ExploreActionList.transform);
+        ActionScript script =
+            actionPrefab.GetComponentInChildren<ActionScript>();
+        script
+            .ReturnAction(resource.action,
+            resource.resourceName,
+            resource.duration,
+            resource.flavourText,
+            resource.staminaCost,
+            resource.tool,
+            resource.skill,
+            resource.time,
+            reqsOutput,
+            outOutput,
+            resource.outcomes,
+            /*
                 ActionChecker(resource.duration,
                 resource.staminaCost,
                 resource.tool,
                 resource.skill,
                 resource.time,
                 resource.requires),*/
-                true,
-                actionPrefab);
-        }
+            true,
+            actionPrefab,
+            featureId,
+            resource.gameId);
     }
 
     bool

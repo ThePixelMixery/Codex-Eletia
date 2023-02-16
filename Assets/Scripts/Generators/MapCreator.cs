@@ -73,7 +73,8 @@ public class MapCreator : MonoBehaviour
             if (select == handler._GameData.stateCoords[i].type)
             {
                 State stateSelected = handler._GameData.stateCoords[i];
-                Tile tileSelected = handler._GameData.stateCoords[i].tiles[tile];
+                Tile tileSelected =
+                    handler._GameData.stateCoords[i].tiles[tile];
                 stateSelected.discovered = true;
                 mapManager.tempMap = handler._GameData.stateCoords;
                 mapManager
@@ -324,12 +325,15 @@ public class MapCreator : MonoBehaviour
         //[] civ builder
         List<NPC> npcs = new List<NPC>();
         List<Resource> resources = new List<Resource>();
-
         for (int i = 0; i < featureTypeArray.Length; i++)
         {
-            resources.Add(resourceData.GetResource(100));
             features[i] =
-                new Feature(3, "Trapping ground", null, resources, false);
+                new Feature(i,
+                    3,
+                    "Trapping ground",
+                    false,
+                    null,
+                    GenerateResources(100,100,100));
         }
 
         /*for (int i = 0; i < featureTypeArray.Length; i++)
@@ -601,5 +605,41 @@ public class MapCreator : MonoBehaviour
             }
         }*/
         return features;
+    }
+
+    List<Resource> GenerateResources(int id0)
+    {
+        List<Resource> returnList = new List<Resource>();
+        Resource resource0 = resourceData.GetResource(id0);
+        resource0.gameId = 0;
+        returnList.Add (resource0);
+        return returnList;
+    }
+
+    List<Resource> GenerateResources(int id0, int id1)
+    {
+        List<Resource> returnList = new List<Resource>();
+        Resource resource0 = resourceData.GetResource(id0);
+        resource0.gameId = 0;
+        returnList.Add (resource0);
+        Resource resource1 = resourceData.GetResource(id1);
+        resource1.gameId = 1;
+        returnList.Add (resource1);
+        return returnList;
+    }
+
+    List<Resource> GenerateResources(int id0, int id1, int id2)
+    {
+        List<Resource> returnList = new List<Resource>();
+        Resource resource0 = resourceData.GetResource(id0);
+        resource0.gameId = 0;
+        returnList.Add (resource0);
+        Resource resource1 = resourceData.GetResource(id1);
+        resource1.gameId = 1;
+        returnList.Add (resource1);
+        Resource resource2 = resourceData.GetResource(id2);
+        resource2.gameId = 2;
+        returnList.Add (resource2);
+        return returnList;
     }
 }

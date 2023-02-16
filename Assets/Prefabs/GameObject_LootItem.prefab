@@ -268,7 +268,7 @@ GameObject:
   - component: {fileID: 2847927989280067960}
   - component: {fileID: 520255111758329161}
   m_Layer: 0
-  m_Name: Text_StackCount
+  m_Name: Text_StackQuantity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -579,8 +579,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dc956c8cc13f71b4976fd7db91ad244, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stackName: {fileID: 4239157054137645915}
-  stackCount: {fileID: 520255111758329161}
-  stackWeight: {fileID: 2769785705031119714}
   button: {fileID: 1372106316227480062}
-  moveSprite: {fileID: 0}
+  stackName: {fileID: 4239157054137645915}
+  stackQuantity: {fileID: 520255111758329161}
+  stackWeight: {fileID: 2769785705031119714}

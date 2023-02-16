@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -108,7 +107,6 @@ public class SaveHandler : MonoBehaviour
     {
         saveJson = File.ReadAllText(saveLocation);
         _GameData = JsonUtility.FromJson<GameData>(saveJson);
-
         maps
             .LoadSavedMap(_GameData.stateCoords,
             _GameData.keeper.state,
@@ -155,5 +153,12 @@ public class SaveHandler : MonoBehaviour
             tileX +
             ", " +
             tileY);
+    }
+
+    public void NewGame()
+    {
+        _GameData.keeper.skills = new List<string>();
+        _GameData.keeper.tools = new List<tool>();
+        _GameData.keeper.inventory = new List<Stack>();
     }
 }

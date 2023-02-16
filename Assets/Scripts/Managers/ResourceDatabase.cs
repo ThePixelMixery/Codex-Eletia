@@ -74,6 +74,7 @@ public class ResourceDatabase : MonoBehaviour
                 "Tracking",
                 "Bow",
                 2,
+                true,
                 new List<require> {
                     new require { item = itemDatabase.GetItem(1), count = 1 }
                 }, // arrows

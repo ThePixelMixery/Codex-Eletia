@@ -35,7 +35,7 @@ public class ActionScript : MonoBehaviour
 
     MapManager maps;
 
-    LootMenu loots;
+    InventoryManager invo;
 
     SaveHandler save;
 
@@ -43,16 +43,23 @@ public class ActionScript : MonoBehaviour
 
     int type;
 
+    int featureId;
+
+    int resourceId;
+
     GameObject actionObject;
 
-    Feature feature;
+    Resource resource;
 
     void Start()
     {
         button.onClick.AddListener (ClickAction);
         maps =
             GameObject.Find("GameObject_MapManager").GetComponent<MapManager>();
-        loots = GameObject.Find("GameObject_LootMenu").GetComponent<LootMenu>();
+        invo =
+            GameObject
+                .Find("GameObject_Inventory")
+                .GetComponent<InventoryManager>();
         save = GameObject.Find("GameObject_Save").GetComponent<SaveHandler>();
     }
 
@@ -67,9 +74,25 @@ public class ActionScript : MonoBehaviour
         this.tileObject = tileObject;
     }
 
+    public void TalkAction(
+        string button,
+        string resourceName,
+        int duration,
+        string flavour,
+        GameObject actionObject
+    )
+    {
+        this.resourceName = resourceName;
+        this.actionResource.text = resourceName + " for " + duration + " hours";
+        this.actionButton.text = button;
+        this.actionFlavour.text = flavour;
+        this.type = 1;
+        this.actionObject = actionObject;
+    }
+
     public void ReturnAction(
         string button,
-        string resource,
+        string resourceName,
         int duration,
         string flavour,
         int stamina,
@@ -80,10 +103,12 @@ public class ActionScript : MonoBehaviour
         string results,
         List<outcome> outcome,
         bool skillOrObject,
-        GameObject actionObject
+        GameObject actionObject,
+        int featureId,
+        int resourceId
     )
     {
-        resourceName = resource;
+        this.resourceName = resourceName;
         this.actionResource.text = resourceName + " for " + duration + " hours";
         this.actionButton.text = button;
         this.actionFlavour.text = flavour;
@@ -109,7 +134,6 @@ public class ActionScript : MonoBehaviour
                 timeOfDay = "Day";
                 break;
         }
-
         this.actionDaytime.text = timeOfDay;
         this.actionDetail.text = details;
         this.actionReturn.text = results;
@@ -117,6 +141,8 @@ public class ActionScript : MonoBehaviour
         this.button.interactable = skillOrObject;
         this.type = 2;
         this.actionObject = actionObject;
+        this.featureId = featureId;
+        this.resourceId = resourceId;
     }
 
     void ClickAction()
@@ -126,14 +152,19 @@ public class ActionScript : MonoBehaviour
             case 0:
                 tileObject
                     .GetComponentInChildren<TileScript>()
-                    .FeatureHandler(25);
+                    .FeatureDiscovery(25);
                 maps.UpdateCurrentTile (tileObject);
                 break;
             case 1:
+                Debug.Log("Talked to someone");
                 break;
             case 2:
                 Debug.Log(outcome[0].chance);
-                loots.ToKeeper (outcome, resourceName);
+                invo.Sourced (outcome, resourceName);
+                tileObject
+                    .GetComponentInChildren<TileScript>()
+                    .ResourceDisable(featureId, resourceId);
+                maps.UpdateCurrentTile (tileObject);
                 actionObject.SetActive(false);
                 break;
             default:

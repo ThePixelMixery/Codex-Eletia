@@ -7,21 +7,18 @@ using UnityEngine.UI;
 public class LootScript : MonoBehaviour
 {
     public Button button;
-LootMenu loots;
 
+    LootMenu loots;
 
-    Stack stack;
+    public Stack stack;
 
     public TextMeshProUGUI stackName;
 
-    public TextMeshProUGUI stackCount;
+    public TextMeshProUGUI stackQuantity;
 
     public TextMeshProUGUI stackWeight;
 
-
     Sprite moveSprite;
-
-    
 
     bool source;
 
@@ -35,7 +32,7 @@ LootMenu loots;
     {
         this.stack = stack;
         this.stackName.text = stack.item.itemName;
-        this.stackCount.text = stack.count.ToString();
+        this.stackQuantity.text = stack.quantity.ToString();
         this.stackWeight.text = stack.totalWeight.ToString();
         this.moveSprite = moveSprite;
         this.source = source;
@@ -43,6 +40,12 @@ LootMenu loots;
 
     void ClickAction()
     {
-        //stack.count
+    }
+
+    public void UpdateQuantity(int toAdd)
+    {
+        this.stack.UpdateQuantity(toAdd);
+        this.stackQuantity.text = stack.quantity.ToString();
+        this.stackWeight.text = stack.totalWeight.ToString();
     }
 }

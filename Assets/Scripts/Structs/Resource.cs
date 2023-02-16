@@ -25,11 +25,14 @@ public struct outcome
 [System.Serializable]
 public struct Resource
 {
+    public int gameId;
+
     public int id;
 
     public string action;
 
     public string resourceName;
+
     public int duration;
 
     public string flavourText;
@@ -41,6 +44,8 @@ public struct Resource
     public string tool;
 
     public int time;
+
+    public bool active;
 
     public List<require> requires;
 
@@ -56,11 +61,12 @@ public struct Resource
         string skill,
         string tool,
         int time,
+        bool active,
         List<require> requires,
         List<outcome> outcomes
-        
     )
     {
+        this.gameId = 0;
         this.id = id;
         this.action = action;
         this.resourceName = resourceName;
@@ -70,12 +76,14 @@ public struct Resource
         this.skill = skill;
         this.tool = tool;
         this.time = time;
+        this.active = active;
         this.requires = requires;
         this.outcomes = outcomes;
     }
 
     Resource(Resource resource)
     {
+        this.gameId = resource.gameId;
         this.id = resource.id;
         this.action = resource.action;
         this.resourceName = resource.resourceName;
@@ -84,8 +92,14 @@ public struct Resource
         this.skill = resource.skill;
         this.tool = resource.tool;
         this.time = resource.time;
+        this.active = resource.active;
         this.staminaCost = resource.staminaCost;
         this.requires = resource.requires;
         this.outcomes = resource.outcomes;
+    }
+
+    public void UpdateAvailabilty(bool active)
+    {
+        this.active = active;
     }
 }

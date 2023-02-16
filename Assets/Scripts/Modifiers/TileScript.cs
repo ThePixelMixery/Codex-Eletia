@@ -11,7 +11,7 @@ public class TileScript : MonoBehaviour
 
     public GameObject tileTile;
 
-    public GameObject[] Features = new GameObject[4];
+    public GameObject[] featureObjects = new GameObject[4];
 
     void Start()
     {
@@ -28,18 +28,18 @@ public class TileScript : MonoBehaviour
     ) //bool current,
     {
         tile = tempTile;
-        
+
         //if (tile.type > 0)
         tileTile.GetComponent<Image>().sprite = tempSprite;
         tileTile.GetComponent<Image>().color = tile.tileColor;
-        Features[0].GetComponent<Image>().sprite = featureSprite1;
-        Features[0].SetActive(tile.features[0].discovered);
-        Features[1].GetComponent<Image>().sprite = featureSprite2;
-        Features[1].SetActive(tile.features[1].discovered);
-        Features[2].GetComponent<Image>().sprite = featureSprite3;
-        Features[2].SetActive(tile.features[2].discovered);
-        Features[3].GetComponent<Image>().sprite = featureSprite4;
-        Features[3].SetActive(tile.features[3].discovered);
+        featureObjects[0].GetComponent<Image>().sprite = featureSprite1;
+        featureObjects[0].SetActive(tile.features[0].discovered);
+        featureObjects[1].GetComponent<Image>().sprite = featureSprite2;
+        featureObjects[1].SetActive(tile.features[1].discovered);
+        featureObjects[2].GetComponent<Image>().sprite = featureSprite3;
+        featureObjects[2].SetActive(tile.features[2].discovered);
+        featureObjects[3].GetComponent<Image>().sprite = featureSprite4;
+        featureObjects[3].SetActive(tile.features[3].discovered);
         tileTile.SetActive(tile.discovered);
     }
 
@@ -54,7 +54,7 @@ public class TileScript : MonoBehaviour
         tileTile.SetActive(tile.discovered);
     }
 
-    public void FeatureHandler(int exploredAmount)
+    public void FeatureDiscovery(int exploredAmount)
     {
         Debug.Log("Before add on tile" + tile.explored);
         tile.explored = tile.explored + exploredAmount;
@@ -81,7 +81,12 @@ public class TileScript : MonoBehaviour
         }
         for (int i = 0; i < 4; i++)
         {
-            Features[i].SetActive(tile.features[i].discovered);
+            featureObjects[i].SetActive(tile.features[i].discovered);
         }
+    }
+
+    public void ResourceDisable(int featureId, int resourceId)
+    {
+        tile.features[featureId].resources[resourceId].UpdateAvailabilty(false);
     }
 }

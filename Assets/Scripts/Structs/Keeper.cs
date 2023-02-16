@@ -31,6 +31,8 @@ public struct Keeper
 
     public float staminaRate;
 
+    public int time;
+
     public List<string> skills;
 
     public List<string> toolKeys;
@@ -38,8 +40,6 @@ public struct Keeper
     public List<int> toolValue;
 
     public List<tool> tools;
-
-    public int time;
 
     public List<Stack> inventory;
 
