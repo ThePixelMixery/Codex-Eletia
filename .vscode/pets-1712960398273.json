@@ -1,0 +1,32 @@
+[
+	{
+		"color": "red",
+		"type": "fox",
+		"size": "medium",
+		"name": "Evelyn"
+	},
+	{
+		"color": "white",
+		"type": "rat",
+		"size": "medium",
+		"name": "Mochi"
+	},
+	{
+		"color": "white",
+		"type": "rat",
+		"size": "medium",
+		"name": "Lychee"
+	},
+	{
+		"color": "white",
+		"type": "rat",
+		"size": "medium",
+		"name": "Timtam"
+	},
+	{
+		"color": "black",
+		"type": "cat",
+		"size": "medium",
+		"name": "Croissant"
+	}
+]

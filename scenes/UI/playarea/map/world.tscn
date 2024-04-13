@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cxgq5foaw7i75"]
+
+[node name="World" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 0

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://8fdin4ava42h"]
+
+[node name="Combat" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 0

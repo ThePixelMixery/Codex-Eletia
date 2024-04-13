@@ -1,0 +1,78 @@
+[gd_scene load_steps=9 format=3 uid="uid://cgkkt0s6kuy"]
+
+[ext_resource type="PackedScene" uid="uid://lohyoji0q0g8" path="res://scenes/UI/events.tscn" id="1_f0nnw"]
+[ext_resource type="Script" path="res://scripts/autoloads/save-manager.gd" id="1_n3pqe"]
+[ext_resource type="PackedScene" uid="uid://cq1eje456ok7a" path="res://scenes/UI/playarea/map.tscn" id="2_jbip0"]
+[ext_resource type="Script" path="res://scripts/tab_unlocker.gd" id="2_lrdkh"]
+[ext_resource type="PackedScene" uid="uid://8fdin4ava42h" path="res://scenes/UI/playarea/combat.tscn" id="3_2xeig"]
+[ext_resource type="PackedScene" uid="uid://cbu4kbusf371f" path="res://scenes/UI/info/inv.tscn" id="5_ec4al"]
+[ext_resource type="PackedScene" uid="uid://vcmf2w317qy7" path="res://scenes/UI/info/dragons.tscn" id="6_yqos6"]
+[ext_resource type="PackedScene" uid="uid://cbdoc1xxgog2f" path="res://scenes/UI/info/quests.tscn" id="7_doubg"]
+
+[node name="Control_Base" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_n3pqe")
+
+[node name="Split_Base" type="HSplitContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = 880
+script = ExtResource("2_lrdkh")
+
+[node name="Split_Log" type="VSplitContainer" parent="Split_Base"]
+layout_mode = 2
+split_offset = 590
+
+[node name="Tab_Play" type="TabContainer" parent="Split_Base/Split_Log"]
+layout_mode = 2
+tab_focus_mode = 1
+
+[node name="Map" parent="Split_Base/Split_Log/Tab_Play" instance=ExtResource("2_jbip0")]
+layout_mode = 2
+
+[node name="Control_Events" parent="Split_Base/Split_Log" instance=ExtResource("1_f0nnw")]
+layout_mode = 2
+
+[node name="Play_Locked" type="Control" parent="Split_Base/Split_Log"]
+layout_mode = 2
+
+[node name="Combat" parent="Split_Base/Split_Log/Play_Locked" instance=ExtResource("3_2xeig")]
+layout_mode = 2
+
+[node name="Tab_Info" type="TabContainer" parent="Split_Base"]
+layout_mode = 2
+tab_focus_mode = 1
+
+[node name="Info_Locked" type="Control" parent="Split_Base"]
+layout_mode = 2
+
+[node name="Inventory" parent="Split_Base/Info_Locked" instance=ExtResource("5_ec4al")]
+layout_mode = 2
+anchors_preset = 0
+offset_left = 792.0
+offset_top = 31.0
+offset_right = 792.0
+offset_bottom = 0.0
+
+[node name="Dragons" parent="Split_Base/Info_Locked" instance=ExtResource("6_yqos6")]
+
+[node name="Quests" parent="Split_Base/Info_Locked" instance=ExtResource("7_doubg")]
+
+[node name="Button_Test" type="Button" parent="."]
+layout_mode = 0
+offset_left = 980.0
+offset_top = 591.0
+offset_right = 1136.0
+offset_bottom = 641.0
+text = "Mighty Test Button"
+
+[connection signal="pressed" from="Button_Test" to="." method="_on_button_test_pressed"]

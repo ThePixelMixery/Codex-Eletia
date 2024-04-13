@@ -1,0 +1,85 @@
+[gd_scene load_steps=2 format=3 uid="uid://lohyoji0q0g8"]
+
+[ext_resource type="Script" path="res://scripts/UI/log_utility.gd" id="1_tevaj"]
+
+[node name="Control_Events" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1152.0
+offset_bottom = -648.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tevaj")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox_Events" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBox_Title" type="HBoxContainer" parent="VBox_Events"]
+layout_mode = 2
+
+[node name="Label_Title" type="Label" parent="VBox_Events/HBox_Title"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Events"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Check_Settings" type="CheckButton" parent="VBox_Events/HBox_Title"]
+layout_mode = 2
+text = "Log Settings"
+
+[node name="HBox_Settings" type="HBoxContainer" parent="VBox_Events/HBox_Title"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Check_Time" type="CheckButton" parent="VBox_Events/HBox_Title/HBox_Settings"]
+layout_mode = 2
+size_flags_horizontal = 3
+button_pressed = true
+text = "Timestamps"
+
+[node name="Check_Story" type="CheckButton" parent="VBox_Events/HBox_Title/HBox_Settings"]
+layout_mode = 2
+size_flags_horizontal = 3
+button_pressed = true
+text = "Story"
+
+[node name="Check_Loot" type="CheckButton" parent="VBox_Events/HBox_Title/HBox_Settings"]
+layout_mode = 2
+size_flags_horizontal = 3
+button_pressed = true
+text = "Loot"
+
+[node name="Check_Unlock" type="CheckButton" parent="VBox_Events/HBox_Title/HBox_Settings"]
+layout_mode = 2
+size_flags_horizontal = 3
+button_pressed = true
+text = "Unlock"
+
+[node name="VBox_Log" type="VBoxContainer" parent="VBox_Events"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 2
+
+[connection signal="toggled" from="VBox_Events/HBox_Title/Check_Settings" to="." method="_on_check_settings_toggled"]
+[connection signal="toggled" from="VBox_Events/HBox_Title/HBox_Settings/Check_Time" to="." method="_on_check_time_toggled"]
+[connection signal="toggled" from="VBox_Events/HBox_Title/HBox_Settings/Check_Story" to="." method="_on_check_story_toggled"]
+[connection signal="toggled" from="VBox_Events/HBox_Title/HBox_Settings/Check_Loot" to="." method="_on_check_loot_toggled"]
+[connection signal="toggled" from="VBox_Events/HBox_Title/HBox_Settings/Check_Unlock" to="." method="_on_check_unlock_toggled"]

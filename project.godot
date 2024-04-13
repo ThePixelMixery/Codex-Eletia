@@ -11,14 +11,24 @@ config_version=5
 [application]
 
 config/name="Codex Eletia"
+run/main_scene="res://scenes/base.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+save="*res://scripts/autoloads/save-manager.gd"
+sets="*res://scripts/autoloads/settings.gd"
+player="*res://scripts/autoloads/player.gd"
+inv="*res://scripts/autoloads/inventory.gd"
+log="*res://scripts/autoloads/logger.gd"
 
 [file_customization]
 
 folder_colors={
 "res://assets/": "yellow",
 "res://scenes/": "teal",
+"res://scenes/prefabs/": "green",
 "res://scripts/": "purple",
 "res://scripts/autoloads/": "pink"
 }

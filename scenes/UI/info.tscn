@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://vpraqregxglf"]
+
+[ext_resource type="PackedScene" uid="uid://cbu4kbusf371f" path="res://scenes/UI/info/inv.tscn" id="1_2s21b"]
+
+[node name="Control_Info" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Tab_Info" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+drag_to_rearrange_enabled = true
+tab_focus_mode = 1
+
+[node name="Inventory" parent="Tab_Info" instance=ExtResource("1_2s21b")]
+layout_mode = 2

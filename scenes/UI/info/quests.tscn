@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cbdoc1xxgog2f"]
+
+[node name="Quests" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
