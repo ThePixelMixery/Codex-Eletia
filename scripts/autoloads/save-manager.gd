@@ -7,15 +7,19 @@ const MAP_SAVE_PATH = "user://saves/map_save.json"
 const QUEST_SAVE_PATH = "user://saves/quest_save.json"
 const PASS = "Emizzy"
 
-func load_data(file_path: String, default_data: Variant) -> Variant:
-	var loaded_data = default_data
+func load_data(file_path: String,  data: Variant) -> Variant:
+	
+	var loaded_data
 
+	#first save creates directory
 	if not FileAccess.file_exists(file_path):
 		print("First run, setting data to default")
 		DirAccess.make_dir_absolute("user://saves")
-		save_data(file_path, default_data)
+		save_data(file_path,  data)
 	else:
+		#nonprod
 		var save_file = FileAccess.open(file_path, FileAccess.READ)
+		#password locked, for prod
 		#var save_file = FileAccess.open_encrypted_with_pass(file_path, FileAccess.READ, PASS)
 		print("Found a save at ", file_path)
 		var json = JSON.new()
@@ -29,12 +33,29 @@ func load_data(file_path: String, default_data: Variant) -> Variant:
 
 
 func save_data(file_path: String, data: Variant):
+	#nonprod
 	var save_file = FileAccess.open(file_path, FileAccess.WRITE)
+	#password locked, for prod
 	#var save_file = FileAccess.open_encrypted_with_pass(file_path, FileAccess.WRITE,PASS)
 	var json_string = JSON.stringify(data)
 	save_file.store_line(json_string)
-	print(file_path, " saved")
+
+	#Tells you what saved
+	var subject: String
+	match file_path:
+		SETTINGS_SAVE_PATH:
+			subject = "Settings"
+		PLAYER_SAVE_PATH:
+			subject = "Player"
+		INVENTORY_SAVE_PATH:
+			subject = "Inventory"
+		MAP_SAVE_PATH:
+			subject = "Map"
+		QUEST_SAVE_PATH:
+			subject = "Quest"
+			
+	log.add_event("%s saved" % subject,"system")
 
 
 func _on_button_test_pressed():
-	save_data(save.SETTINGS_SAVE_PATH, sets.settings)
+	maps.map_gen()

@@ -21,7 +21,13 @@ save="*res://scripts/autoloads/save-manager.gd"
 sets="*res://scripts/autoloads/settings.gd"
 player="*res://scripts/autoloads/player.gd"
 inv="*res://scripts/autoloads/inventory.gd"
+maps="*res://scripts/autoloads/map.gd"
 log="*res://scripts/autoloads/logger.gd"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 
 [file_customization]
 

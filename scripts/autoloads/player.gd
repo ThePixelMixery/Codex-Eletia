@@ -11,4 +11,3 @@ var skills: Array
 
 func save_player():
     save.save_data(save.PLAYER_SAVE_PATH, player)
-    log.add_event("test", "test",true)

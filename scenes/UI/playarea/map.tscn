@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cq1eje456ok7a"]
+[gd_scene load_steps=4 format=3 uid="uid://cq1eje456ok7a"]
 
 [ext_resource type="Script" path="res://scripts/UI/MapSwitch.gd" id="1_721q2"]
 [ext_resource type="PackedScene" uid="uid://cxgq5foaw7i75" path="res://scenes/UI/playarea/map/world.tscn" id="1_hmvoq"]
+[ext_resource type="Script" path="res://scripts/UI/map_updater.gd" id="1_skgs8"]
 
 [node name="Control_Map" type="Control"]
 layout_mode = 3
@@ -10,6 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_skgs8")
 
 [node name="HBox_Map" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -21,12 +23,11 @@ grow_vertical = 2
 script = ExtResource("1_721q2")
 
 [node name="Control_Map" type="Control" parent="HBox_Map"]
-custom_minimum_size = Vector2(550, 550)
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Grid_Continent" type="GridContainer" parent="HBox_Map/Control_Map"]
-custom_minimum_size = Vector2(550, 550)
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -3835,8 +3836,6 @@ size_flags_vertical = 3
 expand_mode = 1
 
 [node name="Grid_World" type="GridContainer" parent="HBox_Map/Control_Map"]
-visible = false
-custom_minimum_size = Vector2(550, 550)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -3850,191 +3849,552 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="Label" type="Label" parent="HBox_Map/Control_Map/Grid_World/Tex_State1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Tex_State2" type="TextureRect" parent="HBox_Map/Control_Map/Grid_World"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HBox_Map/Control_Map/Grid_World/Tex_State2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Tex_State3" type="TextureRect" parent="HBox_Map/Control_Map/Grid_World"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="Label" type="Label" parent="HBox_Map/Control_Map/Grid_World/Tex_State3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Tex_State4" type="TextureRect" parent="HBox_Map/Control_Map/Grid_World"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HBox_Map/Control_Map/Grid_World/Tex_State4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Tex_State5" type="TextureRect" parent="HBox_Map/Control_Map/Grid_World"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="Label" type="Label" parent="HBox_Map/Control_Map/Grid_World/Tex_State5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Tex_State6" type="TextureRect" parent="HBox_Map/Control_Map/Grid_World"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HBox_Map/Control_Map/Grid_World/Tex_State6"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Tex_State7" type="TextureRect" parent="HBox_Map/Control_Map/Grid_World"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="Label" type="Label" parent="HBox_Map/Control_Map/Grid_World/Tex_State7"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Tex_State8" type="TextureRect" parent="HBox_Map/Control_Map/Grid_World"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HBox_Map/Control_Map/Grid_World/Tex_State8"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Tex_State9" type="TextureRect" parent="HBox_Map/Control_Map/Grid_World"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="Label" type="Label" parent="HBox_Map/Control_Map/Grid_World/Tex_State9"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Tex_State10" type="TextureRect" parent="HBox_Map/Control_Map/Grid_World"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HBox_Map/Control_Map/Grid_World/Tex_State10"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Tex_State11" type="TextureRect" parent="HBox_Map/Control_Map/Grid_World"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="Label" type="Label" parent="HBox_Map/Control_Map/Grid_World/Tex_State11"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Tex_State12" type="TextureRect" parent="HBox_Map/Control_Map/Grid_World"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HBox_Map/Control_Map/Grid_World/Tex_State12"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Tex_State13" type="TextureRect" parent="HBox_Map/Control_Map/Grid_World"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="Label" type="Label" parent="HBox_Map/Control_Map/Grid_World/Tex_State13"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Tex_State14" type="TextureRect" parent="HBox_Map/Control_Map/Grid_World"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HBox_Map/Control_Map/Grid_World/Tex_State14"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Tex_State15" type="TextureRect" parent="HBox_Map/Control_Map/Grid_World"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="Label" type="Label" parent="HBox_Map/Control_Map/Grid_World/Tex_State15"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Tex_State16" type="TextureRect" parent="HBox_Map/Control_Map/Grid_World"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HBox_Map/Control_Map/Grid_World/Tex_State16"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Tex_State17" type="TextureRect" parent="HBox_Map/Control_Map/Grid_World"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="Label" type="Label" parent="HBox_Map/Control_Map/Grid_World/Tex_State17"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Tex_State18" type="TextureRect" parent="HBox_Map/Control_Map/Grid_World"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HBox_Map/Control_Map/Grid_World/Tex_State18"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Tex_State19" type="TextureRect" parent="HBox_Map/Control_Map/Grid_World"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="Label" type="Label" parent="HBox_Map/Control_Map/Grid_World/Tex_State19"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Tex_State20" type="TextureRect" parent="HBox_Map/Control_Map/Grid_World"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HBox_Map/Control_Map/Grid_World/Tex_State20"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Tex_State21" type="TextureRect" parent="HBox_Map/Control_Map/Grid_World"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="Label" type="Label" parent="HBox_Map/Control_Map/Grid_World/Tex_State21"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Tex_State22" type="TextureRect" parent="HBox_Map/Control_Map/Grid_World"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HBox_Map/Control_Map/Grid_World/Tex_State22"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Tex_State23" type="TextureRect" parent="HBox_Map/Control_Map/Grid_World"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="Label" type="Label" parent="HBox_Map/Control_Map/Grid_World/Tex_State23"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Tex_State24" type="TextureRect" parent="HBox_Map/Control_Map/Grid_World"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HBox_Map/Control_Map/Grid_World/Tex_State24"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Tex_State25" type="TextureRect" parent="HBox_Map/Control_Map/Grid_World"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="Label" type="Label" parent="HBox_Map/Control_Map/Grid_World/Tex_State25"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Tex_State26" type="TextureRect" parent="HBox_Map/Control_Map/Grid_World"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HBox_Map/Control_Map/Grid_World/Tex_State26"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Tex_State27" type="TextureRect" parent="HBox_Map/Control_Map/Grid_World"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="Label" type="Label" parent="HBox_Map/Control_Map/Grid_World/Tex_State27"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Tex_State28" type="TextureRect" parent="HBox_Map/Control_Map/Grid_World"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HBox_Map/Control_Map/Grid_World/Tex_State28"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Tex_State29" type="TextureRect" parent="HBox_Map/Control_Map/Grid_World"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="Label" type="Label" parent="HBox_Map/Control_Map/Grid_World/Tex_State29"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Tex_State30" type="TextureRect" parent="HBox_Map/Control_Map/Grid_World"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HBox_Map/Control_Map/Grid_World/Tex_State30"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Tex_State31" type="TextureRect" parent="HBox_Map/Control_Map/Grid_World"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="Label" type="Label" parent="HBox_Map/Control_Map/Grid_World/Tex_State31"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Tex_State32" type="TextureRect" parent="HBox_Map/Control_Map/Grid_World"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HBox_Map/Control_Map/Grid_World/Tex_State32"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Tex_State33" type="TextureRect" parent="HBox_Map/Control_Map/Grid_World"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="Label" type="Label" parent="HBox_Map/Control_Map/Grid_World/Tex_State33"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Tex_State34" type="TextureRect" parent="HBox_Map/Control_Map/Grid_World"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HBox_Map/Control_Map/Grid_World/Tex_State34"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Tex_State35" type="TextureRect" parent="HBox_Map/Control_Map/Grid_World"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="Label" type="Label" parent="HBox_Map/Control_Map/Grid_World/Tex_State35"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Tex_State36" type="TextureRect" parent="HBox_Map/Control_Map/Grid_World"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="Label" type="Label" parent="HBox_Map/Control_Map/Grid_World/Tex_State36"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Tab_Map" type="TabContainer" parent="HBox_Map"]
 layout_mode = 2
 size_flags_horizontal = 3
 tab_alignment = 2
-current_tab = 1
 
 [node name="World" parent="HBox_Map/Tab_Map" instance=ExtResource("1_hmvoq")]
+visible = true
 layout_mode = 2
 
 [node name="Continent" type="VBoxContainer" parent="HBox_Map/Tab_Map"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3

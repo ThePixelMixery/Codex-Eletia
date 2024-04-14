@@ -30,6 +30,7 @@ func use_tool(tool_id:int):
     var tool_info = inv.inv["tools"][tool_id]
     var logmessage: String
     inv.inv["tools"][tool_id]["uses"] -= 1    
+    #removes tool if uses reach zero
     if inv.inv["tools"][tool_id] <= 0:
         logmessage = "%s %s %s broke" % [tool_info["grade"], tool_info["type"], tool_info["tool_name"]]
         log.add_event(logmessage, "tools")

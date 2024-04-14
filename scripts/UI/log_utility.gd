@@ -42,6 +42,6 @@ func _on_check_settings_toggled(toggled_on:bool):
 		settings_box.show()
 	else:
 		settings_box.hide()
-		
-func _on_control_base_log_entry(entry:Node):
+
+func _on_node_logger_log_entry(entry:Node):
 	log_box.add_child(entry)
