@@ -17,7 +17,7 @@ func _ready():
 	check_unlock.button_pressed = sets.settings["events"]["unlock"]
 
 func save_settings():
-	save.save_data(save.SETTINGS_SAVE_PATH, sets.settings)
+	save.save_data(save.SETTINGS, sets.settings)
 
 func _on_check_time_toggled(toggled_on:bool):
 	sets.settings["events"]["time"] = toggled_on

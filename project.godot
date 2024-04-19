@@ -23,6 +23,7 @@ player="*res://scripts/autoloads/player.gd"
 inv="*res://scripts/autoloads/inventory.gd"
 maps="*res://scripts/autoloads/map.gd"
 log="*res://scripts/autoloads/logger.gd"
+data="*res://scripts/autoloads/databases.gd"
 
 [display]
 
@@ -33,10 +34,13 @@ window/size/viewport_height=1080
 
 folder_colors={
 "res://assets/": "yellow",
+"res://assets/databases/": "orange",
+"res://assets/databases/actions/": "yellow",
 "res://scenes/": "teal",
 "res://scenes/prefabs/": "green",
 "res://scripts/": "purple",
-"res://scripts/autoloads/": "pink"
+"res://scripts/autoloads/": "pink",
+"res://scripts/autoloads/ResourceTables/": "purple"
 }
 
 [rendering]

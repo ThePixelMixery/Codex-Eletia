@@ -1,21 +1,21 @@
 extends Node
 
-const SETTINGS_SAVE_PATH = "user://saves/settings_save.json"
-const PLAYER_SAVE_PATH = "user://saves/player_save.json"
-const INVENTORY_SAVE_PATH = "user://saves/inventory_save.json"
-const MAP_SAVE_PATH = "user://saves/map_save.json"
-const QUEST_SAVE_PATH = "user://saves/quest_save.json"
+const SETTINGS = "user://saves/settings_save.json"
+const PLAYER = "user://saves/player_save.json"
+const INVENTORY = "user://saves/inventory_save.json"
+const MAP = "user://saves/map_save.json"
+const QUEST = "user://saves/quest_save.json"
 const PASS = "Emizzy"
 
-func load_data(file_path: String,  data: Variant) -> Variant:
+func load_data(file_path: String, data: Variant, base_data: Variant) -> Variant:
 	
-	var loaded_data
+	var loaded_data = data
 
 	#first save creates directory
 	if not FileAccess.file_exists(file_path):
 		print("First run, setting data to default")
 		DirAccess.make_dir_absolute("user://saves")
-		save_data(file_path,  data)
+		save_data(file_path, base_data)
 	else:
 		#nonprod
 		var save_file = FileAccess.open(file_path, FileAccess.READ)
@@ -43,15 +43,15 @@ func save_data(file_path: String, data: Variant):
 	#Tells you what saved
 	var subject: String
 	match file_path:
-		SETTINGS_SAVE_PATH:
+		SETTINGS:
 			subject = "Settings"
-		PLAYER_SAVE_PATH:
+		PLAYER:
 			subject = "Player"
-		INVENTORY_SAVE_PATH:
+		INVENTORY:
 			subject = "Inventory"
-		MAP_SAVE_PATH:
+		MAP:
 			subject = "Map"
-		QUEST_SAVE_PATH:
+		QUEST:
 			subject = "Quest"
 			
 	log.add_event("%s saved" % subject,"system")

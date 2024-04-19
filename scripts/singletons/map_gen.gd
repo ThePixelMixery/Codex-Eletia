@@ -27,10 +27,13 @@ static func generate_map(reset: bool = false):
 	
 	# checks if map exists before generating
 	if reset:
-		maps.map.clear()
-	
+		maps.map["continents"].clear()
+		maps.map["tiles"].clear()
+
+
 	# generating the map and alerting player
-	generate_conts(maps.map)
+	generate_conts(maps.map["continents"])
+	generate_world(maps.map)
 	log.add_event("(Re)creating map","test")
 
 static func generate_conts(conts: Array):
@@ -85,3 +88,27 @@ static func create_main_cont():
 	generated_cont_data.shuffle()
 
 	return generated_cont_data
+
+static func generate_world(map_data: Dictionary):
+	var conts: Array = map_data["continents"]
+	var tiles: Array = map_data["tiles"]
+	var size: int = map_data["world_size"]
+	var tile: Dictionary
+
+	# create base tiles based on size
+	while tiles.size()<(conts.size()*size):
+		tiles.append(tile)
+
+	# select blocks of tiles based on size
+	# and apply a type to them. based on continents
+	''' example v would select [0,0; 1,0; 0,1; 1,1]
+		xx-xx-00-00
+		xx-xx-00-00
+		00-00-00-00
+		00-00-00-00
+	'''
+
+	# ocean tiles?
+	# border mixing?
+
+	map_data["tiles"] = tiles

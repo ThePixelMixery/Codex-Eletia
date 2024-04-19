@@ -1,13 +1,18 @@
 extends Node
 
-var displayName: String
+var data: Dictionary = {
+    "displayName": "Player",
 
-var location: Array
+    "location": [0,0],
 
-var stamina: float
-var staminaMax: float
+    "stamina": 0.0,
+    "staminaMax": 0.0,
 
-var skills: Array
+    "skills": []
+}
+
+func _ready():
+    player.data = save.load_data(save.PLAYER, player.data, data)
 
 func save_player():
-    save.save_data(save.PLAYER_SAVE_PATH, player)
+    save.save_data(save.PLAYER, player.player)

@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://iqjj3rhrqlak"
+
+[deps]
+
+files=["res://assets/databases/actions/actions.Dragon.translation", "res://assets/databases/actions/actions.Type.translation", "res://assets/databases/actions/actions.Action.translation"]
+
+source_file="res://assets/databases/actions/actions.csv"
+dest_files=["res://assets/databases/actions/actions.Dragon.translation", "res://assets/databases/actions/actions.Type.translation", "res://assets/databases/actions/actions.Action.translation"]
+
+[params]
+
+compress=true
+delimiter=0
