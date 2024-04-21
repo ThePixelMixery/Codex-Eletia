@@ -1,6 +1,6 @@
 extends Node
 
-signal log_entry (entry: log)
+
 
 '''
 story, 
@@ -32,10 +32,14 @@ func add_event(message:String, type: String, reminder:bool = false):
         if sets.settings["events"]["settings"]:
             message_total = current_time() + message_total
         entry.text = message_total
-        log_entry.emit(entry)
+        emit.log_entry.emit(entry)
 
 #generates timestamps
 func current_time():
     var datetime: Dictionary = Time.get_time_dict_from_system()
     var datetime_string: String = "[%02d:%02d:%02d] " % [datetime["hour"],datetime["minute"],datetime["second"]] 
     return datetime_string
+
+
+func _on_button_test_2_pressed():
+    pass

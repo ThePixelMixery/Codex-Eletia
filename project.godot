@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+emit="*res://scripts/autoloads/emitter.gd"
 save="*res://scripts/autoloads/save-manager.gd"
 sets="*res://scripts/autoloads/settings.gd"
 player="*res://scripts/autoloads/player.gd"
@@ -39,6 +40,7 @@ folder_colors={
 "res://scenes/": "teal",
 "res://scenes/prefabs/": "green",
 "res://scripts/": "purple",
+"res://scripts/UI/": "pink",
 "res://scripts/autoloads/": "pink",
 "res://scripts/autoloads/ResourceTables/": "purple"
 }

@@ -9,6 +9,8 @@ extends Node
 @onready var log_box: VBoxContainer = $VBox_Events/VBox_Log
 
 func _ready():
+	emit.connect("log_entry",log_entry)
+	
 	check_settings.button_pressed = sets.settings["events"]["settings"]
 	_on_check_settings_toggled(sets.settings["events"]["settings"])
 	check_time.button_pressed = sets.settings["events"]["time"]
@@ -43,5 +45,5 @@ func _on_check_settings_toggled(toggled_on:bool):
 	else:
 		settings_box.hide()
 
-func _on_node_logger_log_entry(entry:Node):
+func log_entry(entry:Node):
 	log_box.add_child(entry)
