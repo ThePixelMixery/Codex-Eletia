@@ -29,30 +29,30 @@ func _ready():
 	
 	cont_array = cont_grid.get_children()
 	world_array = world_grid.get_children()
-	if maps.map["continents"] != []:
+	if global.map["continents"] != []:
 		populate_conts()
-		populate_tiles()
+		#populate_tiles()
 
 func populate_ui():
 	populate_conts()
-	populate_tiles()
+	#populate_tiles()
 	pass
 
 func populate_conts():
 	print("populating cont UI")
 	#adding tooltips and info
-	for i in range(maps.map["continents"].size()):
+	for i in range(global.map["continents"].size()):
 		var cont_label: Label = cont_array[i].get_child(0)
-		#if maps.map["continents"][i]["disovered"]:
-			#cont_label.text = maps.map["continents"][i]["type"]
-		cont_label.text = maps.map["continents"][i]["type"]
+		#if global.map["continents"][i]["disovered"]:
+			#cont_label.text = global.map["continents"][i]["type"]
+		cont_label.text = global.map["continents"][i]["type"]
 
 func populate_tiles():
 	var image: CompressedTexture2D
 	print("populating world UI")
-	for i in maps.map["tiles"].size():
+	for i in global.map["tiles"].size()-1:
 		var tex = TextureRect.new()
-		match maps.map["tiles"][i]["type"]:
+		match global.map["tiles"][i]["type"]:
 			"Fire":
 				image = fire
 			"Water":

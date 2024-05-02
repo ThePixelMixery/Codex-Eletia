@@ -1,7 +1,5 @@
 extends Node
 
-
-
 '''
 story, 
 loot, 
@@ -16,7 +14,7 @@ func add_event(message:String, type: String, reminder:bool = false):
     var allowed = false
     match type:
         "tools":
-            allowed = sets.settings["events"]["tools"]
+            allowed = global.settings["events"]["tools"]
         "test":
             allowed = true
         "system":
@@ -29,7 +27,7 @@ func add_event(message:String, type: String, reminder:bool = false):
         if reminder:
             message_total = "Reminder: " + message_total
         #for timestamps
-        if sets.settings["events"]["settings"]:
+        if global.settings["events"]["settings"]:
             message_total = current_time() + message_total
         entry.text = message_total
         emit.log_entry.emit(entry)
@@ -39,7 +37,3 @@ func current_time():
     var datetime: Dictionary = Time.get_time_dict_from_system()
     var datetime_string: String = "[%02d:%02d:%02d] " % [datetime["hour"],datetime["minute"],datetime["second"]] 
     return datetime_string
-
-
-func _on_button_test_2_pressed():
-    pass

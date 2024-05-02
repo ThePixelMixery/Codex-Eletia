@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://lohyoji0q0g8" path="res://scenes/UI/events.tscn" id="1_f0nnw"]
 [ext_resource type="Script" path="res://scripts/testing.gd" id="1_gm04j"]
 [ext_resource type="PackedScene" uid="uid://cq1eje456ok7a" path="res://scenes/UI/playarea/map.tscn" id="2_jbip0"]
-[ext_resource type="Script" path="res://scripts/tab_unlocker.gd" id="2_lrdkh"]
+[ext_resource type="Script" path="res://scripts/statics/tab_unlocker.gd" id="2_lrdkh"]
 [ext_resource type="PackedScene" uid="uid://8fdin4ava42h" path="res://scenes/UI/playarea/combat.tscn" id="3_2xeig"]
 [ext_resource type="PackedScene" uid="uid://cbu4kbusf371f" path="res://scenes/UI/info/inv.tscn" id="5_ec4al"]
 [ext_resource type="PackedScene" uid="uid://vcmf2w317qy7" path="res://scenes/UI/info/dragons.tscn" id="6_yqos6"]

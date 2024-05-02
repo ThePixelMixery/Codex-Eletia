@@ -11,34 +11,35 @@ extends Node
 func _ready():
 	emit.connect("log_entry",log_entry)
 	
-	check_settings.button_pressed = sets.settings["events"]["settings"]
-	_on_check_settings_toggled(sets.settings["events"]["settings"])
-	check_time.button_pressed = sets.settings["events"]["time"]
-	check_story.button_pressed = sets.settings["events"]["story"]
-	check_loot.button_pressed = sets.settings["events"]["loot"]
-	check_unlock.button_pressed = sets.settings["events"]["unlock"]
+	check_settings.button_pressed = global.settings["events"]["settings"]
+	_on_check_settings_toggled(global.settings["events"]["settings"])
+	check_time.button_pressed = global.settings["events"]["time"]
+	check_story.button_pressed = global.settings["events"]["story"]
+	check_loot.button_pressed = global.settings["events"]["loot"]
+	check_unlock.button_pressed = global.settings["events"]["unlock"]
 
 func save_settings():
-	save.save_data(save.SETTINGS, sets.settings)
+#	save.save_data(save.SETTINGS, sets.settings)
+	pass
 
 func _on_check_time_toggled(toggled_on:bool):
-	sets.settings["events"]["time"] = toggled_on
+	global.settings["events"]["time"] = toggled_on
 	save_settings()
 
 func _on_check_story_toggled(toggled_on:bool):
-	sets.settings["events"]["story"] = toggled_on
+	global.settings["events"]["story"] = toggled_on
 	save_settings()
 
 func _on_check_loot_toggled(toggled_on:bool):
-	sets.settings["events"]["loot"] = toggled_on
+	global.settings["events"]["loot"] = toggled_on
 	save_settings()
 
 func _on_check_unlock_toggled(toggled_on:bool):
-	sets.settings["events"]["unlock"] = toggled_on
+	global.settings["events"]["unlock"] = toggled_on
 	save_settings()
 
 func _on_check_settings_toggled(toggled_on:bool):
-	sets.settings["events"]["settings"] = toggled_on
+	global.settings["events"]["settings"] = toggled_on
 	save_settings()
 	if (toggled_on):
 		settings_box.show()

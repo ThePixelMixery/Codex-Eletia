@@ -55,7 +55,3 @@ func save_data(file_path: String, data: Variant):
 			subject = "Quest"
 			
 	log.add_event("%s saved" % subject,"system")
-
-
-func _on_button_test_pressed():
-	maps.map_gen()

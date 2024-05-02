@@ -17,12 +17,9 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+global="*res://scripts/autoloads/global.gd"
 emit="*res://scripts/autoloads/emitter.gd"
 save="*res://scripts/autoloads/save-manager.gd"
-sets="*res://scripts/autoloads/settings.gd"
-player="*res://scripts/autoloads/player.gd"
-inv="*res://scripts/autoloads/inventory.gd"
-maps="*res://scripts/autoloads/map.gd"
 log="*res://scripts/autoloads/logger.gd"
 data="*res://scripts/autoloads/databases.gd"
 
