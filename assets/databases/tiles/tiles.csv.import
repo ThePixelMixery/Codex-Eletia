@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://crwkuaiacaxjv"
+
+[deps]
+
+files=["res://assets/databases/tiles/tiles.Pop Min.translation", "res://assets/databases/tiles/tiles.Pop Max.translation", "res://assets/databases/tiles/tiles.Type.translation", "res://assets/databases/tiles/tiles.Cat.translation", "res://assets/databases/tiles/tiles.Subcat.translation", "res://assets/databases/tiles/tiles.Text.translation", "res://assets/databases/tiles/tiles.Info.translation"]
+
+source_file="res://assets/databases/tiles/tiles.csv"
+dest_files=["res://assets/databases/tiles/tiles.Pop Min.translation", "res://assets/databases/tiles/tiles.Pop Max.translation", "res://assets/databases/tiles/tiles.Type.translation", "res://assets/databases/tiles/tiles.Cat.translation", "res://assets/databases/tiles/tiles.Subcat.translation", "res://assets/databases/tiles/tiles.Text.translation", "res://assets/databases/tiles/tiles.Info.translation"]
+
+[params]
+
+compress=false
+delimiter=0

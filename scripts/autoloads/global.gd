@@ -1,115 +1,160 @@
 extends Node
 
-var inv: Dictionary = {
-    "tools": []
-}
-
-var map: Dictionary = {
-	"continents": [],
-	"tiles": [],
-	"adjacent": {},
+var settings: Dictionary = {
+	"events" = {
+		"settings" = true,
+		"time" = true,
+		"story" = true,
+		"loot" = true,
+		"unlock" = true
+	},
+    "layout" = {
+        "colourblind" = false,
+        "world_map_size" = 0
+    }
 }
 
 var player: Dictionary = {
-    "displayName": "Player",
+	"displayName" =  "Player",
 
-    "stamina": 0.0,
-    "staminaMax": 0.0,
+	"stamina" = 0.0,
+	"staminaMax" = 0.0,
 
-    "skills": []
+	"skills" = []
 }
 
-############## settings
-
-var settings: Dictionary = {
-	"events":{
-		"settings": true,
-		"time": true,
-		"story": true,
-		"loot": true,
-		"unlock": true
-	}
+var inv: Dictionary = {
+	"tools": []
 }
 
+var map: Dictionary = {
+	"continents" = [],
+	"tiles" = [],
+	"adjacent" = {},
+}
 
-const PASS = "Emizzy"
-const SETTINGS = "user://saves/settings_save.json"
-const PLAYER = "user://saves/player_save.json"
-const INVENTORY = "user://saves/inventory_save.json"
-const MAP = "user://saves/map_save.json"
-const QUEST = "user://saves/quest_save.json"
+var quest: Dictionary = {}
 
-func load_data(file_path: String, data: Variant, base_data: Variant) -> Variant:
-    
-    var loaded_data = data
+# consts
+const password: String = "Emizzy"
+const SETTINGS: String = "user://saves/settings_save.json"
+const PLAYER: String = "user://saves/player_save.json"
+const INV: String = "user://saves/inventory_save.json"
+const MAP: String = "user://saves/map_save.json"
+const QUEST: String = "user://saves/quest_save.json"
 
-    #first save creates directory
-    if not FileAccess.file_exists(file_path):
-        print("First run, setting data to default")
-        DirAccess.make_dir_absolute("user://saves")
-        save_data(file_path, base_data)
-    else:
-        #nonprod
-        var save_file = FileAccess.open(file_path, FileAccess.READ)
-        #password locked, for prod
-        #var save_file = FileAccess.open_encrypted_with_pass(file_path, FileAccess.READ, PASS)
-        print("Found a save at ", file_path)
-        var json = JSON.new()
-        var parse_result = json.parse(save_file.get_line())
-        if parse_result == OK:
-            loaded_data = json.get_data()
-        else:
-            print("JSON Parse Error: ", json.get_error_message(), " in ", file_path, " at line ", json.get_error_line())
+func _ready():
+	var dir = DirAccess.open("user://saves")
 
-    return loaded_data
+	# checks save folder exists
+	if dir:
+		var files: Array = []
+		dir.list_dir_begin() 
+		# check file name
+		var file_name : String = dir.get_next()
+		#looks through whole folder
+		while file_name != "":
+			# if the file is has a .tres extension, adds file and nicename to list
+			files.append(file_name)
+			file_name = dir.get_next()
+		for file in files:
+			load_data("user://saves/"+file)
 
-
-func save_data(file_path: String, data: Variant):
-    #nonprod
-    var save_file = FileAccess.open(file_path, FileAccess.WRITE)
-    #password locked, for prod
-    #var save_file = FileAccess.open_encrypted_with_pass(file_path, FileAccess.WRITE,PASS)
-    var json_string = JSON.stringify(data)
-    save_file.store_line(json_string)
-
-    #Tells you what saved
-    var subject: String = file_path
-            
-    log.add_event("%s saved" % subject,"system")
+	else:
+		#first save creates directory
+		print("First run, setting data to default")
+		DirAccess.make_dir_absolute("user://saves")
+		save(global.SETTINGS)
+		save(global.PLAYER)
+		save(global.INV)
+		save(global.MAP)
+		save(global.QUEST)
 
 
+func load_data(file:String):
+	#nonprod
+	var save_file = FileAccess.open(file, FileAccess.READ)
+	#password locked, for prod
+	#var save_file = FileAccess.open_encrypted_with_pass(file, FileAccess.READ, PASS)
+
+	var json = JSON.new()
+	var parse_result = json.parse(save_file.get_line())
+	if parse_result == OK:    
+		match file:
+			SETTINGS:
+				global.settings = json.get_data()
+			PLAYER:
+				global.player = json.get_data()
+			INV:
+				global.inv = json.get_data()
+			MAP:
+				global.map = json.get_data()
+			QUEST:
+				global.quest = json.get_data()
+			_:
+				print("unexpected file found")
+
+	else:
+		print("JSON Parse Error: ", json.get_error_message(), " in ", file, " at line ", json.get_error_line())
+
+func select_data(data: String):
+	var _json_string: String
+	match data:
+		SETTINGS:
+			_json_string = JSON.stringify(global.settings)
+		PLAYER:
+			_json_string = JSON.stringify(global.player)
+		INV:
+			_json_string = JSON.stringify(global.inv)
+		MAP:
+			_json_string = JSON.stringify(global.map)
+		QUEST:
+			_json_string = JSON.stringify(global.quest)
+		_:
+			print("unexpected json string")
+	return _json_string
+
+
+func save(data: String):
+	#password locked, for prod
+#   var save_file = FileAccess.open_encrypted_with_pass(file_path, FileAccess.WRITE,PASS)
+	#nonprod
+	var file = FileAccess.open(data, FileAccess.WRITE)
+	file.store_string(select_data(data))
+	print("Saved: ", data)
+	log.add_event("%s saved" % data,"system")
 
 func soft_reset():
-    settings = {
-        "events": 
-        {
-            "settings": true,
-            "time": true,
-            "story": true,
-            "loot": true,
-            "unlock": true
-        }
-    }
+	settings = {
+		"events" = 
+		{
+			"settings" = true,
+			"time" = true,
+			"story" = true,
+			"loot" = true,
+			"unlock" = true
+		}
+	}
 
 func hard_reset():
-    settings = {
-        "events":
-        {
-            "settings": true,
-            "time": true,
-            "story": true,
-            "loot": true,
-            "unlock": true
-        },
-        "tabs_unlocked":
-        {
-            "play" = {
-                "combat": false
-            },
-            "info" = {
-                "dragons": false,
-                "inv": false,
-                "quests": false,
-            }
-        }
-    }
+	settings = {
+		"events" =
+		{
+			"settings" = true,
+			"time" = true,
+			"story" = true,
+			"loot" = true,
+			"unlock" = true
+		},
+		"tabs_unlocked" =
+		{
+			"play" = {
+				"combat" = false
+			},
+			"info" = {
+				"dragons" = false,
+				"inv" = false,
+				"quests" = false,
+			}
+		}
+	}

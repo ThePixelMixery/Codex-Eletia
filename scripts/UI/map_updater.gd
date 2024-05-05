@@ -1,8 +1,8 @@
 extends Node
 
-@onready var cont_grid: GridContainer = $HBox_Map/Control_Map/Grid_Conts
-@onready var explore_grid: GridContainer = $HBox_Map/Control_Map/Grid_Explore
-@onready var world_grid: GridContainer = $HBox_Map/Control_Map/Scroll_World/Grid_World
+@onready var cont_grid: GridContainer = $HSplit_Map/Control_Map/Control_Buffer/Grid_Conts
+@onready var explore_grid: GridContainer = $HSplit_Map/Control_Map/Control_Buffer/Grid_Explore
+@onready var world_grid: GridContainer = $HSplit_Map/Control_Map/Control_Buffer/Scroll_World/Grid_World
 
 var cont_array: Array 
 var world_array: Array 
@@ -31,28 +31,44 @@ func _ready():
 	world_array = world_grid.get_children()
 	if global.map["continents"] != []:
 		populate_conts()
-		#populate_tiles()
+		populate_tiles()
 
 func populate_ui():
 	populate_conts()
-	#populate_tiles()
-	pass
+	populate_tiles()
 
 func populate_conts():
 	print("populating cont UI")
-	#adding tooltips and info
-	for i in range(global.map["continents"].size()):
-		var cont_label: Label = cont_array[i].get_child(0)
+
+	for cont in global.map["continents"]:
+		var cont_button: Button = Button.new()
+		cont_button.set_anchors_preset(Control.PRESET_FULL_RECT)
+		cont_button.size_flags_horizontal= Control.SIZE_EXPAND_FILL
+		cont_button.size_flags_vertical= Control.SIZE_EXPAND_FILL
+		cont_grid.add_child(cont_button)
+		
+		var cont_label: Label = Label.new()
+		
+		#label inside cont tile
+		cont_label.set_anchors_preset(Control.PRESET_FULL_RECT)
+		cont_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		cont_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		cont_label.size_flags_horizontal= Control.SIZE_EXPAND_FILL
+		cont_label.size_flags_vertical= Control.SIZE_EXPAND_FILL
 		#if global.map["continents"][i]["disovered"]:
 			#cont_label.text = global.map["continents"][i]["type"]
-		cont_label.text = global.map["continents"][i]["type"]
+		if cont["size"] == 0:
+			cont_label.text = cont["type"] + "\n Capital"
+		else:
+			cont_label.text = cont["type"]
+		cont_button.add_child(cont_label)
 
 func populate_tiles():
 	var image: CompressedTexture2D
 	print("populating world UI")
-	for i in global.map["tiles"].size()-1:
+	for tile in global.map["tiles"]:
 		var tex = TextureRect.new()
-		match global.map["tiles"][i]["type"]:
+		match tile["type"]:
 			"Fire":
 				image = fire
 			"Water":

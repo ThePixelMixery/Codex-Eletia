@@ -2,10 +2,10 @@ extends Node
 
 func add_tool(tool_name: String, type: String, grade: String, uses: int):
     var new_tool = {
-        "name": tool_name,
-        "type": type,
-        "grade": grade,
-        "uses": uses
+        "name" = tool_name,
+        "type" = type,
+        "grade" = grade,
+        "uses" = uses
     }
     var logmessage: String
     global.inv["tools"].append(new_tool)

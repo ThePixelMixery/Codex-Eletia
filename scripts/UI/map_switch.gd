@@ -1,10 +1,10 @@
-extends HBoxContainer
+extends HSplitContainer
 
 @onready var tabs: TabContainer = $Tab_Map
 
-@onready var cont_map: GridContainer = $Control_Map/Grid_Conts
-@onready var world_map: GridContainer = $Control_Map/Grid_Explore
-@onready var explore_map: ScrollContainer = $Control_Map/Scroll_World
+@onready var cont_map: GridContainer = $Control_Map/Control_Buffer/Grid_Conts
+@onready var world_map: GridContainer = $Control_Map/Control_Buffer/Grid_Explore
+@onready var explore_map: ScrollContainer = $Control_Map/Control_Buffer/Scroll_World
 
 var tab_array: Array = []
 
