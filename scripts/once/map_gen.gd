@@ -18,7 +18,6 @@ var base_cont_data: Array = [
 	{ "type" = "Plant", "sh" = "Pl"},
 	{ "type" = "Overseer", "sh" = "Ov"},
 	{ "type" = "Ghost", "sh" = "Gh"},
-	{ "type" = "Channel", "sh" = "Ch"},
 	{ "type" = "Hallow", "sh" = "Ha"}
 ]
 
@@ -180,10 +179,16 @@ func add_shorthand(tiles: Array):
 				tile["shorthand"] = cont["sh"]
 
 func add_population():
+
 	for cont in global.map["continents"]:
 		if cont["type"] != "Sea":
 			add_major(cont)
-		
+
+	for tile in global.map["tiles"]:
+		var chance: float = randf_range(0,1)
+		if chance <= 0.3 and tile["type"] != "Sea":
+			add_minor(tile)
+
 func add_major(cont: Variant):
 	# pick tile to become major tile
 	var selected: bool = false
@@ -201,21 +206,17 @@ func add_major(cont: Variant):
 	match cont["size"]:
 		0:
 			for entry in data.tiles:
-				tile_from_db = get_db_tile_info(cont["type"],"Capital")
+				tile_from_db = data.get_tile_entry(cont["type"],"Capital")
 		1:
 			for entry in data.tiles:
-				tile_from_db = get_db_tile_info(cont["type"],"City")
+				tile_from_db = data.get_tile_entry(cont["type"],"City")
 		2:
 			for entry in data.tiles:
-				tile_from_db = get_db_tile_info(cont["type"],"Town")
+				tile_from_db = data.get_tile_entry(cont["type"],"Town")
 	_tile.merge(tile_from_db)
-	print("tile %d assigned %s in %s territory" % [tile_id, _tile["name"],cont["type"]])
-
-func add_minor(cont: Variant):
-	# Minor: Other
-	pass
-
-func get_db_tile_info(type: String, subcat: String):
-	for entry in data["tiles"]:
-		if entry["type"] == type && entry["subcat"] == subcat:
-			return entry
+	
+func add_minor(tile: Variant):
+	var subcat = data.minor_locations.pick_random()
+	var tile_from_db: Variant = data.get_tile_entry(tile["type"], subcat)
+	tile.merge(tile_from_db)
+	print("Added %s to %d, %d" % [subcat, tile["pos"][0],tile["pos"][1]])

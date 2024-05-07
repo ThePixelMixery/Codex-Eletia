@@ -1,7 +1,18 @@
 extends Node
 
+
 var actions: Array = []
-var tiles: Array = []
+var tiles: Dictionary = {}
+
+var minor_locations = [
+	"Outpost",
+	"Colony",
+	"Refuge",
+	"Hamlet",
+	"Fort",
+	"Sanctuary",
+	"Stronghold"
+]
 
 var prefixes: Dictionary = {
 	"enemies" = [
@@ -107,18 +118,21 @@ var prefixes: Dictionary = {
 }
 
 func _ready():
-	populate("actions")
+#	populate("actions")
 	populate("tiles")
 
 	# remove title row
-	actions.pop_front()
-	tiles.pop_front()
+#	actions.pop_front()
 
 func populate(data:String):
 	var file: FileAccess 
 	file = FileAccess.open("res://assets/databases/" + data +"/" + data +".csv", FileAccess.READ)
-	while !file.eof_reached():
-		database_entry(data, file.get_csv_line())
+	match data:
+		"tiles":
+			while !file.eof_reached():
+				make_tile_entry(file.get_csv_line())
+		_:
+			pass
 
 func database_entry(data: String, entry: Array):
 	match data:
@@ -130,15 +144,17 @@ func database_entry(data: String, entry: Array):
 				"action":entry[3]
 			}
 			actions.append(action)
-		"tiles":
-			var tile: Dictionary = {
-				#"prefix": true if entry[0] == "Yes" else false,
-				"name": entry[0],
-				"pop min": entry[1],
-				"pop max": entry[2],
-				"type": entry[3],
-				"cat": entry[4],
-				"subcat": entry[5],
-				"flavour": entry[6]
-			}
-			tiles.append(tile)
+
+func make_tile_entry(entry: Array):
+	var tile_info: Dictionary = {
+		"name" = entry[2],
+		"pop_min" = entry[3],
+		"pop_max" = entry[4],
+		"flavour" = entry[5]
+	}
+	if !tiles.has(entry[0]):
+		tiles[entry[0]] = {}
+	tiles[entry[0]][entry[1]] = tile_info
+
+func get_tile_entry(type: String, cat: String):
+	return tiles[type][cat]
