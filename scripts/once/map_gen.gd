@@ -2,8 +2,13 @@ extends Node
 
 var rng: RandomNumberGenerator
 
-var map_x: int = -24
-var map_y: int = 24
+var map_x: int = -22
+var map_y: int = 22
+var map_pos = 22
+var map_neg = -22
+var map_cap: int = 23
+var cont_size: int = 8
+var map_inc: int = 9
 
 # used for inital generation
 var base_cont_data: Array = [
@@ -16,7 +21,6 @@ var base_cont_data: Array = [
 	{ "type" = "Time", "sh" = "Ti"},
 	{ "type" = "Summoner", "sh" = "Su"},
 	{ "type" = "Plant", "sh" = "Pl"},
-	{ "type" = "Overseer", "sh" = "Ov"},
 	{ "type" = "Ghost", "sh" = "Gh"},
 	{ "type" = "Hallow", "sh" = "Ha"}
 ]
@@ -47,7 +51,7 @@ func generate_map(data):
 
 	#generating terrain
 	#pick tile to become populated tiles
-	add_population()
+#	add_population()
 
 	global.save(global.MAP)
 
@@ -56,7 +60,7 @@ func generate_map(data):
 func generate_conts():
 	var generated_cont_data: Array = []
 
-	for i in range(3):
+	for i in range(2):
 		for cont in base_cont_data:
 			var new_cont = {
 				"size": i,
@@ -67,7 +71,7 @@ func generate_conts():
 			generated_cont_data.append(new_cont)
 
 	
-	for i in range(generated_cont_data.size(), 49):
+	for i in range(generated_cont_data.size(), 25):
 		var sea_cont: Dictionary = {
 			"size": 3,
 			"type": "Sea",
@@ -83,27 +87,27 @@ func generate_conts():
 	return generated_cont_data
 
 func apply_coords(cont: Dictionary):
-	cont["x_limit"] = [map_x,map_x+6]
-	cont["y_limit"] = [map_y,map_y-6]
-	map_x += 7
-	if map_x >= 25:
-		map_x = -24
-		map_y -= 7
+	cont["x_limit"] = [map_x,map_x+cont_size]
+	cont["y_limit"] = [map_y,map_y-cont_size]
+	map_x += map_inc
+	if map_x >= map_cap:
+		map_x = map_neg
+		map_y -= map_inc
 
 func generate_world(data: Dictionary):
 	# create world tiles based on size
-	for i in range(global.map["continents"].size()*49):
+	for i in range(global.map["continents"].size()*81):
 		var tile: Dictionary = {}
 		data["tiles"].append(tile)
 
-	var pos_x = -24
-	var pos_y = 24
+	map_x = map_neg
+	map_y = map_pos
 	for tile in data["tiles"]:
-		tile["pos"] = [pos_x,pos_y]
-		pos_x += 1
-		if pos_x == 25:
-			pos_x = -24
-			pos_y -= 1
+		tile["pos"] = [map_x,map_y]
+		map_x += 1
+		if map_x == map_cap:
+			map_x = map_neg
+			map_y -= 1
 
 
 	#assigns type based on content, clean
@@ -125,6 +129,8 @@ func generate_world(data: Dictionary):
 				tile["type"] = rand_assign
 
 	add_shorthand(data["tiles"])
+
+
 
 func assign_cont():
 	# assign according to continent
@@ -160,9 +166,20 @@ func set_directions(index: int, data: Dictionary):
 	data["adjacent"]["SW"] = get_tile_from_pos(pos_x-1,pos_y-1)
 
 func get_tile_from_pos(x:int, y:int, data:Dictionary = global.map):
+	if x <= map_neg or x >= map_pos:
+		x = map_opposite_edge(x)
+	if y <= map_neg or y >= map_pos:
+		y = map_opposite_edge(y)
 	for tile in data["tiles"]:
 		if tile["pos"][0] == x && tile["pos"][1] == y:
 			return tile
+
+func map_opposite_edge(coord: int):
+	if coord == map_cap:
+		coord = map_neg
+	elif coord == -(map_cap):
+		coord = map_pos
+	return coord
 
 func ocean_check(tile: Variant, change: float):
 	for key in global.map["adjacent"].keys():

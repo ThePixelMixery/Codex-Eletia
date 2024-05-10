@@ -6,7 +6,7 @@ extends Node
 
 var cont_array: Array 
 var world_array: Array 
-
+var tile_size: = Vector2(40,40)
 	
 var base: CompressedTexture2D = load("res://assets/images/tiles/base.png")
 var fire: CompressedTexture2D = load("res://assets/images/tiles/world_fire.png")
@@ -40,6 +40,10 @@ func populate_ui():
 func populate_conts():
 	print("populating cont UI")
 
+	if cont_grid.get_child_count() != 0:
+		for child in cont_grid.get_children():
+			child.queue_free() 
+
 	for cont in global.map["continents"]:
 		var cont_button: Button = Button.new()
 		cont_button.set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -64,10 +68,16 @@ func populate_conts():
 		cont_button.add_child(cont_label)
 
 func populate_tiles():
+
+	if world_grid.get_child_count() != 0:
+		for child in world_grid.get_children():
+			child.queue_free() 
+
 	var image: CompressedTexture2D
 	print("populating world UI")
 	for tile in global.map["tiles"]:
-		var tex = TextureRect.new()
+		var tileButton = Button.new()
+		tileButton.set_size(tile_size)
 		match tile["type"]:
 			"Fire":
 				image = fire
@@ -99,5 +109,7 @@ func populate_tiles():
 				image = sea
 			_:
 				image = base		
-		tex.texture = image
-		world_grid.add_child(tex)
+		tileButton.custom_minimum_size = tile_size
+		tileButton.expand_icon = true
+		tileButton.icon = image
+		world_grid.add_child(tileButton)

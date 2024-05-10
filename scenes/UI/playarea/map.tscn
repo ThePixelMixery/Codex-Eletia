@@ -47,633 +47,89 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Grid_Explore" type="GridContainer" parent="HSplit_Map/Control_Map/Control_Buffer"]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = -4.0
+columns = 3
+
+[node name="Button_NW" type="Button" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBox_Tile" type="VBoxContainer" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button_NW"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label_Tile" type="Label" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button_NW/VBox_Tile"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Grid_Actions" type="GridContainer" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button_NW/VBox_Tile"]
+layout_mode = 2
+size_flags_vertical = 3
 columns = 4
 
-[node name="Button1" type="Button" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore"]
+[node name="Button_N" type="Button" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ButtonGrid" type="GridContainer" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button1"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-columns = 2
-
-[node name="Tex_Action1" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button1/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action2" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button1/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action3" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button1/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action4" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button1/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Button2" type="Button" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ButtonGrid" type="GridContainer" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button2"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-columns = 2
-
-[node name="Tex_Action1" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button2/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action2" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button2/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action3" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button2/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action4" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button2/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Button3" type="Button" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ButtonGrid" type="GridContainer" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button3"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-columns = 2
-
-[node name="Tex_Action1" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button3/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action2" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button3/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action3" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button3/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action4" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button3/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Button4" type="Button" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ButtonGrid" type="GridContainer" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button4"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-columns = 2
-
-[node name="Tex_Action1" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button4/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action2" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button4/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action3" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button4/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action4" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button4/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Button5" type="Button" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ButtonGrid" type="GridContainer" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button5"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-columns = 2
-
-[node name="Tex_Action1" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button5/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action2" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button5/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action3" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button5/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action4" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button5/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Button6" type="Button" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ButtonGrid" type="GridContainer" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button6"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-columns = 2
-
-[node name="Tex_Action1" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button6/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action2" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button6/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action3" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button6/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action4" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button6/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Button7" type="Button" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ButtonGrid" type="GridContainer" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button7"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-columns = 2
-
-[node name="Tex_Action1" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button7/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action2" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button7/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action3" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button7/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action4" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button7/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Button8" type="Button" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ButtonGrid" type="GridContainer" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button8"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-columns = 2
-
-[node name="Tex_Action1" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button8/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action2" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button8/ButtonGrid"]
+[node name="Button_NE" type="Button" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-expand_mode = 1
 
-[node name="Tex_Action3" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button8/ButtonGrid"]
+[node name="Button_W" type="Button" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-expand_mode = 1
 
-[node name="Tex_Action4" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button8/ButtonGrid"]
+[node name="Button_self" type="Button" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Button9" type="Button" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ButtonGrid" type="GridContainer" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button9"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-columns = 2
-
-[node name="Tex_Action1" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button9/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action2" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button9/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action3" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button9/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action4" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button9/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Button10" type="Button" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ButtonGrid" type="GridContainer" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button10"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-columns = 2
-
-[node name="Tex_Action1" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button10/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action2" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button10/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action3" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button10/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action4" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button10/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Button11" type="Button" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ButtonGrid" type="GridContainer" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button11"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-columns = 2
-
-[node name="Tex_Action1" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button11/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action2" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button11/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action3" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button11/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action4" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button11/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Button12" type="Button" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ButtonGrid" type="GridContainer" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button12"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-columns = 2
-
-[node name="Tex_Action1" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button12/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action2" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button12/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action3" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button12/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action4" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button12/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Button13" type="Button" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ButtonGrid" type="GridContainer" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button13"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-columns = 2
-
-[node name="Tex_Action1" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button13/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action2" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button13/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action3" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button13/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action4" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button13/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Button14" type="Button" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ButtonGrid" type="GridContainer" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button14"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-columns = 2
-
-[node name="Tex_Action1" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button14/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action2" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button14/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action3" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button14/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action4" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button14/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Button15" type="Button" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ButtonGrid" type="GridContainer" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button15"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-columns = 2
-
-[node name="Tex_Action1" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button15/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action2" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button15/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action3" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button15/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Tex_Action4" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button15/ButtonGrid"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand_mode = 1
-
-[node name="Button16" type="Button" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ButtonGrid" type="GridContainer" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button16"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-columns = 2
 
-[node name="Tex_Action1" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button16/ButtonGrid"]
+[node name="Button_E" type="Button" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-expand_mode = 1
 
-[node name="Tex_Action2" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button16/ButtonGrid"]
+[node name="Button_SW" type="Button" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-expand_mode = 1
 
-[node name="Tex_Action3" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button16/ButtonGrid"]
+[node name="Button_S" type="Button" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-expand_mode = 1
 
-[node name="Tex_Action4" type="TextureRect" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button16/ButtonGrid"]
+[node name="Button_SE" type="Button" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-expand_mode = 1
 
 [node name="Grid_Conts" type="GridContainer" parent="HSplit_Map/Control_Map/Control_Buffer"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-columns = 7
+columns = 5
 
 [node name="Scroll_World" type="ScrollContainer" parent="HSplit_Map/Control_Map/Control_Buffer"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -683,19 +139,18 @@ grow_vertical = 2
 
 [node name="Grid_World" type="GridContainer" parent="HSplit_Map/Control_Map/Control_Buffer/Scroll_World"]
 layout_mode = 2
-columns = 49
+columns = 45
 
 [node name="Tab_Map" type="TabContainer" parent="HSplit_Map"]
 layout_mode = 2
 size_flags_horizontal = 3
 tab_alignment = 2
-current_tab = 1
 
 [node name="World" type="Control" parent="HSplit_Map/Tab_Map"]
-visible = false
 layout_mode = 2
 
 [node name="Continent" type="Control" parent="HSplit_Map/Tab_Map"]
+visible = false
 layout_mode = 2
 
 [node name="Explore" type="VBoxContainer" parent="HSplit_Map/Tab_Map"]

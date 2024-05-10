@@ -1,6 +1,6 @@
 ﻿Fire,Outpost,Emberforge,5,50,"A roaring inferno fueled by the earth's core, where skilled artisans craft the finest weaponry and armor, each piece forged with unbearable heat","Resource collection area, professionals for learning skills"
 Fire,Fort,Fort,50,250,"Its ramparts ablaze with eternal fire, guarding the territory from harm","Fortified military structure, base or defense"
-Fire,Sancutary,Sanctuary,25,250,"The faithful gather to pay homage to the flames, their prayers rising like smoke to the heavens",Sacred place
+Fire,Sanctuary,Sanctuary,25,250,"The faithful gather to pay homage to the flames, their prayers rising like smoke to the heavens",Sacred place
 Fire,Stronghold,Stronghold,50,500,"A fortress of fire and steel, its walls forged in the heart a risen volcano",Central hub of power and defense
 Fire,Refuge,Refuge,25,250,"A sanctuary of warmth and hospitality, offering solace to weary travelers.",Safe haven
 Fire,Hamlet,Hamlet,25,250,"Nestled in a thriving farmland, a testament to the ash they depend on",A few houses and buildings
@@ -10,7 +10,7 @@ Fire,Capital,Infernium,2000,20000,"Its heart pulsating with the fiery breath of 
 Fire,Town,Igniferia,50,500,The town hums with the crackling energy of molten glass and the scent of burning clay,"Small Population, general store, inn, maybe a side quest, well-defined community, infra, economy"
 Water,Stronghold,Stronghold,50,500,"Its foundations sinking into the mire, a fortress besieged by paranoia",Central hub of power and defense
 Water,Fort,Fort,50,250,Its walls slick with algae and its defenders ever wary of the patient carnivores,"Fortified military structure, base or defense"
-Water,Sancutary,Sanctuary,25,250,"A beacon of hope in the heart of the swamp, where the light struggles to penetrate the darkness",Sacred place
+Water,Sanctuary,Sanctuary,25,250,"A beacon of hope in the heart of the swamp, where the light struggles to penetrate the darkness",Sacred place
 Water,Refuge,Refuge,25,250,"A haven amidst the treacherous marshes, where every step could be your last.",Safe haven
 Water,Hamlet,Hamlet,25,250,"Where the waters rise and fall with the tides, and the marshes claim all who falter",A few houses and buildings
 Water,Colony,Colony,100,1000,"Clinging to the edge of the swamp, its people ever vigilant of the lurking predators.","Settlement in a new territory, Nomadic"
@@ -19,7 +19,7 @@ Water,City,Maritum,500,5000,Where the shadows dance and the marshes swallow all 
 Water,Town,Town,50,500,Where the ground shifts beneath your feet and the whispers of unseen dangers fill the air.,"Small Population, general store, inn, maybe a side quest, well-defined community, infra, economy"
 Water,Outpost,Abyss,5,50,"A undergrown network of tunnels, it’s bounty getting rarer the deeper you go. Beware of the residents","Resource collection area, professionals for learning skills"
 Earth,Fort,Fort,50,250,"Its walls hewn from the living rock, standing as a bulwark on an expansive plateau.","Fortified military structure, base or defense"
-Earth,Sancutary,Sanctuary,25,250,"Hidden deep within the earth, where the faithful gather to pay homage to the land.",Sacred place
+Earth,Sanctuary,Sanctuary,25,250,"Hidden deep within the earth, where the faithful gather to pay homage to the land.",Sacred place
 Earth,Stronghold,Stronghold,50,500,"Its foundations rooted in the bedrock, unyielding against the ravages of time.",Central hub of power and defense
 Earth,Hamlet,Hamlet,25,250,"Where the mountains loom overhead, and the people eke out a living from the unforgiving terrain.",A few houses and buildings
 Earth,Colony,Colony,100,1000,"Nestled in the heart of the mountains, its people toil tirelessly in the depths of the earth.","Settlement in a new territory, Nomadic"
@@ -28,7 +28,7 @@ Earth,City,Earthrend,500,5000,Where the streets are paved with cobblestones and 
 Earth,Capital,Terranis,2000,20000,"A majestic structure, sculpted from the mountainside, gleams with the radiant splendor of gold and jewels adorning its sharp-edged facade.","Primary or admin city, institution and leaders"
 Earth,Town,Terravox,50,500,"The clang of metal on metal echoes through the streets, and the earth trembles beneath your feet","Small Population, general store, inn, maybe a side quest, well-defined community, infra, economy"
 Earth,Outpost,Terraforge,5,50,"A mobile workshop for creating magic sensors, built to fold and navigate the treacherous depths and survive a tunnel collapse","Resource collection area, professionals for learning skills"
-Air,Sancutary,Sanctuary,25,250,"In a sacred place where secrets are whispered on the desert breeze, ancient ruins stand as a testament to the enduring power of the wind.",Sacred place
+Air,Sanctuary,Sanctuary,25,250,"In a sacred place where secrets are whispered on the desert breeze, ancient ruins stand as a testament to the enduring power of the wind.",Sacred place
 Air,Stronghold,Stronghold,50,500,"Carved into a rocky outcrop, a formidable fortress withstands the relentless desert winds, its walls weathered by centuries of sandstorms.",Central hub of power and defense
 Air,Hamlet,Hamlet,25,250,"On the fringes of the desert, a small community struggles to survive, their homes huddled together against the relentless heat.",A few houses and buildings
 Air,Fort,Fort,50,250,"Atop a rocky plateau, a stronghold commands a view of the vast desert expanse, its battlements ready to repel any threat.","Fortified military structure, base or defense"
@@ -40,7 +40,7 @@ In the heart of a desert metropolis, towering sandstone structures rise like mon
 Air,Town,Aeroth,50,500,"
 Amidst the shifting sands where reality blurs with illusion, a bustling hub thrives, its streets alive with the whispers of hidden truths.","Small Population, general store, inn, maybe a side quest, well-defined community, infra, economy"
 Air,Outpost,Daggerstone,5,50,"A Daggerstone rises defiantly from the earth, its jagged pinnacle reaching towards the heavens like an ancient sentinel, defying the passage of time with its imposing height.","Resource collection area, professionals for learning skills"
-Arcane,Sancutary,Sanctuary,25,250,To be written…,Sacred place
+Arcane,Sanctuary,Sanctuary,25,250,To be written…,Sacred place
 Arcane,Fort,Fort,50,250,"Soldiers study distributed tomes, rehearsing defensive spells as they train their sword arm.","Fortified military structure, base or defense"
 Arcane,Stronghold,Stronghold,50,500,To be written…,Central hub of power and defense
 Arcane,Hamlet,Hamlet,25,250,To be written…,A few houses and buildings
@@ -53,7 +53,7 @@ Arcane,Outpost,Spellspire,5,50,To be written…,"Resource collection area, profe
 Mystic,Outpost,Emporium,5,50,"Artisans imbue trinkets with mystic qualities, granting the power of divination, luck, and hexes to those who possess them.",
 Mystic,Hamlet,Hamlet,25,250,"Fae-like luck dances with danger, mystic whims dictate the ebb and flow of daily life.",A few houses and buildings
 Mystic,Stronghold,Stronghold,50,500,"Built upon the shifting sands of fate, its walls impervious to the whims of chance.",Central hub of power and defense
-Mystic,Sancutary,Sanctuary,25,250,"For the fortunate and the favored, mystic blessings shape every venture, from morale boosts to prophetic insights",Sacred place
+Mystic,Sanctuary,Sanctuary,25,250,"For the fortunate and the favored, mystic blessings shape every venture, from morale boosts to prophetic insights",Sacred place
 Mystic,Fort,Fort,50,250,"Perched on the edge of mystic prophecy, daring risk-takers thrive, turning battles with fate into legendary tales.","Fortified military structure, base or defense"
 Mystic,Refuge,Refuge,25,250,Mystic blessings manifest in successful endeavors and miraculous visions.,Safe haven
 Mystic,Colony,Colony,100,1000,"Dreams guide every action, its inhabitants bound by the threads of fate.","Settlement in a new territory, Nomadic"
@@ -61,7 +61,7 @@ Mystic,City,Mystara,500,5000,"Rife with fae-like dealings, mysticism permeates e
 Mystic,Capital,Enigmara,2000,20000,"Encircled by glistening crystals and glittering trinkets, stands as a nexus of luck and demise, where divination, morale, and uncertainty intertwine in a mesmerizing dance of fate.","Primary or admin city, institution and leaders"
 Mystic,Town,Esoterica,50,500,"Fortune smiles upon the bold risk-takers, dreams are woven into prophecy, shaping every twist of fate.","Small Population, general store, inn, maybe a side quest, well-defined community, infra, economy"
 Time,Fort,Fort,50,250,To be written…,"Fortified military structure, base or defense"
-Time,Sancutary,Sanctuary,25,250,To be written…,Sacred place
+Time,Sanctuary,Sanctuary,25,250,To be written…,Sacred place
 Time,Stronghold,Stronghold,50,500,To be written…,Central hub of power and defense
 Time,Refuge,Refuge,25,250,To be written…,Safe haven
 Time,Hamlet,Hamlet,25,250,To be written…,A few houses and buildings
@@ -71,7 +71,7 @@ Time,Capital,Eonora,2000,20000,To be written…,"Primary or admin city, institut
 Time,Town,Temporalis,50,500,To be written…,"Small Population, general store, inn, maybe a side quest, well-defined community, infra, economy"
 Time,Outpost,Chronotron,5,50,To be written…,"Resource collection area, professionals for learning skills"
 Summoner,Fort,Fort,50,250,To be written…,"Fortified military structure, base or defense"
-Summoner,Sancutary,Sanctuary,25,250,To be written…,Sacred place
+Summoner,Sanctuary,Sanctuary,25,250,To be written…,Sacred place
 Summoner,Stronghold,Stronghold,50,500,To be written…,Central hub of power and defense
 Summoner,Hamlet,Hamlet,25,250,To be written…,A few houses and buildings
 Summoner,Refuge,Refuge,25,250,To be written…,Safe haven
@@ -81,7 +81,7 @@ Summoner,Capital,Acolytheon,2000,20000,To be written…,"Primary or admin city, 
 Summoner,Town,Soulfis,50,500,To be written…,"Small Population, general store, inn, maybe a side quest, well-defined community, infra, economy"
 Summoner,Outpost,Conjorium,5,50,To be written…,"Resource collection area, professionals for learning skills"
 Plant,Fort,Fort,50,250,To be written…,"Fortified military structure, base or defense"
-Plant,Sancutary,Sanctuary,25,250,To be written…,Sacred place
+Plant,Sanctuary,Sanctuary,25,250,To be written…,Sacred place
 Plant,Stronghold,Stronghold,50,500,To be written…,Central hub of power and defense
 Plant,Hamlet,Hamlet,25,250,To be written…,A few houses and buildings
 Plant,Colony,Colony,100,1000,To be written…,"Settlement in a new territory, Nomadic"
@@ -90,40 +90,20 @@ Plant,City,Florastra,500,5000,To be written…,large urban settlement
 Plant,Refuge,Refuge,25,250,To be written…,Safe haven
 Plant,Town,Arboros,50,500,To be written…,"Small Population, general store, inn, maybe a side quest, well-defined community, infra, economy"
 Plant,Outpost,Terrarium,5,50,To be written…,"Resource collection area, professionals for learning skills"
-Overseer,Sancutary,Sanctuary,25,250,To be written…,Sacred place
-Overseer,Stronghold,Stronghold,50,500,To be written…,Central hub of power and defense
-Overseer,Fort,Fort,50,250,To be written…,"Fortified military structure, base or defense"
-Overseer,Hamlet,Hamlet,25,250,To be written…,A few houses and buildings
-Overseer,Colony,Colony,100,1000,To be written…,"Settlement in a new territory, Nomadic"
-Overseer,Refuge,Refuge,25,250,To be written…,Safe haven
-Overseer,Capital,Sentinelis,2000,20000,To be written…,"Primary or admin city, institution and leaders"
-Overseer,City,Custodiar,500,5000,To be written…,large urban settlement
-Overseer,Town,Custos,50,500,To be written…,"Small Population, general store, inn, maybe a side quest, well-defined community, infra, economy"
-Overseer,Outpost,Workshop,5,50,To be written…,"Resource collection area, professionals for learning skills"
 Ghost,Fort,Fort,50,250,To be written…,"Fortified military structure, base or defense"
 Ghost,Hamlet,Hamlet,25,250,To be written…,A few houses and buildings
 Ghost,Stronghold,Stronghold,50,500,To be written…,Central hub of power and defense
-Ghost,Sancutary,Sanctuary,25,250,To be written…,Sacred place
+Ghost,Sanctuary,Sanctuary,25,250,To be written…,Sacred place
 Ghost,Capital,Ectrosanct,2000,20000,To be written…,"Primary or admin city, institution and leaders"
 Ghost,Refuge,Refuge,25,250,To be written…,Safe haven
 Ghost,Colony,Colony,100,1000,To be written…,"Settlement in a new territory, Nomadic"
 Ghost,Town,Spectralis,50,500,To be written…,"Small Population, general store, inn, maybe a side quest, well-defined community, infra, economy"
 Ghost,City,Ectrium,500,5000,To be written…,large urban settlement
 Ghost,Outpost,Graveyard,5,50,To be written…,"Resource collection area, professionals for learning skills"
-Channel,Stronghold,Stronghold,50,500,To be written…,Central hub of power and defense
-Channel,Hamlet,Hamlet,25,250,To be written…,A few houses and buildings
-Channel,Fort,Fort,50,250,To be written…,"Fortified military structure, base or defense"
-Channel,Sancutary,Sanctuary,25,250,To be written…,Sacred place
-Channel,Colony,Colony,100,1000,To be written…,"Settlement in a new territory, Nomadic"
-Channel,Refuge,Refuge,25,250,To be written…,Safe haven
-Channel,City,Energon,500,5000,To be written…,large urban settlement
-Channel,Capital,Aetheria,2000,20000,To be written…,"Primary or admin city, institution and leaders"
-Channel,Town,Conduitum,50,500,To be written…,"Small Population, general store, inn, maybe a side quest, well-defined community, infra, economy"
-Channel,Outpost,Flux Field,5,50,To be written…,"Resource collection area, professionals for learning skills"
 Hallow,Stronghold,Stronghold,50,500,To be written…,Central hub of power and defense
 Hallow,Hamlet,Hamlet,25,250,To be written…,A few houses and buildings
 Hallow,Fort,Fort,50,250,To be written…,"Fortified military structure, base or defense"
-Hallow,Sancutary,Sanctuary,25,250,To be written…,Sacred place
+Hallow,Sanctuary,Sanctuary,25,250,To be written…,Sacred place
 Hallow,Refuge,Refuge,25,250,To be written…,Safe haven
 Hallow,Capital,Snctifex,2000,20000,To be written…,"Primary or admin city, institution and leaders"
 Hallow,Colony,Colony,100,1000,To be written…,"Settlement in a new territory, Nomadic"
