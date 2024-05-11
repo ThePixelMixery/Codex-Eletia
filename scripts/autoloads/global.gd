@@ -30,7 +30,7 @@ var inv: Dictionary = {
 var map: Dictionary = {
 	"continents" = [],
 	"tiles" = [],
-	"adjacent" = {},
+	"adjacent" = [],
 }
 
 var quest: Dictionary = {}
@@ -157,25 +157,26 @@ func hard_reset():
 		}
 	}
 
-func set_directions(index: int, data: Dictionary=global.map):
-	var pos_x: int = data["tiles"][index]["pos"][0]
-	var pos_y: int = data["tiles"][index]["pos"][1]
-	data["adjacent"]["self"] = data["tiles"][index]
-	data["adjacent"]["NE"] = get_tile_from_pos(pos_x+1,pos_y+1)
-	data["adjacent"]["N"] = get_tile_from_pos(pos_x,pos_y+1)
-	data["adjacent"]["NW"] = get_tile_from_pos(pos_x-1,pos_y+1)
-	data["adjacent"]["E"] = get_tile_from_pos(pos_x+1,pos_y)
-	data["adjacent"]["W"] = get_tile_from_pos(pos_x-1,pos_y)
-	data["adjacent"]["SE"] = get_tile_from_pos(pos_x+1,pos_y-1)
-	data["adjacent"]["S"] = get_tile_from_pos(pos_x,pos_y-1)
-	data["adjacent"]["SW"] = get_tile_from_pos(pos_x-1,pos_y-1)
+func set_directions(index: int):
+	var pos_x: int = global.map["tiles"][index]["pos"][0]
+	var pos_y: int = global.map["tiles"][index]["pos"][1]
+	global.map["adjacent"].clear()
+	global.map["adjacent"].append(get_tile_from_pos(pos_x-1,pos_y+1))
+	global.map["adjacent"].append(get_tile_from_pos(pos_x,pos_y+1))
+	global.map["adjacent"].append(get_tile_from_pos(pos_x+1,pos_y+1))
+	global.map["adjacent"].append(get_tile_from_pos(pos_x-1,pos_y))
+	global.map["adjacent"].append(global.map["tiles"][index])
+	global.map["adjacent"].append(get_tile_from_pos(pos_x+1,pos_y))
+	global.map["adjacent"].append(get_tile_from_pos(pos_x-1,pos_y-1))
+	global.map["adjacent"].append(get_tile_from_pos(pos_x,pos_y-1))
+	global.map["adjacent"].append(get_tile_from_pos(pos_x+1,pos_y-1))
 
-func get_tile_from_pos(x:int, y:int, data:Dictionary = global.map):
+func get_tile_from_pos(x:int, y:int):
 	if x <= -23 or x >= 23:
 		x = map_opposite_edge(x)
 	if y <= -23 or y >= 23:
 		y = map_opposite_edge(y)
-	for tile in data["tiles"]:
+	for tile in global.map["tiles"]:
 		if tile["pos"][0] == x && tile["pos"][1] == y:
 			return tile
 

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cq1eje456ok7a"]
+[gd_scene load_steps=7 format=3 uid="uid://cq1eje456ok7a"]
 
 [ext_resource type="Script" path="res://scripts/UI/Map/map_switch.gd" id="1_721q2"]
 [ext_resource type="Script" path="res://scripts/once/map_gen.gd" id="2_q3e6x"]
 [ext_resource type="Script" path="res://scripts/UI/Map/explore_display.gd" id="3_axiyc"]
 [ext_resource type="Script" path="res://scripts/UI/Map/cont_display.gd" id="4_l0w6f"]
 [ext_resource type="Script" path="res://scripts/UI/Map/world_display.gd" id="5_4sjkx"]
+[ext_resource type="PackedScene" uid="uid://cxgq5foaw7i75" path="res://scenes/UI/playarea/map/world.tscn" id="6_vauas"]
 
 [node name="Control_Map" type="Control"]
 layout_mode = 3
@@ -48,6 +49,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Grid_Explore" type="GridContainer" parent="HSplit_Map/Control_Map/Control_Buffer"]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -85,7 +87,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 tab_alignment = 2
 
-[node name="World" type="Control" parent="HSplit_Map/Tab_Map"]
+[node name="World" parent="HSplit_Map/Tab_Map" instance=ExtResource("6_vauas")]
 layout_mode = 2
 
 [node name="Continent" type="Control" parent="HSplit_Map/Tab_Map"]

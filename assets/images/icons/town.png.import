@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://tjb0euvfxi0o"
-path="res://.godot/imported/world_channel.png-42508eb17b3efb00913b943261bdd1d0.ctex"
+uid="uid://bks41knqlj5s5"
+path="res://.godot/imported/town.png-2804690f17d01996ae67dcafeb164eb6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/tiles/world_channel.png"
-dest_files=["res://.godot/imported/world_channel.png-42508eb17b3efb00913b943261bdd1d0.ctex"]
+source_file="res://assets/images/icons/town.png"
+dest_files=["res://.godot/imported/town.png-2804690f17d01996ae67dcafeb164eb6.ctex"]
 
 [params]
 

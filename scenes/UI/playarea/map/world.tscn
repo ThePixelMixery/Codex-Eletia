@@ -1,6 +1,114 @@
-[gd_scene format=3 uid="uid://cxgq5foaw7i75"]
+[gd_scene load_steps=2 format=3 uid="uid://cxgq5foaw7i75"]
+
+[ext_resource type="Script" path="res://scripts/UI/Map/world_tile_info.gd" id="1_tyufj"]
 
 [node name="World" type="Control"]
-visible = false
 layout_mode = 3
 anchors_preset = 0
+
+[node name="Scroll_World" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="Control" type="Control" parent="Scroll_World"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBox_World" type="VBoxContainer" parent="Scroll_World/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_tyufj")
+
+[node name="VBox_Title" type="VBoxContainer" parent="Scroll_World/Control/VBox_World"]
+layout_mode = 2
+
+[node name="Label_Title" type="Label" parent="Scroll_World/Control/VBox_World/VBox_Title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Tile Info"
+horizontal_alignment = 1
+
+[node name="HSeparator1" type="HSeparator" parent="Scroll_World/Control/VBox_World/VBox_Title"]
+layout_mode = 2
+
+[node name="Check_Settings" type="CheckButton" parent="Scroll_World/Control/VBox_World/VBox_Title"]
+layout_mode = 2
+text = "Tile Settings"
+
+[node name="VBox_Settings" type="VBoxContainer" parent="Scroll_World/Control/VBox_World/VBox_Title"]
+visible = false
+layout_mode = 2
+
+[node name="Check_Quests" type="CheckButton" parent="Scroll_World/Control/VBox_World/VBox_Title/VBox_Settings"]
+layout_mode = 2
+text = "Quests"
+
+[node name="Check_Resources" type="CheckButton" parent="Scroll_World/Control/VBox_World/VBox_Title/VBox_Settings"]
+layout_mode = 2
+text = "Resources"
+
+[node name="HSeparator1" type="HSeparator" parent="Scroll_World/Control/VBox_World"]
+layout_mode = 2
+
+[node name="VBox_Environment" type="VBoxContainer" parent="Scroll_World/Control/VBox_World"]
+layout_mode = 2
+
+[node name="Label_Name" type="Label" parent="Scroll_World/Control/VBox_World/VBox_Environment"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Tile Name"
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="Scroll_World/Control/VBox_World/VBox_Environment"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 2
+
+[node name="Label_TitleCategory" type="Label" parent="Scroll_World/Control/VBox_World/VBox_Environment/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Category:"
+
+[node name="Label_Category" type="Label" parent="Scroll_World/Control/VBox_World/VBox_Environment/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Tile Category"
+horizontal_alignment = 2
+
+[node name="Label_TitleTerritory" type="Label" parent="Scroll_World/Control/VBox_World/VBox_Environment/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Territory:"
+
+[node name="Label_Territory" type="Label" parent="Scroll_World/Control/VBox_World/VBox_Environment/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Tile Territory"
+horizontal_alignment = 2
+
+[node name="Label_Title" type="Label" parent="Scroll_World/Control/VBox_World/VBox_Environment/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Magic Energy"
+
+[node name="Label_Territory2" type="Label" parent="Scroll_World/Control/VBox_World/VBox_Environment/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Tile Type"
+horizontal_alignment = 2

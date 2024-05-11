@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2c36feco3oom"
-path="res://.godot/imported/world_overseer.png-4be2a1693540398a82e19e7b36cfa942.ctex"
+uid="uid://w62e12cb0bcg"
+path="res://.godot/imported/city-light.png-8e8b2f3e57400470cb8fd943b668285c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/tiles/world_overseer.png"
-dest_files=["res://.godot/imported/world_overseer.png-4be2a1693540398a82e19e7b36cfa942.ctex"]
+source_file="res://assets/images/icons/city-light.png"
+dest_files=["res://.godot/imported/city-light.png-8e8b2f3e57400470cb8fd943b668285c.ctex"]
 
 [params]
 

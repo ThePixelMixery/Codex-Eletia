@@ -56,7 +56,7 @@ func generate_map(data):
 	#pick tile to become populated tiles
 	add_population()
 
-	global.set_directions(51)
+	global.set_directions(47)
 
 	global.save(global.MAP)
 
@@ -102,7 +102,11 @@ func apply_coords(cont: Dictionary):
 func generate_world(data: Dictionary):
 	# create world tiles based on size
 	for i in range(global.map["continents"].size()*81):
-		var tile: Dictionary = {}
+		
+		var tile: Dictionary = { 
+			"id" = i,
+			"category" = "base"
+		}
 		data["tiles"].append(tile)
 
 	map_x = map_neg
@@ -119,10 +123,10 @@ func generate_world(data: Dictionary):
 	assign_cont()	
 
 	# ocean borders
-	for i in range(0, data["tiles"].size()):
-		global.set_directions(i, data)
+	for tile in data["tiles"]:
+		global.set_directions(tile["id"])
 		var change: float = randf_range(0,1)
-		ocean_check(data["tiles"][i] ,change)
+		ocean_check(data["tiles"][tile["id"]] ,change)
 
 	# mixing	
 	for tile in global.map["tiles"]:
@@ -157,10 +161,9 @@ func assign_cont():
 		cont["tile_ids"] = tile_ids
 
 func ocean_check(tile: Variant, change: float):
-	for key in global.map["adjacent"].keys():
-		var dir = global.map["adjacent"][key]
+	for dir in range(global.map["adjacent"].size()-1):
 		if dir != null:
-			var dir_type = global.map["adjacent"][key]["type"]
+			var dir_type = global.map["adjacent"][dir]["type"]
 			if dir_type == "Sea" && change < 0.3:
 				tile["type"] = "Sea"
 
@@ -177,6 +180,8 @@ func base_details():
 			if tile_to_update["type"] != "Sea":
 				var tile_info = data.get_tile_entry(cont["type"],tile_to_update["type"])
 				tile_to_update.merge(tile_info)
+			else:
+				tile_to_update["name"] = "Sea" 
 
 func add_population():
 	for cont in global.map["continents"]:

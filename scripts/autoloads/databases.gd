@@ -147,6 +147,7 @@ func database_entry(data: String, entry: Array):
 
 func make_tile_entry(entry: Array):
 	var tile_info: Dictionary = {
+		"category" = entry [1],
 		"name" = entry[2],
 		"pop_min" = entry[3],
 		"pop_max" = entry[4],

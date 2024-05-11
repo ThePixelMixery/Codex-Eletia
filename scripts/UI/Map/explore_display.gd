@@ -1,6 +1,6 @@
 extends Node
 
-var details: Dictionary = {}
+
 
 func _ready():
 	emit.connect("map_generated", populate_explore)
@@ -14,14 +14,16 @@ func populate_explore():
 		for child in get_children():
 			child.queue_free() 
 	
-	for dir in global.map["adjacent"].keys():
+	for dir in global.map["adjacent"].size():
+		var tile_info = global.map["adjacent"][dir]
+		
 		var dir_button: Button = Button.new()
-		dir_button.name = "Button_" + dir
 		dir_button.size_flags_horizontal= Control.SIZE_EXPAND_FILL
 		dir_button.size_flags_vertical= Control.SIZE_EXPAND_FILL
 		add_child(dir_button)
 
 		var vbox: VBoxContainer = VBoxContainer.new()
+		vbox.set_anchors_preset(Control.PRESET_FULL_RECT)
 		vbox.size_flags_horizontal= Control.SIZE_EXPAND_FILL
 		vbox.size_flags_vertical= Control.SIZE_EXPAND_FILL
 		dir_button.add_child(vbox)
@@ -30,10 +32,13 @@ func populate_explore():
 		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		label.size_flags_vertical= Control.SIZE_EXPAND_FILL
+		label.size_flags_horizontal= Control.SIZE_EXPAND_FILL
 		label.size_flags_stretch_ratio = 0.25
-		print(global.map["adjacent"][dir])
-		#label.text = global.map["adjacent"][dir]
+		label.text = tile_info["name"]
 		vbox.add_child(label)
 
 		var action_grid: GridContainer = GridContainer.new()
+		action_grid.size_flags_vertical= Control.SIZE_EXPAND_FILL
+		action_grid.size_flags_horizontal= Control.SIZE_EXPAND_FILL
 		vbox.add_child(action_grid)
+
