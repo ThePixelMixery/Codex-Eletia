@@ -56,6 +56,8 @@ func generate_map(data):
 	#pick tile to become populated tiles
 	add_population()
 
+	global.set_directions(51)
+
 	global.save(global.MAP)
 
 	emit.map_generated.emit()
@@ -118,7 +120,7 @@ func generate_world(data: Dictionary):
 
 	# ocean borders
 	for i in range(0, data["tiles"].size()):
-		set_directions(i, data)
+		global.set_directions(i, data)
 		var change: float = randf_range(0,1)
 		ocean_check(data["tiles"][i] ,change)
 
@@ -153,35 +155,6 @@ func assign_cont():
 				tiles[i]["type"] = cont["type"]
 				tile_ids.append(i)
 		cont["tile_ids"] = tile_ids
-
-func set_directions(index: int, data: Dictionary):
-	var pos_x: int = data["tiles"][index]["pos"][0]
-	var pos_y: int = data["tiles"][index]["pos"][1]
-	data["adjacent"]["self"] = data["tiles"][index]
-	data["adjacent"]["NE"] = get_tile_from_pos(pos_x+1,pos_y+1)
-	data["adjacent"]["N"] = get_tile_from_pos(pos_x,pos_y+1)
-	data["adjacent"]["NW"] = get_tile_from_pos(pos_x-1,pos_y+1)
-	data["adjacent"]["E"] = get_tile_from_pos(pos_x+1,pos_y)
-	data["adjacent"]["W"] = get_tile_from_pos(pos_x-1,pos_y)
-	data["adjacent"]["SE"] = get_tile_from_pos(pos_x+1,pos_y-1)
-	data["adjacent"]["S"] = get_tile_from_pos(pos_x,pos_y-1)
-	data["adjacent"]["SW"] = get_tile_from_pos(pos_x-1,pos_y-1)
-
-func get_tile_from_pos(x:int, y:int, data:Dictionary = global.map):
-	if x <= map_neg or x >= map_pos:
-		x = map_opposite_edge(x)
-	if y <= map_neg or y >= map_pos:
-		y = map_opposite_edge(y)
-	for tile in data["tiles"]:
-		if tile["pos"][0] == x && tile["pos"][1] == y:
-			return tile
-
-func map_opposite_edge(coord: int):
-	if coord == map_cap:
-		coord = map_neg
-	elif coord == -(map_cap):
-		coord = map_pos
-	return coord
 
 func ocean_check(tile: Variant, change: float):
 	for key in global.map["adjacent"].keys():
@@ -245,4 +218,3 @@ func add_minor(tile: Variant):
 	var subcat = data.minor_locations.pick_random()
 	var tile_from_db: Variant = data.get_tile_entry(tile["type"], subcat)
 	tile.merge(tile_from_db)
-	print("Added %s to %d, %d" % [subcat, tile["pos"][0],tile["pos"][1]])

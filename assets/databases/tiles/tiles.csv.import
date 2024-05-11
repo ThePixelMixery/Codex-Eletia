@@ -2,16 +2,16 @@
 
 importer="csv_translation"
 type="Translation"
-uid="uid://crwkuaiacaxjv"
+uid="uid://cha8gsgu44uam"
 
 [deps]
 
-files=["res://assets/databases/tiles/tiles.Outpost.translation", "res://assets/databases/tiles/tiles.Emberforge.translation", "res://assets/databases/tiles/tiles.5.translation", "res://assets/databases/tiles/tiles.50.translation", "res://assets/databases/tiles/tiles.A roaring inferno fueled by the earth's core, where skilled artisans craft the finest weaponry and armor, each piece forged with unbearable heat.translation", "res://assets/databases/tiles/tiles.Resource collection area, professionals for learning skills.translation"]
+files=["res://assets/databases/tiles/tiles.Category.translation", "res://assets/databases/tiles/tiles.Name.translation", "res://assets/databases/tiles/tiles.Pop Min.translation", "res://assets/databases/tiles/tiles.Pop Max.translation", "res://assets/databases/tiles/tiles.Text.translation", "res://assets/databases/tiles/tiles.Info.translation", "res://assets/databases/tiles/tiles.Icon.translation"]
 
 source_file="res://assets/databases/tiles/tiles.csv"
-dest_files=["res://assets/databases/tiles/tiles.Outpost.translation", "res://assets/databases/tiles/tiles.Emberforge.translation", "res://assets/databases/tiles/tiles.5.translation", "res://assets/databases/tiles/tiles.50.translation", "res://assets/databases/tiles/tiles.A roaring inferno fueled by the earth's core, where skilled artisans craft the finest weaponry and armor, each piece forged with unbearable heat.translation", "res://assets/databases/tiles/tiles.Resource collection area, professionals for learning skills.translation"]
+dest_files=["res://assets/databases/tiles/tiles.Category.translation", "res://assets/databases/tiles/tiles.Name.translation", "res://assets/databases/tiles/tiles.Pop Min.translation", "res://assets/databases/tiles/tiles.Pop Max.translation", "res://assets/databases/tiles/tiles.Text.translation", "res://assets/databases/tiles/tiles.Info.translation", "res://assets/databases/tiles/tiles.Icon.translation"]
 
 [params]
 
-compress=false
+compress=true
 delimiter=0

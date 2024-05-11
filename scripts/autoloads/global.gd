@@ -70,7 +70,6 @@ func _ready():
 		save(global.MAP)
 		save(global.QUEST)
 
-
 func load_data(file:String):
 	#nonprod
 	var save_file = FileAccess.open(file, FileAccess.READ)
@@ -114,11 +113,10 @@ func select_data(data: String):
 			print("unexpected json string")
 	return _json_string
 
-
 func save(data: String):
-	#password locked, for prod
-#   var save_file = FileAccess.open_encrypted_with_pass(file_path, FileAccess.WRITE,PASS)
-	#nonprod
+	# password locked, for prod
+	#   var save_file = FileAccess.open_encrypted_with_pass(file_path, FileAccess.WRITE,PASS)
+	# nonprod
 	var file = FileAccess.open(data, FileAccess.WRITE)
 	file.store_string(select_data(data))
 	print("Saved: ", data)
@@ -158,3 +156,32 @@ func hard_reset():
 			}
 		}
 	}
+
+func set_directions(index: int, data: Dictionary=global.map):
+	var pos_x: int = data["tiles"][index]["pos"][0]
+	var pos_y: int = data["tiles"][index]["pos"][1]
+	data["adjacent"]["self"] = data["tiles"][index]
+	data["adjacent"]["NE"] = get_tile_from_pos(pos_x+1,pos_y+1)
+	data["adjacent"]["N"] = get_tile_from_pos(pos_x,pos_y+1)
+	data["adjacent"]["NW"] = get_tile_from_pos(pos_x-1,pos_y+1)
+	data["adjacent"]["E"] = get_tile_from_pos(pos_x+1,pos_y)
+	data["adjacent"]["W"] = get_tile_from_pos(pos_x-1,pos_y)
+	data["adjacent"]["SE"] = get_tile_from_pos(pos_x+1,pos_y-1)
+	data["adjacent"]["S"] = get_tile_from_pos(pos_x,pos_y-1)
+	data["adjacent"]["SW"] = get_tile_from_pos(pos_x-1,pos_y-1)
+
+func get_tile_from_pos(x:int, y:int, data:Dictionary = global.map):
+	if x <= -23 or x >= 23:
+		x = map_opposite_edge(x)
+	if y <= -23 or y >= 23:
+		y = map_opposite_edge(y)
+	for tile in data["tiles"]:
+		if tile["pos"][0] == x && tile["pos"][1] == y:
+			return tile
+
+func map_opposite_edge(coord: int):
+	if coord == 23:
+		coord = -22
+	elif coord == -23:
+		coord = 22
+	return coord
