@@ -49,9 +49,12 @@ func generate_map(data):
 	#generating world
 	generate_world(data)
 
+	#adding names and flavour text
+	base_details()
+
 	#generating terrain
 	#pick tile to become populated tiles
-#	add_population()
+	add_population()
 
 	global.save(global.MAP)
 
@@ -125,12 +128,11 @@ func generate_world(data: Dictionary):
 		var rand_assign = base_cont_data[rand_num]["type"]
 		var change: float = randf_range(0,1)
 		if tile["type"] != "Sea":
-			if change <= 0.4:
+			if change <= 0.3:
 				tile["type"] = rand_assign
 
+
 	add_shorthand(data["tiles"])
-
-
 
 func assign_cont():
 	# assign according to continent
@@ -195,15 +197,22 @@ func add_shorthand(tiles: Array):
 			if tile["type"] == cont["type"]:
 				tile["shorthand"] = cont["sh"]
 
-func add_population():
+func base_details():
+	for cont in global.map["continents"]:
+		for tile in cont["tile_ids"]:
+			var tile_to_update = global.map["tiles"][tile]
+			if tile_to_update["type"] != "Sea":
+				var tile_info = data.get_tile_entry(cont["type"],tile_to_update["type"])
+				tile_to_update.merge(tile_info)
 
+func add_population():
 	for cont in global.map["continents"]:
 		if cont["type"] != "Sea":
 			add_major(cont)
 
 	for tile in global.map["tiles"]:
 		var chance: float = randf_range(0,1)
-		if chance <= 0.3 and tile["type"] != "Sea":
+		if chance <= 0.2 and tile["type"] != "Sea":
 			add_minor(tile)
 
 func add_major(cont: Variant):

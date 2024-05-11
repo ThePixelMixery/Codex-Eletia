@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cq1eje456ok7a"]
+[gd_scene load_steps=6 format=3 uid="uid://cq1eje456ok7a"]
 
-[ext_resource type="Script" path="res://scripts/UI/map_switch.gd" id="1_721q2"]
-[ext_resource type="Script" path="res://scripts/UI/map_updater.gd" id="1_skgs8"]
+[ext_resource type="Script" path="res://scripts/UI/Map/map_switch.gd" id="1_721q2"]
 [ext_resource type="Script" path="res://scripts/once/map_gen.gd" id="2_q3e6x"]
+[ext_resource type="Script" path="res://scripts/UI/Map/explore_display.gd" id="3_axiyc"]
+[ext_resource type="Script" path="res://scripts/UI/Map/cont_display.gd" id="4_l0w6f"]
+[ext_resource type="Script" path="res://scripts/UI/Map/world_display.gd" id="5_4sjkx"]
 
 [node name="Control_Map" type="Control"]
 layout_mode = 3
@@ -11,7 +13,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_skgs8")
 
 [node name="Control_MapGen" type="Control" parent="."]
 layout_mode = 2
@@ -53,6 +54,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = -4.0
 columns = 3
+script = ExtResource("3_axiyc")
 
 [node name="Button_NW" type="Button" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore"]
 layout_mode = 2
@@ -84,40 +86,200 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="VBox_Tile" type="VBoxContainer" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button_N"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label_Tile" type="Label" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button_N/VBox_Tile"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Grid_Actions" type="GridContainer" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button_N/VBox_Tile"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 4
+
 [node name="Button_NE" type="Button" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="VBox_Tile" type="VBoxContainer" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button_NE"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label_Tile" type="Label" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button_NE/VBox_Tile"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Grid_Actions" type="GridContainer" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button_NE/VBox_Tile"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 4
 
 [node name="Button_W" type="Button" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="VBox_Tile" type="VBoxContainer" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button_W"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label_Tile" type="Label" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button_W/VBox_Tile"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Grid_Actions" type="GridContainer" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button_W/VBox_Tile"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 4
+
 [node name="Button_self" type="Button" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="VBox_Tile" type="VBoxContainer" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button_self"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label_Tile" type="Label" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button_self/VBox_Tile"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Grid_Actions" type="GridContainer" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button_self/VBox_Tile"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 4
 
 [node name="Button_E" type="Button" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="VBox_Tile" type="VBoxContainer" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button_E"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label_Tile" type="Label" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button_E/VBox_Tile"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Grid_Actions" type="GridContainer" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button_E/VBox_Tile"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 4
+
 [node name="Button_SW" type="Button" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="VBox_Tile" type="VBoxContainer" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button_SW"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label_Tile" type="Label" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button_SW/VBox_Tile"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Grid_Actions" type="GridContainer" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button_SW/VBox_Tile"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 4
 
 [node name="Button_S" type="Button" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="VBox_Tile" type="VBoxContainer" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button_S"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label_Tile" type="Label" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button_S/VBox_Tile"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Grid_Actions" type="GridContainer" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button_S/VBox_Tile"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 4
+
 [node name="Button_SE" type="Button" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="VBox_Tile" type="VBoxContainer" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button_SE"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label_Tile" type="Label" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button_SE/VBox_Tile"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Grid_Actions" type="GridContainer" parent="HSplit_Map/Control_Map/Control_Buffer/Grid_Explore/Button_SE/VBox_Tile"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 4
 
 [node name="Grid_Conts" type="GridContainer" parent="HSplit_Map/Control_Map/Control_Buffer"]
 visible = false
@@ -128,6 +290,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 columns = 5
+script = ExtResource("4_l0w6f")
 
 [node name="Scroll_World" type="ScrollContainer" parent="HSplit_Map/Control_Map/Control_Buffer"]
 layout_mode = 1
@@ -140,6 +303,7 @@ grow_vertical = 2
 [node name="Grid_World" type="GridContainer" parent="HSplit_Map/Control_Map/Control_Buffer/Scroll_World"]
 layout_mode = 2
 columns = 45
+script = ExtResource("5_4sjkx")
 
 [node name="Tab_Map" type="TabContainer" parent="HSplit_Map"]
 layout_mode = 2

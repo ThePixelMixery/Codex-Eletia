@@ -38,6 +38,7 @@ folder_colors={
 "res://scenes/prefabs/": "green",
 "res://scripts/": "purple",
 "res://scripts/UI/": "pink",
+"res://scripts/UI/Map/": "purple",
 "res://scripts/autoloads/": "pink",
 "res://scripts/autoloads/ResourceTables/": "purple"
 }
